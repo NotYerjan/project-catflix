@@ -19,6 +19,7 @@ export default function ReviewsList() {
 
   return (
     <div className="reviews-list" id="container">
+      <h2>Reviews</h2>
       {reviews.map((review) => (
         <Review key={review.id} content={review} />
       ))}

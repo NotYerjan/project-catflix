@@ -31,7 +31,7 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="reviews-container">
       {/* <form onSubmit={addReview}>
         <input type="text" name="content" />
         <button type="submit">add review</button>
