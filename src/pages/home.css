@@ -1,0 +1,57 @@
+.all {
+  margin: 1em 1em 0.1em 1em;
+}
+.img-resize {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+.background-icon {
+  /* padding: 1em; */
+  background: #353535bf;
+  color: #f5e4d080;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  gap: 20px;
+  position: absolute;
+  width: 41.05px;
+  height: 44px;
+  left: 400px;
+  top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+}
+.movie-title,
+.img-resize,
+.background-icon {
+  cursor: pointer;
+}
+body {
+  color: white;
+  background-color: #1d1c19;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  margin: auto;
+}
+.listOfMovies {
+  padding: 1em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  width: 100%;
+  height: 100vh;
+}
+.flex-poligon {
+  display: flex;
+  align-items: baseline;
+}
+.poligon {
+  margin-left: 1em;
+}
