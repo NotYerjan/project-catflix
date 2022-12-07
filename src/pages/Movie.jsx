@@ -11,7 +11,6 @@ export default function Movie() {
 
 	return (
 		<>
-			<h1>Movie</h1>
 			{movie ? (
 				<>
 					<MovieInfo movie={movie} />
