@@ -7,7 +7,7 @@ import useMovieStore from "../store/storeMovies";
 export default function Movie() {
 	const { id } = useParams();
 	const movies = useMovieStore((state) => state.movies);
-	const [movie] = movies.filter((m) => m.id === id);
+	const movie = movies.find((m) => m.id === id);
 
 	return (
 		<>
