@@ -1,25 +1,36 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { FiHeart, FiHome, FiSearch, FiUser } from "react-icons/fi";
-import "./NavBar.css";
+import { AppBar, Toolbar, Box, IconButton } from "@mui/material";
 
 export default function Navbar() {
-  return (
-    <div className="navBar">
-      <ul className="navBarContent">
-        <li>
-          <Link to="/movies"><FiHome  className="navBarIcon"/></Link>
-        </li>
-        <li>
-          <Link to="/liked"><FiHeart  className="navBarIcon"/></Link>
-        </li>
-        <li>
-          <Link to="/users"><FiUser   className="navBarIcon"/></Link>
-        </li>
-        <li>
-          <Link to="/search"><FiSearch   className="navBarIcon"/></Link>
-        </li>
-      </ul>
-    </div>
-  );
+	return (
+		<AppBar position="fixed" color="primary" sx={{ top: "auto", bottom: 0 }}>
+			<Toolbar sx={{ display: "flex", justifyContent: "space-around" }}>
+				<Link to="/movies">
+					<IconButton>
+						<FiHome className="navBarIcon" />
+					</IconButton>
+				</Link>
+
+				<Link to="/liked">
+					<IconButton>
+						<FiHeart className="navBarIcon" />
+					</IconButton>
+				</Link>
+
+				<Link to="/users">
+					<IconButton>
+						<FiUser className="navBarIcon" />
+					</IconButton>
+				</Link>
+
+				<Link to="/search">
+					<IconButton>
+						<FiSearch className="navBarIcon" />
+					</IconButton>
+				</Link>
+			</Toolbar>
+		</AppBar>
+	);
 }

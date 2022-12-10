@@ -3,14 +3,14 @@ import { FiBell, FiChevronDown } from "react-icons/fi";
 import useMovieStore from "../store/storeMovies";
 import MovieList from "../components/MovieList";
 import Logo from "../components/Logo";
-import "./home.css";
+// import "./home.css";
 export default function Home() {
 	const movies = useMovieStore((state) => state.movies);
 
 	return (
 		<div>
 			<div>
-				<div className="logo">
+				<div className="logo" style={{}}>
 					<Logo />
 					<FiBell className="background-icon" />
 				</div>

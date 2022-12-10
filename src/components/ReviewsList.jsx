@@ -1,30 +1,28 @@
-import React, { useEffect } from "react";
+import React from "react";
 import useReviewStore from "../store/storeReview.js";
 import Review from "./Reviews/Review";
+import CreateReview from "./Reviews/CreateReview.jsx";
+import { Box, Paper, Typography } from "@mui/material";
 
-export default function ReviewsList() {
-  const reviews = useReviewStore((state) => state.reviews);
-  // let limit = -2;
+export default function ReviewsList({ movie }) {
+	const reviews = useReviewStore((state) => state.reviews);
 
-  /*   const renderReviews = () => {
-    return reviews
-      .slice(limit)
-      .map((review) => <Review key={review.id} content={review} />);
-  }; */
-
-  /*   useEffect(() => {
-    console.log(limit);
-    //renderReviews();
-  }, [limit]); */
-
-  return (
-    <div className="reviews-list" id="container">
-      <h2>Reviews</h2>
-      {reviews.map((review) => (
-        <Review key={review.id} content={review} />
-      ))}
-      {/* <button onClick={() => renderReviews()}>Render</button>
-      <button onClick={() => limit = limit-1}>Show More..</button> */}
-    </div>
-  );
+	return (
+		<Paper
+			sx={{
+				flex: 1,
+				minWidth: 250,
+				padding: 2,
+				display: "flex",
+				flexDirection: "column",
+				gap: 2,
+			}}
+		>
+			<Typography variant="h4">Reviews</Typography>
+			{reviews.map((review) => (
+				<Review key={review.id} content={review} />
+			))}
+			<CreateReview />
+		</Paper>
+	);
 }
