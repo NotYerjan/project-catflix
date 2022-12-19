@@ -3,6 +3,8 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import Home from "./pages/Home";
 import Movie from "./pages/Movie";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 import Liked from "./components/extratest/Liked";
 import Search from "./components/extratest/Search";
 import User from "./pages/User";
@@ -29,6 +31,7 @@ const router = createBrowserRouter([
         element: <Liked />,
       },
       {
+
         path: "user",
         element: <User />,
       },
@@ -39,9 +42,19 @@ const router = createBrowserRouter([
       {
         path: "search",
         element: <Search />,
+      {
+    path: "login",
+    element: <Login />,
+  },
+  {
+    path: "signup",
+    element: <SignUp />,
+  },
       },
     ],
   },
+  
+
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
