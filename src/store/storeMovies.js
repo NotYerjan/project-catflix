@@ -7,7 +7,7 @@ const useMovieStore = create((set) => ({
     set((state) => ({
       movies: state.movies.map((movie) =>
         movie.id === movieId
-          ? { ...movie, reviews: [...movie.reviews, reviewId] }
+          ? { ...movie, reviewIds: [...movie.reviewIds, reviewId] }
           : movie
       ),
     })),
@@ -17,11 +17,14 @@ const useMovieStore = create((set) => ({
         movie.id === movieId
           ? {
               ...movie,
-              reviews: movie.reviews.filter((review) => review !== reviewId),
+              reviewIds: movie.reviewIds.filter(
+                (review) => review !== reviewId
+              ),
             }
           : movie
       ),
     })),
+  //  filterMovies = (key, v) => movies.filter(m => m[key] === v)
 }));
 
 export default useMovieStore;

@@ -7,7 +7,8 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Liked from "./components/extratest/Liked";
 import Search from "./components/extratest/Search";
-import Users from "./components/extratest/Users";
+import User from "./pages/User";
+import UserEdit from "./pages/UserEdit";
 import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -30,23 +31,30 @@ const router = createBrowserRouter([
         element: <Liked />,
       },
       {
-        path: "users",
-        element: <Users />,
+
+        path: "user",
+        element: <User />,
+      },
+      {
+        path: "user/edit",
+        element: <UserEdit />,
       },
       {
         path: "search",
         element: <Search />,
-      },
-    ],
-  },
-  {
-    path: "/login",
+      {
+    path: "login",
     element: <Login />,
   },
   {
-    path: "/signup",
+    path: "signup",
     element: <SignUp />,
   },
+      },
+    ],
+  },
+  
+
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

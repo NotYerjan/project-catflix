@@ -5,29 +5,29 @@ import { Container, Box, Paper } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const darkTheme = createTheme({
-	palette: {
-		mode: "dark",
-	},
+  palette: {
+    mode: "dark",
+  },
 });
 
 function App() {
-	return (
-		<ThemeProvider theme={darkTheme}>
-			<Paper
-				elevation={12}
-				sx={{
-					minHeight: "100vh",
-					pb: "80px",
-					borderRadius: 0,
-				}}
-			>
-				<Navbar />
-				<Container>
-					<Outlet />
-				</Container>
-			</Paper>
-		</ThemeProvider>
-	);
+  return (
+    <ThemeProvider theme={darkTheme}>
+      <Paper
+        elevation={12}
+        sx={{
+          minHeight: "100vh",
+          pb: "80px",
+          borderRadius: 0,
+        }}
+      >
+        <Navbar />
+        <Container>
+          <Outlet />
+        </Container>
+      </Paper>
+    </ThemeProvider>
+  );
 }
 
 export default App;
