@@ -9,12 +9,6 @@ export default function Home() {
 
   return (
     <div>
-      <div>
-        <div className="logo" style={{}}>
-          <Logo />
-          <FiBell className="background-icon" />
-        </div>
-      </div>
       <div className="flex-poligon">
         <p className="all">All</p>
         <FiChevronDown className="poligon" />

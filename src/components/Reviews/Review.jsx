@@ -27,7 +27,11 @@ export default function Review(props) {
   return (
     <Card elevation={6}>
       <CardHeader
-        avatar={<Avatar sx={{ bgcolor: "black" }}>{userId}</Avatar>}
+        avatar={
+          <Avatar sx={{ bgcolor: "white" }}>
+            <FiUser />
+          </Avatar>
+        }
         action={
           <Box>
             <IconButton onClick={handleEditReview}>

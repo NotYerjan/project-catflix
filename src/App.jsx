@@ -1,8 +1,8 @@
 import Navbar from "./components/Navbar";
 import { Outlet } from "react-router-dom";
 import { Container, Box, Paper } from "@mui/material";
-
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import Headbar from "./components/Headbar";
 
 const darkTheme = createTheme({
   palette: {
@@ -21,8 +21,9 @@ function App() {
           borderRadius: 0,
         }}
       >
+        <Headbar />
         <Navbar />
-        <Container>
+        <Container sx={{ paddingTop: 10 }}>
           <Outlet />
         </Container>
       </Paper>
