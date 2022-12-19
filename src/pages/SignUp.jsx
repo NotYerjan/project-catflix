@@ -3,8 +3,6 @@ import {
   Container,
   FormControl,
   FormHelperText,
-  Input,
-  InputLabel,
   TextField,
   Button,
   FormLabel,
@@ -12,8 +10,7 @@ import {
   IconButton,
   InputAdornment,
 } from "@mui/material";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import { nanoid } from "nanoid";
 import { Link } from "react-router-dom";
 
@@ -118,7 +115,7 @@ const SignUp = () => {
                   edge="end"
                   onClick={() => setShowPassword((show) => !show)}
                 >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                  {showPassword ? <FiEyeOff /> : <FiEye />}
                 </IconButton>
               </InputAdornment>
             ),
@@ -142,7 +139,7 @@ const SignUp = () => {
                   edge="end"
                   onClick={() => setShowConfirmPassword((show) => !show)}
                 >
-                  {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                  {showConfirmPassword ? <FiEyeOff /> : <FiEye />}
                 </IconButton>
               </InputAdornment>
             ),

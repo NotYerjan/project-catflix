@@ -31,7 +31,6 @@ const router = createBrowserRouter([
         element: <Liked />,
       },
       {
-
         path: "user",
         element: <User />,
       },
@@ -42,20 +41,17 @@ const router = createBrowserRouter([
       {
         path: "search",
         element: <Search />,
-         },
-      {
-    path: "login",
+      },
+    ],
+  },
+  {
+    path: "/login",
     element: <Login />,
   },
   {
-    path: "signup",
+    path: "/signup",
     element: <SignUp />,
   },
-     
-    ],
-  },
-  
-
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

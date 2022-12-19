@@ -13,8 +13,7 @@ import {
   IconButton,
   formLabelClasses,
 } from "@mui/material";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -122,7 +121,7 @@ const Login = () => {
                   edge="end"
                   onClick={() => setShowPassword((show) => !show)}
                 >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                  {showPassword ? <FiEyeOff /> : <FiEye />}
                 </IconButton>
               </InputAdornment>
             ),
