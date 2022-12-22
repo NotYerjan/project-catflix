@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiHeart, FiHome, FiSearch, FiUser } from "react-icons/fi";
-import { AppBar, Toolbar, IconButton } from "@mui/material";
+import { AppBar, Toolbar, IconButton, Box } from "@mui/material";
 import Searchbar from "./Searchbar";
 
 export default function Navbar() {
@@ -15,9 +15,9 @@ export default function Navbar() {
         sx={{ top: { xs: "auto", md: 0 }, bottom: { xs: 0, md: "auto" } }}
       >
         {displaySearch && (
-          <div style={{ padding: "10px" }}>
+          <Box sx={{ padding: "10px", display: { xs: "block", md: "none" } }}>
             <Searchbar />
-          </div>
+          </Box>
         )}
         <Toolbar
           sx={{

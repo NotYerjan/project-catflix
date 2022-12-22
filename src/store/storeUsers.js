@@ -3,63 +3,86 @@ import { INIT_USERS } from "./initUsers";
 
 const useUserStore = create((set) => ({
   users: INIT_USERS,
-  createUser: (newUser) =>
-    set((state) => ({ users: [...state.users, newUser] })),
-  updateUser: (userId, userInfo) =>
+  currentUser: null,
+  isLoggedIn: false,
+
+  createAndLoginUser: (newUser) =>
+    set((state) => ({
+      users: [...state.users, newUser],
+      currentUser: newUser,
+      isLoggedIn: true,
+    })),
+
+  updateUserInGlobalStore: () =>
     set((state) => ({
       users: state.users.map((user) =>
-        user.id === userId ? { ...user, ...userInfo } : user
+        state.currentUser.id === user.id ? state.currentUser : user
       ),
     })),
-  deleteUser: (userId) =>
+
+  deleteAndLogoutUser: (userId) =>
     set((state) => ({
       users: state.users.filter((user) => user.id !== userId),
+      currentUser: null,
+      isLoggedIn: false,
     })),
-  addMovieStatus: (userId, movieId, statusType) =>
+
+  loginUser: (userId) =>
     set((state) => ({
-      users: state.users.map((user) =>
-        user.id === userId
-          ? addMovieStatusToUser(user, movieId, statusType)
-          : user
-      ),
+      currentUser: state.users.find(({ id }) => id === userId),
+      isLoggedIn: true,
     })),
-  toggleFavoriteMovie: (userId, movieId) =>
+
+  updateCurrentUserInfo: (userInfo) =>
     set((state) => ({
-      users: state.users.map((user) =>
-        user.id === userId ? toggleFavoriteMovieOfUser(user, movieId) : user
-      ),
+      currentUser: { ...state.currentUser, ...userInfo },
     })),
+
+  logoutUser: () =>
+    set((state) => ({
+      currentUser: null,
+      isLoggedIn: false,
+    })),
+
+  changeMovieStatusOfUser: (movieId, newStatus) =>
+    set((state) => {
+      const userMovie = state.currentUser.movies.find(
+        ({ id }) => id === movieId
+      );
+
+      return userMovie
+        ? updateExistingUserMovie(state, movieId, { status: newStatus })
+        : addNewMovieToUserMovies(state, { id: movieId, status: newStatus });
+    }),
+
+  toggleFavoriteMovie: (movieId) =>
+    set((state) => {
+      const userMovie = state.currentUser.movies.find(
+        ({ id }) => id === movieId
+      );
+
+      return userMovie
+        ? updateExistingUserMovie(state, movieId, {
+            isFavorite: !userMovie.isFavorite,
+          })
+        : addNewMovieToUserMovies(state, { id: movieId, isFavorite: true });
+    }),
 }));
 
-const addMovieStatusToUser = (user, movieId, statusType) => {
-  if (user.moviesStatus.finished.includes(movieId)) {
-    deleteMovieStatusFromUser(user, movieId, "finished");
-  } else if (user.moviesStatus.watching.includes(movieId)) {
-    deleteMovieStatusFromUser(user, movieId, "watching");
-  } else if (user.moviesStatus.willWatch.includes(movieId)) {
-    deleteMovieStatusFromUser(user, movieId, "willWatch");
-  }
-  user.moviesStatus[statusType].push(movieId);
-  return user;
-};
+const addNewMovieToUserMovies = (state, newMovie) => ({
+  currentUser: {
+    ...state.currentUser,
+    movies: [...state.currentUser, newMovie],
+  },
+});
 
-const deleteMovieStatusFromUser = (user, movieId, statusType) => {
-  user.moviesStatus[statusType] = user.moviesStatus[statusType].filter(
-    (movie) => movie !== movieId
-  );
-  return user;
-};
-
-const toggleFavoriteMovieOfUser = (user, movieId) => {
-  const newUser = user.favoriteMovies.includes(movieId)
-    ? {
-        ...user,
-        favoriteMovies: user.favoriteMovies.filter(
-          (movie) => movie !== movieId
-        ),
-      }
-    : { ...user, favoriteMovies: [...user.favoriteMovies, movieId] };
-  return newUser;
-};
+const updateExistingUserMovie = (state, movieId, updatedMovieData) => ({
+  currentUser: {
+    ...state.currentUser,
+    movies: state.currentUser.movies.map((movie) =>
+      movie.id === movieId ? { ...movie, ...updatedMovieData } : movie
+    ),
+  },
+});
 
 export default useUserStore;

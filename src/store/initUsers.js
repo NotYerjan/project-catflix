@@ -8,12 +8,11 @@ export const INIT_USERS = [
     lastName: "Turarov",
     imgSrc: "",
     birthday: new Date("Feb 24 1998"),
-    favoriteMovies: ["jasdhkhadjsj"],
-    moviesStatus: {
-      finished: ["jasdhkhadjsj", "arehsfdbesr"],
-      watching: [],
-      willWatch: ["xklnjkna"],
-    },
+    movies: [
+      { id: "jasdhkhadjsj", status: "finished", isFavorite: true },
+      { id: "arehsfdbesr", status: "finished", isFavorite: false },
+      { id: "xklnjkna", status: "willWatch", isFavorite: false },
+    ],
   },
   {
     id: "akujsdrobin",
@@ -24,11 +23,10 @@ export const INIT_USERS = [
     lastName: "Bejan",
     imgSrc: "",
     birthday: new Date("Feb 24 1998"),
-    favoriteMovies: ["jasdhkhadjsj"],
-    moviesStatus: {
-      finished: ["jasdhkhadjsj", "arehsfdbesr"],
-      watching: [],
-      willWatch: ["xklnjkna"],
-    },
+    movies: [
+      { id: "jasdhkhadjsj", status: "finished", isFavorite: true },
+      { id: "arehsfdbesr", status: "finished", isFavorite: false },
+      { id: "xklnjkna", status: "willWatch", isFavorite: false },
+    ],
   },
 ];
