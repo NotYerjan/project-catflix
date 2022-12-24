@@ -2,63 +2,60 @@ import React, { useState } from "react";
 import {
   Container,
   FormControl,
-  FormHelperText,
-  Input,
-  InputLabel,
   TextField,
   Button,
   FormLabel,
   Typography,
   InputAdornment,
   IconButton,
-  formLabelClasses,
+  Alert,
 } from "@mui/material";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
+import useUserStore from "../store/storeUsers";
 
 const Login = () => {
+  // Form Variables
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  // Authentication Variables
   const [auth, setAuth] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
-  const users = [
-    {
-      id: 1,
-      name: "Sama Jabri",
-      password: "s",
-    },
-    {
-      id: 2,
-      name: "a",
-      password: "a",
-    },
-    {
-      id: 3,
-      name: "alvaroDixio",
-      password: "aa",
-    },
-  ];
+  // Functions from store
+  const users = useUserStore((state) => state.users);
+  const loginUser = useUserStore((state) => state.loginUser);
 
   const doesUserExist = () => {
-    const filteredUsers = users.filter((user) => user.name === username);
+    const filteredUsers = users.filter((user) => user.username === username);
     return filteredUsers.length === 0 ? false : true;
   };
 
-  const isUserDataCorrect = () => {
-    const filteredUsers = users.filter(
-      (user) => user.name === username && user.password === password
+  // User exists ? return data : return empty array
+  const userData = () =>
+    users.filter(
+      (user) => user.username === username && user.password === password
     );
-    return filteredUsers.length === 0 ? false : true;
-  };
 
-  const handleUserLogin = () =>
-    doesUserExist()
-      ? isUserDataCorrect()
-        ? setAuth(true) && setErrorMessage("")
-        : setErrorMessage("Username or password incorrect")
-      : setErrorMessage("User data not found, try signing up first");
+  const handleUserLogin = () => {
+    const returnedUserData = userData();
+
+    if (doesUserExist()) {
+      if (returnedUserData.length !== 0) {
+        setAuth(true);
+        setErrorMessage("");
+        loginUser(returnedUserData.id);
+        navigate("/");
+      } else {
+        setErrorMessage("Username or password incorrect");
+      }
+    } else {
+      setErrorMessage("User data not found, try signing up first");
+    }
+  };
 
   return (
     <Container
@@ -85,15 +82,22 @@ const Login = () => {
           style={{
             color: "#1976d2",
             fontSize: "2rem",
-            marginBottom: "1.8rem",
           }}
         >
           Log In
         </FormLabel>
 
-        <FormHelperText error id="username">
-          {errorMessage}
-        </FormHelperText>
+        {
+          <Alert
+            sx={{
+              marginBottom: "0.5rem",
+              visibility: errorMessage ? "visible" : "hidden",
+            }}
+            severity="error"
+          >
+            {errorMessage}
+          </Alert>
+        }
 
         <TextField
           id="username"
@@ -134,12 +138,7 @@ const Login = () => {
           style={{ marginTop: "2rem", width: "80%" }}
           onClick={handleUserLogin}
         >
-          <Link
-            to={auth ? "/" : "/login"}
-            style={{ width: "100%", color: "inherit", textDecoration: "none" }}
-          >
-            Log In
-          </Link>
+          Log In
         </Button>
 
         <Typography variant="body2" color="text.secondary">

@@ -50,6 +50,8 @@ export default function Headbar() {
         </Link>
         <Searchbar place="header" />
         <Box sx={{ flexGrow: 1 }} />
+        <Link to="/login"> Login</Link>
+        <Link to="/signup"> Sign up</Link>
         <Box sx={{ display: "flex" }}>
           <IconButton
             size="large"
