@@ -48,13 +48,6 @@ const SignUp = () => {
     console.log(users);
   };
 
-  /*
-    Types error:
-    1) when fields are empty --> error + alert('') div svg
-    2) username exist --> error + alert('username exists')
-    3) password don't match --> error + alert ('passwords don't match')
-  */
-
   useEffect(() => {
     if (!username) {
       setError("empty field");
