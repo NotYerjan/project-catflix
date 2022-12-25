@@ -20,6 +20,7 @@ export default function CreateReview({ movieId, movie }) {
   const addReview = () => {
     const reviewId = nanoid();
     const date = new Date();
+
     const newReview = {
       id: reviewId,
       userId: "admin",
@@ -29,6 +30,7 @@ export default function CreateReview({ movieId, movie }) {
       score: reviewScore,
       content: reviewContent,
     };
+
     if (reviewContent) {
       console.log(reviewId, movieId);
       createReview(newReview);

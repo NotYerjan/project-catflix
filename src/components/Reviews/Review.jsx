@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useReviewStore from "../../store/storeReview.js";
 import { FiTrash, FiEdit, FiUser } from "react-icons/fi";
 import {
@@ -9,6 +9,8 @@ import {
   IconButton,
   CardContent,
   Typography,
+  Button,
+  TextField,
 } from "@mui/material";
 
 export default function Review(props) {
@@ -16,12 +18,14 @@ export default function Review(props) {
   const deleteReview = useReviewStore((state) => state.deleteReview);
   const { id, userId, createdAt, content, score } = props.content;
 
-  const handleDeleteReview = (e) => {
-    deleteReview(id);
-  };
+  const [isEdited, setIsEdited] = useState(false);
+  const [newContent, setNewContent] = useState(content);
 
-  const handleEditReview = (e) => {
-    console.log("review edited");
+  const toggleEditReview = () => setIsEdited(!isEdited);
+
+  const handleUpdateReview = () => {
+    updateReview(id, newContent);
+    toggleEditReview();
   };
 
   return (
@@ -34,10 +38,11 @@ export default function Review(props) {
         }
         action={
           <Box>
-            <IconButton onClick={handleEditReview}>
+            <IconButton onClick={toggleEditReview}>
               <FiEdit />
             </IconButton>
-            <IconButton onClick={handleDeleteReview}>
+
+            <IconButton onClick={() => deleteReview(id)}>
               <FiTrash />
             </IconButton>
           </Box>
@@ -45,13 +50,38 @@ export default function Review(props) {
         title={userId}
         subheader={createdAt}
       />
+
       <CardContent>
         <Typography variant="body1" color="text.secondary">
           Score: {score}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {content}
-        </Typography>
+
+        {isEdited ? (
+          <TextField
+            multiline
+            defaultValue={content}
+            onChange={(e) => setNewContent(e.target.value)}
+            sx={{
+              width: "100%",
+              height: "auto",
+            }}
+            InputProps={{
+              sx: {
+                display: "flex",
+                flexDirection: { xs: "column", md: "row" },
+              },
+              endAdornment: (
+                <Button variant="contained" onClick={handleUpdateReview}>
+                  Save
+                </Button>
+              ),
+            }}
+          />
+        ) : (
+          <Typography variant="body2" color="text.secondary">
+            {content}
+          </Typography>
+        )}
       </CardContent>
     </Card>
   );
