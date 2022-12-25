@@ -2,47 +2,65 @@ import React, { useState } from "react";
 import {
   Container,
   FormControl,
-  FormHelperText,
   TextField,
   Button,
   FormLabel,
   Typography,
   IconButton,
   InputAdornment,
+  Alert,
 } from "@mui/material";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { Link, useNavigate } from "react-router-dom";
+import useUserStore from "../store/storeUsers";
 import { nanoid } from "nanoid";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const SignUp = () => {
+  // Form Variables
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  // Authentication Variables
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const users = [
-    {
-      id: 1,
-      name: "Sama Jabri",
-    },
-    {
-      id: 2,
-      name: "a",
-    },
-    {
-      id: 3,
-      name: "alvaroDixio",
-    },
-  ];
+  // Functions from store
+  const users = useUserStore((state) => state.users);
+  const signUpUser = useUserStore((state) => state.createAndLoginUser);
 
-  const check = () => {
-    const findMatchUser = users.map((user) =>
-      user.name === username ? false : null
-    );
-    const matchedUsers = findMatchUser.filter((user) => user === false);
-    return matchedUsers.length === 0 ? true : false;
+  const doesUserNameExist = users.find((user) =>
+    user.username === username ? true : false
+  );
+
+  const handleUserSignUp = () => {
+    const newUser = {
+      id: nanoid(),
+      username: username,
+      password: password,
+    };
+
+    signUpUser(newUser);
+    navigate("/");
+    console.log(users);
   };
+
+  useEffect(() => {
+    if (!username) {
+      setError("empty field");
+    } else if (doesUserNameExist) {
+      setError("Username is already taken");
+    } else if (!(password && confirmPassword)) {
+      setError("empty field");
+    } else if (password !== confirmPassword) {
+      setError("Passwords don't match");
+    } else {
+      setError("");
+    }
+  }, [username, password, confirmPassword, doesUserNameExist]);
 
   return (
     <Container
@@ -61,42 +79,42 @@ const SignUp = () => {
           gap: "0.8rem",
           boxShadow: "1px 1px 10px -2px #0d345a",
           borderRadius: "0.2rem",
-          width: "20rem",
-          height: "29rem",
+          width: "21rem",
+          height: "31rem",
         }}
       >
         <FormLabel
-          style={{
+          sx={{
             color: "#1976d2",
             fontSize: "2rem",
-            marginBottom: "1.5rem",
           }}
         >
           Sign Up
         </FormLabel>
+
+        {
+          <Alert
+            sx={{
+              marginBottom: "0.5rem",
+              visibility:
+                error && error !== "empty field" ? "visible" : "hidden",
+            }}
+            severity="error"
+          >
+            {error}
+          </Alert>
+        }
+
         <TextField
-          color={check() ? "primary" : "error"}
+          color={doesUserNameExist ? "error" : "primary"}
           id="username"
           label="Username"
           variant="outlined"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
-          style={{ width: "80.5%" }}
+          style={{ width: "77%" }}
         />
-        <FormHelperText
-          id="username"
-          style={{
-            color: `${check() ? "#1976d2" : "#d32f2f"}`,
-            margin: "-0.5rem",
-          }}
-        >
-          {username
-            ? check()
-              ? "Valid username"
-              : "Username already taken"
-            : ""}
-        </FormHelperText>
 
         <TextField
           id="password"
@@ -147,13 +165,12 @@ const SignUp = () => {
         />
 
         <Button
-          disabled={!(username && password && confirmPassword)}
+          disabled={Boolean(error)}
           variant="contained"
           style={{ marginTop: "1.5rem", width: "80%" }}
+          onClick={handleUserSignUp}
         >
-          <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
-            Sign Up
-          </Link>
+          Sign Up
         </Button>
 
         <Typography variant="body2" color="text.secondary">
