@@ -24,9 +24,9 @@ export const INIT_USERS = [
     imgSrc: "",
     birthday: new Date("Feb 24 1998"),
     movies: [
-      { id: "jasdhkhadjsj", status: "finished", isFavorite: true },
-      { id: "arehsfdbesr", status: "finished", isFavorite: false },
-      { id: "xklnjkna", status: "willWatch", isFavorite: false },
+      { id: "jasdhkhadjsj", status: "finished", isFavorite: false },
+      { id: "arehsfdbesr", status: "finished", isFavorite: true },
+      { id: "xklnjkna", status: "willWatch", isFavorite: true },
     ],
   },
 ];
