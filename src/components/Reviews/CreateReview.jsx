@@ -4,6 +4,7 @@ import {
   CardContent,
   CardActions,
   Button,
+  Rating,
 } from "@mui/material";
 import React from "react";
 import { useState } from "react";
@@ -12,9 +13,11 @@ import { nanoid } from "nanoid";
 import useMovieStore from "../../store/storeMovies.js";
 
 export default function CreateReview({ movieId, movie }) {
-  const createReview = useReviewStore((state) => state.createReview);
   const [reviewContent, setReviewContent] = useState("");
   const [reviewScore, setReviewScore] = useState(5);
+  const [rating, setRating] = useState(0);
+
+  const createReview = useReviewStore((state) => state.createReview);
   const addReviewToMovie = useMovieStore((state) => state.addReviewToMovie);
 
   const addReview = () => {
@@ -27,7 +30,7 @@ export default function CreateReview({ movieId, movie }) {
       createdAt: `${date.getDate()}/${
         date.getMonth() + 1
       }/${date.getFullYear()}`,
-      score: reviewScore,
+      score: rating,
       content: reviewContent,
     };
 
@@ -36,6 +39,7 @@ export default function CreateReview({ movieId, movie }) {
       createReview(newReview);
       addReviewToMovie(movieId, reviewId);
       setReviewContent("");
+      setRating(0);
       console.log(movie.reviewIds);
     } else {
       alert("Comment can't be empty");
@@ -46,8 +50,7 @@ export default function CreateReview({ movieId, movie }) {
     <Card elevation={6}>
       <CardContent>
         <TextField
-          label="Review"
-          helperText="Please write your review here"
+          label="New review"
           multiline
           rows={4}
           value={reviewContent}
@@ -58,8 +61,21 @@ export default function CreateReview({ movieId, movie }) {
         />
       </CardContent>
       <CardActions
-        sx={{ display: "flex", justifyContent: "center", padding: 2, pt: 0 }}
+        sx={{
+          display: "flex",
+          justifyContent: "space-around",
+          padding: 2,
+          pt: 0,
+        }}
       >
+        <Rating
+          name="simple-controlled"
+          value={rating}
+          onChange={(e) => {
+            console.log(e.target.value);
+            setRating(e.target.value);
+          }}
+        />
         <Button variant="contained" onClick={addReview}>
           Submit
         </Button>

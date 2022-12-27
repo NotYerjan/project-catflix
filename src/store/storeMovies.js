@@ -1,8 +1,9 @@
 import create from "zustand";
-// import initMovies from "./initMovies";
 import { INIT_MOVIES } from "./initMovies";
+
 const useMovieStore = create((set) => ({
   movies: INIT_MOVIES,
+
   addReviewToMovie: (movieId, reviewId) =>
     set((state) => ({
       movies: state.movies.map((movie) =>
@@ -11,16 +12,17 @@ const useMovieStore = create((set) => ({
           : movie
       ),
     })),
+
   removeReviewFromMovie: (movieId, reviewId) =>
     set((state) => ({
       movies: state.movies.map((movie) =>
         movie.id === movieId
           ? {
-              ...movie,
-              reviewIds: movie.reviewIds.filter(
-                (review) => review !== reviewId
-              ),
-            }
+            ...movie,
+            reviewIds: movie.reviewIds.filter(
+              (review) => review !== reviewId
+            ),
+          }
           : movie
       ),
     })),

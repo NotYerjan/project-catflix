@@ -4,7 +4,7 @@ export const INIT_REVIEWS = [
     id: "ionvrkjna",
     userId: "Marriska Fernandes",
     createdAt: "Nov 23, 2022",
-    score: 5,
+    rating: 5,
     content:
       "It's bonkers in the best possible way. It's silly, laugh-out-loud funny and never takes itself too seriously. For those who have been living on a steady diet of Marvel films, this one delivers hilarious one-liners, jabs and Easter eggs. ",
   },
@@ -12,7 +12,7 @@ export const INIT_REVIEWS = [
     id: "inilsnvkjnr",
     userId: "Eric Marchen ",
     createdAt: "Dec 2, 2022",
-    score: 2,
+    rating: 2,
     content:
       "I’m laying down the hammer a bit more harshly because somewhere hidden in this messy pastiche to 80s fantasy movies is an adventure worthy of the gods. Unfortunately, hilarity and humanity fail to harmonize in Thor: Love and Thunder.",
   },
@@ -20,7 +20,7 @@ export const INIT_REVIEWS = [
     id: "aegiklnvela",
     userId: "Nicki Dusse ",
     createdAt: "Jan 15, 2022",
-    score: 5,
+    rating: 5,
     content:
       '"The one of the main things that I did like about this film is that some of the questions and the issues people had with the previous iterations were address and/or fixed in this film." - Naturally Na',
   },
@@ -28,7 +28,7 @@ export const INIT_REVIEWS = [
     id: "iuvbaewkuva",
     userId: "Keith Garlington ",
     createdAt: "Jan 15, 2022",
-    score: 4,
+    rating: 4,
     content:
       "By the end, the direction of both the story and the MCU was murkier than before. But at some point all you can do is let the brains at the MCU hive-mind figure it out and then hope they’re able to bring it all together. It’s the best approach.",
   },
@@ -36,7 +36,7 @@ export const INIT_REVIEWS = [
     id: "oiuhebgvea",
     userId: "Liz Shannon Miller ",
     createdAt: "Jan 15, 2022",
-    score: 4,
+    rating: 4,
     content:
       "Throughout all of it, the weird and complex history of Spider-Man as a cinematic icon isn't a hindrance to the story; instead, it's an enhancement, using the quirks of the character's legacy as a source of illumination into why he has endured so long.",
   },
@@ -44,7 +44,7 @@ export const INIT_REVIEWS = [
     id: "inbevibeaw",
     userId: "Jonathan Sim ",
     createdAt: "Jan 15, 2022",
-    score: 4,
+    rating: 4,
     content:
       "A claustrophobic, suspenseful survival film that knows how to tell its story, Thirteen Lives doesn’t get boring once. The characters have a clear objective, and you will be drawn into the mystery of how they will succeed in their goal.",
   },
@@ -52,7 +52,7 @@ export const INIT_REVIEWS = [
     id: "iubjbvoijpwrvr",
     userId: "Cory Woodroof",
     createdAt: "Jan 15, 2022",
-    score: 5,
+    rating: 5,
     content:
       "Watching Troll is like engulfing a cherished comfort food meal. The film’s lack of nutritional value is frankly irrelevant compared to the charming spectacle Uthaug and company cultivate.",
   },
@@ -60,7 +60,7 @@ export const INIT_REVIEWS = [
     id: "iugebkjvaiue",
     userId: "Robert Roten",
     createdAt: "Jan 15, 2022",
-    score: 4,
+    rating: 4,
     content:
       "Troll is a fun jaunt through the Norweigan countryside filled with a path of destruction that’s very much like a Kaiju film. As a casual watch, this is decent and entertaining, but it’s not memorable or lasting.",
   },
