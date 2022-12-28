@@ -6,7 +6,7 @@ export const INIT_USERS = [
     email: "admin1@example.com",
     firstName: "Yerjan",
     lastName: "Turarov",
-    imgSrc: "",
+    imgSrc: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
     birthday: new Date("Feb 24 1998"),
     movies: [
       { id: "jasdhkhadjsj", status: "finished", isFavorite: true },

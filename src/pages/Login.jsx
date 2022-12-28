@@ -35,13 +35,12 @@ const Login = () => {
   };
 
   // User exists ? return data : return empty array
-  const userData = () =>
-    users.filter(
-      (user) => user.username === username && user.password === password
-    );
+  const userData = users.filter(
+    (user) => user.username === username && user.password === password
+  );
 
   const handleUserLogin = () => {
-    const returnedUserData = userData();
+    const returnedUserData = userData;
 
     if (doesUserExist()) {
       if (returnedUserData.length !== 0) {
