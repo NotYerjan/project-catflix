@@ -14,7 +14,6 @@ import useMovieStore from "../../store/storeMovies.js";
 
 export default function CreateReview({ movieId, movie }) {
   const [reviewContent, setReviewContent] = useState("");
-  const [reviewScore, setReviewScore] = useState(5);
   const [rating, setRating] = useState(0);
 
   const createReview = useReviewStore((state) => state.createReview);
@@ -30,17 +29,16 @@ export default function CreateReview({ movieId, movie }) {
       createdAt: `${date.getDate()}/${
         date.getMonth() + 1
       }/${date.getFullYear()}`,
-      score: rating,
+      rating: rating,
       content: reviewContent,
     };
 
     if (reviewContent) {
-      console.log(reviewId, movieId);
       createReview(newReview);
       addReviewToMovie(movieId, reviewId);
+
       setReviewContent("");
       setRating(0);
-      console.log(movie.reviewIds);
     } else {
       alert("Comment can't be empty");
     }

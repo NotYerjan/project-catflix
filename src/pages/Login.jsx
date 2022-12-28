@@ -35,19 +35,18 @@ const Login = () => {
   };
 
   // User exists ? return data : return empty array
-  const userData = () =>
-    users.filter(
-      (user) => user.username === username && user.password === password
-    );
+  const userData = users.find(
+    (user) => user.username === username && user.password === password
+  );
 
   const handleUserLogin = () => {
-    const returnedUserData = userData();
-
     if (doesUserExist()) {
-      if (returnedUserData.length !== 0) {
+      if (userData) {
         setAuth(true);
         setErrorMessage("");
-        loginUser(returnedUserData.id);
+
+        loginUser(userData.id);
+
         navigate("/");
       } else {
         setErrorMessage("Username or password incorrect");
