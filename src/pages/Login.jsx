@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Container,
   FormControl,
@@ -11,7 +12,6 @@ import {
   Alert,
 } from "@mui/material";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { Link, useNavigate } from "react-router-dom";
 import useUserStore from "../store/storeUsers";
 
 const Login = () => {
@@ -34,7 +34,7 @@ const Login = () => {
     return filteredUsers.length === 0 ? false : true;
   };
 
-  // User exists ? return data : return empty array
+  // User exists ? return data : return undefined
   const userData = users.find(
     (user) => user.username === username && user.password === password
   );

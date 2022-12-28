@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+import { nanoid } from "nanoid";
 import {
   Card,
   TextField,
@@ -6,10 +8,7 @@ import {
   Button,
   Rating,
 } from "@mui/material";
-import React from "react";
-import { useState } from "react";
 import useReviewStore from "../../store/storeReview.js";
-import { nanoid } from "nanoid";
 import useMovieStore from "../../store/storeMovies.js";
 
 export default function CreateReview({ movieId, movie }) {
