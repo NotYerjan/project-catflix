@@ -54,7 +54,7 @@ export default function Review(props) {
           )
         }
         title={users.find((user) => user.id === userId).username}
-        subheader={createdAt.toLocaleString("en-CA", { dateStyle: "short" })}
+        subheader={createdAt.toLocaleString("en-CA", { dateStyle: "medium" })}
       />
 
       {isEdited ? (
