@@ -1,8 +1,14 @@
 import Navbar from "./components/Navbar";
-import { Outlet } from "react-router-dom";
-import { Container, Box, Paper } from "@mui/material";
+import {
+  Outlet,
+  useLocation,
+  useNavigate,
+  useNavigation,
+} from "react-router-dom";
+import { Container, Paper } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Headbar from "./components/Headbar";
+import { useEffect } from "react";
 
 const darkTheme = createTheme({
   palette: {
@@ -11,6 +17,15 @@ const darkTheme = createTheme({
 });
 
 function App() {
+  const navigate = useNavigate();
+  let location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname == "/") {
+      navigate("/movies");
+    }
+  }, [location.name]);
+
   return (
     <ThemeProvider theme={darkTheme}>
       <Paper

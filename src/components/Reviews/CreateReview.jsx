@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import useReviewStore from "../../store/storeReview.js";
 import useMovieStore from "../../store/storeMovies.js";
+import useUserStore from "../../store/storeUsers.js";
 
 export default function CreateReview({ movieId, movie }) {
   const [reviewContent, setReviewContent] = useState("");
@@ -17,6 +18,7 @@ export default function CreateReview({ movieId, movie }) {
 
   const createReview = useReviewStore((state) => state.createReview);
   const addReviewToMovie = useMovieStore((state) => state.addReviewToMovie);
+  const user = useUserStore((state) => state.currentUser);
 
   const addReview = () => {
     const reviewId = nanoid();
@@ -24,10 +26,8 @@ export default function CreateReview({ movieId, movie }) {
 
     const newReview = {
       id: reviewId,
-      userId: "admin",
-      createdAt: `${date.getDate()}/${
-        date.getMonth() + 1
-      }/${date.getFullYear()}`,
+      userId: user.id,
+      createdAt: date,
       rating: rating,
       content: reviewContent,
     };
@@ -60,7 +60,7 @@ export default function CreateReview({ movieId, movie }) {
       <CardActions
         sx={{
           display: "flex",
-          justifyContent: "space-around",
+          justifyContent: "space-between",
           padding: 2,
           pt: 0,
         }}
@@ -68,9 +68,8 @@ export default function CreateReview({ movieId, movie }) {
         <Rating
           name="simple-controlled"
           value={rating}
-          onChange={(e) => {
-            console.log(e.target.value);
-            setRating(e.target.value);
+          onChange={(e, newValue) => {
+            setRating(newValue);
           }}
         />
         <Button variant="contained" onClick={addReview}>

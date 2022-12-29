@@ -3,8 +3,8 @@ import { INIT_USERS } from "./initUsers";
 
 const useUserStore = create((set) => ({
   users: INIT_USERS,
-  currentUser: null,
-  isLoggedIn: false,
+  currentUser: INIT_USERS[0],
+  isLoggedIn: true,
 
   createAndLoginUser: (newUser) =>
     set((state) => ({

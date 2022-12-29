@@ -2,13 +2,15 @@ import React from "react";
 import useReviewStore from "../store/storeReview.js";
 import Review from "./Reviews/Review";
 import CreateReview from "./Reviews/CreateReview.jsx";
-import { Box, Paper, Typography } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
+import useUserStore from "../store/storeUsers.js";
 
 export default function ReviewsList({ movie }) {
   const reviews = useReviewStore((state) => state.reviews);
   const movieReviews = reviews.filter((review) =>
     movie.reviewIds.includes(review.id)
   );
+  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
 
   return (
     <Paper
@@ -25,7 +27,7 @@ export default function ReviewsList({ movie }) {
       {movieReviews.map((review) => (
         <Review key={review.id} content={review} />
       ))}
-      <CreateReview movieId={movie.id} movie={movie} />
+      {isLoggedIn && <CreateReview movieId={movie.id} movie={movie} />}
     </Paper>
   );
 }
