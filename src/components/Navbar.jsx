@@ -38,11 +38,11 @@ export default function Navbar() {
         color="primary"
         sx={{ top: { xs: "auto", md: 0 }, bottom: { xs: 0, md: "auto" } }}
       >
-        {/* {displaySearch && (
+        {displaySearch && (
           <Box sx={{ padding: "10px", display: { xs: "block", md: "none" } }}>
             <Searchbar />
           </Box>
-        )} */}
+        )}
         <Toolbar
           sx={{
             justifyContent: "space-around",
