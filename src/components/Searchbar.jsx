@@ -1,6 +1,6 @@
 import { styled, alpha } from "@mui/material/styles";
 import { FiSearch } from "react-icons/fi";
-import { InputBase, ListItemButton, ListItemText } from "@mui/material";
+import { InputBase, ListItemButton, ListItemText, Box } from "@mui/material";
 import useMovieStore from "../store/storeMovies";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -26,31 +26,23 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     width: "100%",
   },
 }));
-export default function Searchbar(props) {
+
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  width: "100%",
+}));
+
+export default function Searchbar() {
   const movies = useMovieStore((state) => state.movies);
   const [mov, setMov] = useState([]);
-  const [sear, setSear] = useState('');
+  const [sear, setSear] = useState("");
   // const [withs, setWiths ]= useState( document.body.offsetWidt);
   let searchedMovies, searchWord;
-  const Search = styled("div")(({ theme }) => ({
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: theme.spacing(3),
-    width: props.place === "header" ? "auto" : "100%",
-    [theme.breakpoints.down("md")]:
-      props.place === "header"
-        ? {
-            display: "none",
-          }
-        : {
-            margin: theme.spacing(0),
-            width: "100%",
-          },
-  }));
 
   // const ImSearching = (e) => {
   //   searchWord = e.target.value;
@@ -72,25 +64,25 @@ export default function Searchbar(props) {
   //       ))
   //     );
   //   }
-   
+
   // };
 
   return (
-    <div>
+    <>
       {/* {sul && <div style={styling}>{mov}</div>} */}
-      {mov}
+      {/* {mov} */}
       <Search>
         <SearchIconWrapper>
           <FiSearch />
         </SearchIconWrapper>
         <StyledInputBase
-        placeholder="Search…"
-        inputProps={{ "aria-label": "search" }}
-        onChange={(e)=>setSear(e.target.value)}
-        value={sear}
+          placeholder="Search…"
+          inputProps={{ "aria-label": "search" }}
+          onChange={(e) => setSear(e.target.value)}
+          value={sear}
         />
       </Search>
-     
-    </div>
+    </>
   );
 }
+
