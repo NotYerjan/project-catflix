@@ -1,6 +1,9 @@
 import { styled, alpha } from "@mui/material/styles";
 import { FiSearch } from "react-icons/fi";
-import { InputBase } from "@mui/material";
+import { InputBase, ListItemButton, ListItemText } from "@mui/material";
+import useMovieStore from "../store/storeMovies";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -24,6 +27,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 export default function Searchbar(props) {
+  const movies = useMovieStore((state) => state.movies);
+  const [mov, setMov] = useState([]);
+  const [sear, setSear] = useState('');
+  // const [withs, setWiths ]= useState( document.body.offsetWidt);
+  let searchedMovies, searchWord;
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
     borderRadius: theme.shape.borderRadius,
@@ -44,15 +52,45 @@ export default function Searchbar(props) {
           },
   }));
 
+  // const ImSearching = (e) => {
+  //   searchWord = e.target.value;
+  //   setSear(searchWord);
+  //   // console.log(searchWord)
+  //   if (sear.trim()) {
+  //     searchedMovies = movies.filter((movie) => {
+  //       return movie.title
+  //         .toLowerCase()
+  //         .includes(sear.toLowerCase().trim());
+  //     });
+  //     setMov(
+  //       searchedMovies.map((movq) => (
+  //         <Link to={`/movies/${movq.id}`}>
+  //             <ListItemButton component="a" key={movq.title}>
+  //             <ListItemText primary={movq.title} />
+  //         </ListItemButton>
+  //           </Link>
+  //       ))
+  //     );
+  //   }
+   
+  // };
+
   return (
-    <Search>
-      <SearchIconWrapper>
-        <FiSearch />
-      </SearchIconWrapper>
-      <StyledInputBase
+    <div>
+      {/* {sul && <div style={styling}>{mov}</div>} */}
+      {mov}
+      <Search>
+        <SearchIconWrapper>
+          <FiSearch />
+        </SearchIconWrapper>
+        <StyledInputBase
         placeholder="Search…"
         inputProps={{ "aria-label": "search" }}
-      />
-    </Search>
+        onChange={(e)=>setSear(e.target.value)}
+        value={sear}
+        />
+      </Search>
+     
+    </div>
   );
 }
