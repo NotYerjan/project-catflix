@@ -40,7 +40,9 @@ export default function Headbar() {
         <Link to="/movies">
           <Logo />
         </Link>
-        <Searchbar place="header" />
+        <Box sx={{ marginLeft: "24px", display: { xs: "none", md: "block" } }}>
+          <Searchbar place="header" />
+        </Box>
         <Box sx={{ flexGrow: 1 }} />
         {!isLoggedIn ? (
           <ButtonGroup sx={{ display: { xs: "none", md: "block" } }}>
