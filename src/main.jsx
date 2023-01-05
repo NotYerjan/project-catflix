@@ -5,13 +5,12 @@ import Home from "./pages/Home";
 import Movie from "./pages/Movie";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-import Liked from "./components/extratest/Liked";
-import Search from "./components/extratest/Search";
 import User from "./pages/User";
 import UserEdit from "./pages/UserEdit";
 import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import FavoritsPage from "./pages/FavoritsPage";
 
 const router = createBrowserRouter([
   {
@@ -27,10 +26,6 @@ const router = createBrowserRouter([
         element: <Movie />,
       },
       {
-        path: "liked",
-        element: <Liked />,
-      },
-      {
         path: "user",
         element: <User />,
       },
@@ -39,9 +34,9 @@ const router = createBrowserRouter([
         element: <UserEdit />,
       },
       {
-        path: "search",
-        element: <Search />,
-      },
+        path: "favorits",
+        element: <FavoritsPage />
+      }
     ],
   },
   {
