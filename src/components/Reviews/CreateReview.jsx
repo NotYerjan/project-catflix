@@ -1,21 +1,24 @@
+import React, { useState } from "react";
+import { nanoid } from "nanoid";
 import {
   Card,
   TextField,
   CardContent,
   CardActions,
   Button,
+  Rating,
 } from "@mui/material";
-import React from "react";
-import { useState } from "react";
 import useReviewStore from "../../store/storeReview.js";
-import { nanoid } from "nanoid";
 import useMovieStore from "../../store/storeMovies.js";
+import useUserStore from "../../store/storeUsers.js";
 
 export default function CreateReview({ movieId, movie }) {
-  const createReview = useReviewStore((state) => state.createReview);
   const [reviewContent, setReviewContent] = useState("");
-  const [reviewScore, setReviewScore] = useState(5);
+  const [rating, setRating] = useState(0);
+
+  const createReview = useReviewStore((state) => state.createReview);
   const addReviewToMovie = useMovieStore((state) => state.addReviewToMovie);
+  const user = useUserStore((state) => state.currentUser);
 
   const addReview = () => {
     const reviewId = nanoid();
@@ -23,20 +26,18 @@ export default function CreateReview({ movieId, movie }) {
 
     const newReview = {
       id: reviewId,
-      userId: "admin",
-      createdAt: `${date.getDate()}/${
-        date.getMonth() + 1
-      }/${date.getFullYear()}`,
-      score: reviewScore,
+      userId: user.id,
+      createdAt: date,
+      rating: rating,
       content: reviewContent,
     };
 
     if (reviewContent) {
-      console.log(reviewId, movieId);
       createReview(newReview);
       addReviewToMovie(movieId, reviewId);
+
       setReviewContent("");
-      console.log(movie.reviewIds);
+      setRating(0);
     } else {
       alert("Comment can't be empty");
     }
@@ -46,8 +47,7 @@ export default function CreateReview({ movieId, movie }) {
     <Card elevation={6}>
       <CardContent>
         <TextField
-          label="Review"
-          helperText="Please write your review here"
+          label="New review"
           multiline
           rows={4}
           value={reviewContent}
@@ -58,8 +58,20 @@ export default function CreateReview({ movieId, movie }) {
         />
       </CardContent>
       <CardActions
-        sx={{ display: "flex", justifyContent: "center", padding: 2, pt: 0 }}
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          padding: 2,
+          pt: 0,
+        }}
       >
+        <Rating
+          name="simple-controlled"
+          value={rating}
+          onChange={(e, newValue) => {
+            setRating(newValue);
+          }}
+        />
         <Button variant="contained" onClick={addReview}>
           Submit
         </Button>

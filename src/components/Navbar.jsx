@@ -1,11 +1,35 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiHeart, FiHome, FiSearch, FiUser } from "react-icons/fi";
-import { AppBar, Toolbar, IconButton, Box } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Box,
+  Popover,
+  Button,
+  ButtonGroup,
+} from "@mui/material";
 import Searchbar from "./Searchbar";
+import useUserStore from "../store/storeUsers";
 
 export default function Navbar() {
   const [displaySearch, setDisplaySearch] = useState(false);
+  const logoutUser = useUserStore((state) => state.logoutUser);
+  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
+  const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
 
   return (
     <>
@@ -25,25 +49,65 @@ export default function Navbar() {
             display: { xs: "flex", md: "none" },
           }}
         >
-          <Link to="/movies">
-            <IconButton>
-              <FiHome className="navBarIcon" />
-            </IconButton>
-          </Link>
+          <IconButton
+            onClick={() => navigate("/movies")}
+            sx={{ color: "white" }}
+          >
+            <FiHome className="navBarIcon" />
+          </IconButton>
 
-          <Link to="/liked">
-            <IconButton>
-              <FiHeart className="navBarIcon" />
-            </IconButton>
-          </Link>
+          <IconButton
+            onClick={() => navigate("/liked")}
+            sx={{ color: "white" }}
+          >
+            <FiHeart className="navBarIcon" />
+          </IconButton>
 
-          <Link to="/user">
-            <IconButton>
-              <FiUser className="navBarIcon" />
-            </IconButton>
-          </Link>
+          <IconButton
+            onClick={handleClick}
+            aria-describedby={id}
+            sx={{ color: "white" }}
+          >
+            <FiUser className="navBarIcon" />
+          </IconButton>
+          <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
+            transformOrigin={{
+              vertical: "bottom",
+              horizontal: "center",
+            }}
+          >
+            <ButtonGroup
+              orientation="vertical"
+              sx={{ width: "90vw" }}
+              variant="text"
+            >
+              {" "}
+              {isLoggedIn ? (
+                <>
+                  <Button onClick={() => navigate("/user")}>Profile</Button>
+                  <Button onClick={logoutUser}>Log out</Button>
+                </>
+              ) : (
+                <>
+                  <Button onClick={() => navigate("/login")}>Login</Button>
+                  <Button onClick={() => navigate("/signup")}>Sign up</Button>
+                </>
+              )}
+            </ButtonGroup>
+          </Popover>
 
-          <IconButton onClick={() => setDisplaySearch(!displaySearch)}>
+          <IconButton
+            onClick={() => setDisplaySearch(!displaySearch)}
+            sx={{ color: "white" }}
+          >
             <FiSearch className="navBarIcon" />
           </IconButton>
         </Toolbar>

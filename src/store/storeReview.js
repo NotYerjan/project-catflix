@@ -15,13 +15,14 @@ const useReviewStore = create((set) => ({
       reviews: state.reviews.filter((review) => review.id !== reviewId),
     })),
 
-  updateReview: (reviewId, content) =>
+  updateReview: (reviewId, content, rating) =>
     set((state) => ({
       reviews: state.reviews.map((review) =>
         review.id === reviewId
           ? {
             ...review,
             content,
+            rating,
           }
           : review
       ),

@@ -9,8 +9,16 @@ export const INIT_MOVIES = [
     imgSrc:
       "https://m.media-amazon.com/images/M/MV5BYmMxZWRiMTgtZjM0Ny00NDQxLWIxYWQtZDdlNDNkOTEzYTdlXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg",
     tags: ["action", "adventure", "fantasy", "comedy", "movie"],
-    releaseDate: "Sep 8, 2022",
-    duration: 125,
+    releaseDate: "Dec 12, 2021",
+    duration: 148,
+    casts: [
+      "marisa tomei",
+      "martin starr",
+      "jamie foxx",
+      "j.K. simmons",
+      "harry holland",
+    ],
+    country: "germany",
   },
   {
     id: "jasdhkhadjsj",
@@ -23,6 +31,14 @@ export const INIT_MOVIES = [
     tags: ["action", "adventure", "fantasy", "comedy", "movie"],
     releaseDate: "Dec 17, 2021",
     duration: 148,
+    casts: [
+      "marisa tomei",
+      "martin starr",
+      "jamie foxx",
+      "J.K. Simmons",
+      "Harry Holland",
+    ],
+    country: "united kingdom",
   },
   {
     id: "xklnjkna",
@@ -35,6 +51,14 @@ export const INIT_MOVIES = [
     tags: ["drama", "movie"],
     releaseDate: "Jul 29, 2022",
     duration: 144,
+    casts: [
+      "marisa Tomei",
+      "martin Starr",
+      "jamie Foxx",
+      "J.K. Simmons",
+      "Harry Holland",
+    ],
+    country: "United States of America",
   },
   {
     id: "qwqweiqwpo",
@@ -47,5 +71,13 @@ export const INIT_MOVIES = [
     tags: ["action", "adventure", "fantasy", "mystery", "thriller", "movie"],
     releaseDate: "Dec 1, 2022 ",
     duration: 103,
+    casts: [
+      "Marisa Tomei",
+      "Martin Starr",
+      "Jamie Foxx",
+      "J.K. Simmons",
+      "Harry Holland",
+    ],
+    country: "United States of America",
   },
 ];
