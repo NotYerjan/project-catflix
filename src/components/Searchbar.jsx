@@ -1,9 +1,9 @@
 import { styled, alpha } from "@mui/material/styles";
 import { FiSearch } from "react-icons/fi";
-import { InputBase, ListItemButton, ListItemText, Box } from "@mui/material";
+import { InputBase, ListItemButton, ListItemText } from "@mui/material";
 import useMovieStore from "../store/storeMovies";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -38,39 +38,44 @@ const Search = styled("div")(({ theme }) => ({
 }));
 
 export default function Searchbar() {
+  const windowSize = useRef([window.innerWidth]);
+  const navigate = useNavigate();
   const movies = useMovieStore((state) => state.movies);
-  const [mov, setMov] = useState([]);
-  const [sear, setSear] = useState("");
-  // const [withs, setWiths ]= useState( document.body.offsetWidt);
-  let searchedMovies, searchWord;
+  const [searchMovies, setSearchMovies] = useState("");
+  const [putSearchs, setPutSearchs] = useState([]);
 
-  // const ImSearching = (e) => {
-  //   searchWord = e.target.value;
-  //   setSear(searchWord);
-  //   // console.log(searchWord)
-  //   if (sear.trim()) {
-  //     searchedMovies = movies.filter((movie) => {
-  //       return movie.title
-  //         .toLowerCase()
-  //         .includes(sear.toLowerCase().trim());
-  //     });
-  //     setMov(
-  //       searchedMovies.map((movq) => (
-  //         <Link to={`/movies/${movq.id}`}>
-  //             <ListItemButton component="a" key={movq.title}>
-  //             <ListItemText primary={movq.title} />
-  //         </ListItemButton>
-  //           </Link>
-  //       ))
-  //     );
-  //   }
+  useEffect(() => {
+    let searchedMovies;
 
-  // };
+    if (String(searchMovies).trim() !== "") {
+      searchedMovies = movies.filter((movie) => {
+        return movie.title
+          .toLowerCase()
+          .includes(searchMovies.toLowerCase().trim());
+      });
+      setPutSearchs(
+        searchedMovies.map((movie) => (
+          <ListItemButton
+            component="a"
+            key={movie.title}
+            onClick={() => navigate(`/movies/${movie.id}`)}
+          >
+            <ListItemText primary={movie.title} />
+          </ListItemButton>
+        ))
+      );
+    } else {
+      setPutSearchs([]);
+    }
+  }, [searchMovies]);
+  const showSeachStyle = {
+    position: "absolute",
+    backgroundColor: "#2e2a2d",
+    bottom:  windowSize.current[0] < 900 ? "120px" : "",
+  };
 
   return (
     <>
-      {/* {sul && <div style={styling}>{mov}</div>} */}
-      {/* {mov} */}
       <Search>
         <SearchIconWrapper>
           <FiSearch />
@@ -78,11 +83,11 @@ export default function Searchbar() {
         <StyledInputBase
           placeholder="Search…"
           inputProps={{ "aria-label": "search" }}
-          onChange={(e) => setSear(e.target.value)}
-          value={sear}
+          onChange={(e) => setSearchMovies(e.target.value)}
+          value={searchMovies}
         />
       </Search>
+      <div style={showSeachStyle}>{putSearchs}</div>
     </>
   );
 }
-
