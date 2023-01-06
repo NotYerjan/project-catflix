@@ -38,11 +38,15 @@ const Search = styled("div")(({ theme }) => ({
 }));
 
 export default function Searchbar() {
+  const _close = useRef(null);
   const windowSize = useRef([window.innerWidth]);
   const navigate = useNavigate();
   const movies = useMovieStore((state) => state.movies);
   const [searchMovies, setSearchMovies] = useState("");
   const [putSearchs, setPutSearchs] = useState([]);
+  useEffect(() => {
+    document.addEventListener("click", closeSearch, true);
+  });
 
   useEffect(() => {
     let searchedMovies;
@@ -68,10 +72,17 @@ export default function Searchbar() {
       setPutSearchs([]);
     }
   }, [searchMovies]);
+
+  const closeSearch = (e) => {
+    if (!_close.current.contains(e.target)) {
+      setPutSearchs([]);
+    }
+  };
+
   const showSeachStyle = {
     position: "absolute",
     backgroundColor: "#2e2a2d",
-    bottom:  windowSize.current[0] < 900 ? "120px" : "",
+    bottom: windowSize.current[0] < 900 ? "120px" : "",
   };
 
   return (
@@ -87,7 +98,9 @@ export default function Searchbar() {
           value={searchMovies}
         />
       </Search>
-      <div style={showSeachStyle}>{putSearchs}</div>
+      <div ref={_close} style={showSeachStyle}>
+        {putSearchs}
+      </div>
     </>
   );
 }
