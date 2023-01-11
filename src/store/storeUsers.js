@@ -6,6 +6,7 @@ const useUserStore = create((set) => ({
   currentUser: INIT_USERS[0],
   isLoggedIn: true,
 
+
   createAndLoginUser: (newUser) =>
     set((state) => ({
       users: [...state.users, newUser],

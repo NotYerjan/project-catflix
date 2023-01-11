@@ -49,15 +49,25 @@ export default function Navbar() {
             display: { xs: "flex", md: "none" },
           }}
         >
-          <IconButton onClick={() => navigate("/movies")}>
+          <IconButton
+            onClick={() => navigate("/movies")}
+            sx={{ color: "white" }}
+          >
             <FiHome className="navBarIcon" />
           </IconButton>
 
-          <IconButton onClick={() => navigate("/liked")}>
+          <IconButton
+            onClick={() => navigate("/liked")}
+            sx={{ color: "white" }}
+          >
             <FiHeart className="navBarIcon" />
           </IconButton>
 
-          <IconButton onClick={handleClick} aria-describedby={id}>
+          <IconButton
+            onClick={handleClick}
+            aria-describedby={id}
+            sx={{ color: "white" }}
+          >
             <FiUser className="navBarIcon" />
           </IconButton>
           <Popover
@@ -94,7 +104,10 @@ export default function Navbar() {
             </ButtonGroup>
           </Popover>
 
-          <IconButton onClick={() => setDisplaySearch(!displaySearch)}>
+          <IconButton
+            onClick={() => setDisplaySearch(!displaySearch)}
+            sx={{ color: "white" }}
+          >
             <FiSearch className="navBarIcon" />
           </IconButton>
         </Toolbar>

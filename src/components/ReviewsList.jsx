@@ -1,15 +1,10 @@
 import React from "react";
-import useReviewStore from "../store/storeReview.js";
 import Review from "./Reviews/Review";
 import CreateReview from "./Reviews/CreateReview.jsx";
 import { Paper, Typography } from "@mui/material";
 import useUserStore from "../store/storeUsers.js";
 
-export default function ReviewsList({ movie }) {
-  const reviews = useReviewStore((state) => state.reviews);
-  const movieReviews = reviews.filter((review) =>
-    movie.reviewIds.includes(review.id)
-  );
+export default function ReviewsList({ movie, movieReviews }) {
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
 
   return (
