@@ -4,30 +4,36 @@ import { useParams } from "react-router-dom";
 import MovieInfo from "../components/MovieInfo";
 import ReviewsList from "../components/ReviewsList";
 import useMovieStore from "../store/storeMovies";
+import useReviewStore from "../store/storeReview.js";
 
 const MovieBox = styled(Box)({
-	display: "flex",
-	flexWrap: "wrap",
-	justifyContent: "center",
-	gap: 20,
-	paddingTop: 20,
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent: "center",
+  gap: 20,
+  paddingTop: 20,
 });
 
 export default function Movie() {
-	const { id } = useParams();
-	const movies = useMovieStore((state) => state.movies);
-	const movie = movies.find((m) => m.id === id);
+  const { id } = useParams();
+  const movies = useMovieStore((state) => state.movies);
+  const movie = movies.find((m) => m.id === id);
 
-	return (
-		<>
-			{movie ? (
-				<MovieBox>
-					<MovieInfo movie={movie} />
-					<ReviewsList movie={movie} />
-				</MovieBox>
-			) : (
-				<h3>There is no such kind of link</h3>
-			)}
-		</>
-	);
+  const reviews = useReviewStore((state) => state.reviews);
+  const movieReviews = reviews.filter((review) =>
+    movie.reviewIds.includes(review.id)
+  );
+
+  return (
+    <>
+      {movie ? (
+        <MovieBox>
+          <MovieInfo movie={movie} movieReviews={movieReviews} />
+          <ReviewsList movie={movie} movieReviews={movieReviews} />
+        </MovieBox>
+      ) : (
+        <h3>There is no such kind of link</h3>
+      )}
+    </>
+  );
 }

@@ -16,7 +16,7 @@ import Searchbar from "./Searchbar";
 import { Link, useNavigate } from "react-router-dom";
 import useUserStore from "../store/storeUsers";
 
-export default function Headbar() {
+export default function Headbar({ themeSwitch, logo }) {
   const navigate = useNavigate();
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
   const logoutUser = useUserStore((state) => state.logoutUser);
@@ -44,6 +44,7 @@ export default function Headbar() {
           <Searchbar place="header" />
         </Box>
         <Box sx={{ flexGrow: 1 }} />
+        {themeSwitch}
         {!isLoggedIn ? (
           <ButtonGroup sx={{ display: { xs: "none", md: "block" } }}>
             <Button onClick={() => navigate("/login")}>Login</Button>
