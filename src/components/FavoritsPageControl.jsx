@@ -19,7 +19,7 @@ export default function FavoritsPageControl({ movies, mId }) {
   } else if (mId === 4) {
     mas = user.movies.filter((ck) => ck.status === "willWatch");
   }
-console.log(mas)
+
   const movieId = mas.map((m)=> m.id)
 
   return (

@@ -37,14 +37,14 @@ export default function Headbar({ themeSwitch, logo }) {
   return (
     <AppBar>
       <Toolbar>
-        <Link to="/movies">{logo}</Link>
-
-        <Searchbar place="header" />
-
+        <Link to="/movies">
+          <Logo />
+        </Link>
+        <Box sx={{ marginLeft: "24px", display: { xs: "none", md: "block" } }}>
+          <Searchbar place="header" />
+        </Box>
         <Box sx={{ flexGrow: 1 }} />
-
         {themeSwitch}
-
         {!isLoggedIn ? (
           <ButtonGroup sx={{ display: { xs: "none", md: "block" } }}>
             <Button onClick={() => navigate("/login")}>Login</Button>
