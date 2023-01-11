@@ -46,7 +46,7 @@ export default function Searchbar() {
   const [putSearchs, setPutSearchs] = useState([]);
   useEffect(() => {
     document.addEventListener("click", closeSearch, true);
-  });
+  },[]);
 
   useEffect(() => {
     let searchedMovies;
