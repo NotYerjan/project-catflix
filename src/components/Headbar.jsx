@@ -38,7 +38,7 @@ export default function Headbar({ themeSwitch, logo }) {
     <AppBar>
       <Toolbar>
         <Link to="/movies">
-          <Logo />
+          {logo}
         </Link>
         <Box sx={{ marginLeft: "24px", display: { xs: "none", md: "block" } }}>
           <Searchbar place="header" />
