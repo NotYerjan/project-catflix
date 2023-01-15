@@ -6,13 +6,16 @@ import { Container, Paper, Switch } from "@mui/material";
 import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
 import Logo from "./components/Logo";
 import LogoLight from "./components/LogoLight";
+import useUserStore from "./store/storeUsers";
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState("dark");
   const [checked, setChecked] = useState(false);
+  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
 
   const navigate = useNavigate();
-  let location = useLocation();
+  const location = useLocation();
+  let pathname = location.pathname;
 
   const theme = createTheme({
     palette: {
@@ -22,11 +25,21 @@ function App() {
   });
 
   useEffect(() => {
-    if (location.pathname == "/") {
+    console.log(pathname);
+    if (pathname == "/") {
       navigate("/movies");
     }
+    if (
+      isLoggedIn &&
+      (pathname.includes("/login") || pathname.includes("/signup"))
+    ) {
+      navigate("/user");
+    }
+    if (!isLoggedIn && pathname.includes("user")) {
+      navigate("/login");
+    }
     setCurrentTheme((theme) => (checked ? "light" : "dark"));
-  }, [location.name, checked]);
+  }, [pathname, checked, isLoggedIn]);
 
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,

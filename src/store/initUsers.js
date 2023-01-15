@@ -8,6 +8,7 @@ export const INIT_USERS = [
     lastName: "Turarov",
     imgSrc: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
     birthday: new Date("Feb 24 1998"),
+    isSuperUser: true,
     movies: [
       { id: "jasdhkhadjsj", status: "finished", isFavorite: true },
       { id: "arehsfdbesr", status: "finished", isFavorite: false },
@@ -23,6 +24,7 @@ export const INIT_USERS = [
     lastName: "Bejan",
     imgSrc: "",
     birthday: new Date("Feb 24 1998"),
+    isSuperUser: true,
     movies: [
       { id: "jasdhkhadjsj", status: "finished", isFavorite: true },
       { id: "arehsfdbesr", status: "finished", isFavorite: false },

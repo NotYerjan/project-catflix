@@ -42,7 +42,7 @@ export default function Review(props) {
         avatar={<Avatar />}
         action={
           isLoggedIn &&
-          userId == user.id && (
+          (userId == user.id || user.isSuperUser) && (
             <Box>
               <IconButton onClick={toggleEditReview}>
                 <FiEdit />

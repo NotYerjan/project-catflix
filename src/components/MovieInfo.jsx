@@ -2,6 +2,7 @@ import React from "react";
 import {
   Card,
   CardMedia,
+  CardHeader,
   Typography,
   CardContent,
   Box,
@@ -9,28 +10,23 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  IconButton,
 } from "@mui/material";
-import { FiHeart } from "react-icons/fi";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import useReviewStore from "../store/storeReview";
 import useUserStore from "../store/storeUsers";
 import { useState } from "react";
 
 export default function MovieInfo({ movie, movieReviews }) {
   const reviews = useReviewStore((state) => state.reviews);
-  const currentUserMovie = useUserStore((state) => state.currentUser);
+  const user = useUserStore((state) => state.currentUser);
   const newMovieStatus = useUserStore((state) => state.changeMovieStatusOfUser);
-  const toggleLikes = useUserStore((state) => state.toggleFavoriteMovie);
-  let ckeckit, ckecyt;
-  for (let m of currentUserMovie.movies) {
-    if (m.id.toLowerCase() === movie.id.toLowerCase()) {
-      console.log(m.isFavorite);
-      ckeckit = m.isFavorite;
-      ckecyt = m.status;
-    }
-  }
+  const toggleFavorite = useUserStore((state) => state.toggleFavoriteMovie);
+  const userMovieState = user.movies?.find(({ id }) => id == movie.id);
 
-  const [statusMovie, setStatusMovie] = useState(ckecyt);
-  const [likes, setLikes] = useState(ckeckit);
+  const [statusMovie, setStatusMovie] = useState(
+    userMovieState?.status || "none"
+  );
   // Add a comma after a string, used with arrays that have multiple values
   // (names, genres...)
   const addCommaAsSeperator = (string) => (string += ", ");
@@ -38,17 +34,7 @@ export default function MovieInfo({ movie, movieReviews }) {
     setStatusMovie(e.target.value);
     newMovieStatus(movie.id, e.target.value);
   };
-  const makeFavurte = () => {
-    setLikes(!likes);
-    toggleLikes(movie.id);
-  };
-  const liked = {
-    background: likes ? "red" : "black",
-  };
-  const secondStyle = {
-    display: "flex",
-    justifyContent: "space-around",
-  };
+
   return (
     <Box maxWidth={450}>
       <Card sx={{ position: "sticky", top: 20 }}>
@@ -58,45 +44,55 @@ export default function MovieInfo({ movie, movieReviews }) {
           image={movie.imgSrc}
           alt={movie.title}
         />
+        <CardHeader
+          action={
+            <>
+              <IconButton onClick={() => toggleFavorite(movie.id)}>
+                {userMovieState?.isFavorite ? (
+                  <FaHeart color="red" />
+                ) : (
+                  <FaRegHeart />
+                )}
+              </IconButton>
+
+              <FormControl size="small">
+                <InputLabel id="demo-simple-select-label">Status</InputLabel>
+                <Select
+                  label="Status"
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  onChange={handleChange}
+                  value={statusMovie}
+                >
+                  <MenuItem value="none">Select</MenuItem>
+                  <MenuItem value="watching">Watching</MenuItem>
+                  <MenuItem value="finished">Finished</MenuItem>
+                  <MenuItem value="willWatch">Will Watch</MenuItem>
+                </Select>
+              </FormControl>
+            </>
+          }
+          title={movie.title}
+          subheader={
+            <Typography
+              gutterBottom
+              variant="body1"
+              component="div"
+              sx={{ color: "rgb(227, 171, 87);" }}
+            >
+              IMDB:
+              {(
+                movieReviews.reduce(
+                  (total, review) => total + review.rating,
+                  0
+                ) / movieReviews.length
+              ).toFixed(1)}
+            </Typography>
+          }
+        />
         <CardContent>
-          <div style={secondStyle}>
-            <FiHeart style={liked} onClick={makeFavurte} />
-            <FormControl width="200px">
-              <InputLabel id="demo-simple-select-label">
-                Give a status
-              </InputLabel>
-              <Select
-                label=" Give a status"
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                onChange={handleChange}
-                value={statusMovie}
-              >
-                <MenuItem value="watching">Watching</MenuItem>
-                <MenuItem value="finished">Finished</MenuItem>
-                <MenuItem value="willWatch">Will Watch</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-          <Typography gutterBottom variant="h5" component="div">
-            {movie.title}
-          </Typography>
-
-          <Typography
-            gutterBottom
-            variant="body1"
-            component="div"
-            sx={{ color: "rgb(227, 171, 87);" }}
-          >
-            IMDB:
-            {(
-              movieReviews.reduce((total, review) => total + review.rating, 0) /
-              movieReviews.length
-            ).toFixed(1)}
-          </Typography>
-
-          <Typography variant="body2" color="text.secondary">
-            <div style={{ fontWeight: "bold" }}>Overview: </div>
+          <Typography variant="body1" color="text.secondary">
+            <span style={{ fontWeight: "bold" }}>Overview: </span>
             {movie.description}
           </Typography>
 

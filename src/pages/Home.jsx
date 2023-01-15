@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // import { FiBell, FiChevronDown } from "react-icons/fi";
 import useMovieStore from "../store/storeMovies";
-// import MovieList from "../components/MovieList";
+import MovieList from "../components/MovieList";
 import Logo from "../components/Logo";
 import HomeFilter from "../components/HomeFilter";
 import { Button } from "@mui/material";

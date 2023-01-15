@@ -57,7 +57,7 @@ export default function Navbar() {
           </IconButton>
 
           <IconButton
-            onClick={() => navigate("/liked")}
+            onClick={() => navigate("/favorite")}
             sx={{ color: "white" }}
           >
             <FiHeart className="navBarIcon" />

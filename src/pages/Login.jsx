@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Container,
-  FormControl,
   TextField,
   Button,
   FormLabel,
@@ -33,7 +32,6 @@ const Login = () => {
     const filteredUsers = users.filter((user) => user.username === username);
     return filteredUsers.length === 0 ? false : true;
   };
-
 
   // User exists ? return data : return undefined
   const userData = users.find(
@@ -66,9 +64,11 @@ const Login = () => {
         alignItems: "center",
       }}
     >
-      <FormControl
+      <form
+        onSubmit={handleUserLogin}
         style={{
           display: "flex",
+          flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
           gap: "0.8rem",
@@ -133,10 +133,10 @@ const Login = () => {
         />
 
         <Button
+          type="submit"
           disabled={!(username && password)}
           variant="contained"
           style={{ marginTop: "2rem", width: "80%" }}
-          onClick={handleUserLogin}
         >
           Log In
         </Button>
@@ -147,7 +147,7 @@ const Login = () => {
             Sign up
           </Link>
         </Typography>
-      </FormControl>
+      </form>
     </Container>
   );
 };

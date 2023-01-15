@@ -13,7 +13,7 @@ import {
   ButtonGroup,
 } from "@mui/material";
 import Searchbar from "./Searchbar";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useUserStore from "../store/storeUsers";
 
 export default function Headbar({ themeSwitch, logo }) {
@@ -21,6 +21,7 @@ export default function Headbar({ themeSwitch, logo }) {
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
   const logoutUser = useUserStore((state) => state.logoutUser);
   const [anchorEl, setAnchorEl] = useState(null);
+  let location = useLocation();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -30,6 +31,13 @@ export default function Headbar({ themeSwitch, logo }) {
     setAnchorEl(null);
   };
 
+  const handleLogout = () => {
+    logoutUser();
+    if (location.pathname.includes("user")) {
+      navigate("/login");
+    }
+  };
+
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover-headbar" : undefined;
 
@@ -37,9 +45,7 @@ export default function Headbar({ themeSwitch, logo }) {
   return (
     <AppBar>
       <Toolbar>
-        <Link to="/movies">
-          {logo}
-        </Link>
+        <Link to="/movies">{logo}</Link>
         <Box sx={{ marginLeft: "24px", display: { xs: "none", md: "block" } }}>
           <Searchbar place="header" />
         </Box>
@@ -96,7 +102,8 @@ export default function Headbar({ themeSwitch, logo }) {
                 variant="text"
               >
                 <Button onClick={() => navigate("/user")}>Profile</Button>
-                <Button onClick={logoutUser}>Log out</Button>
+                <Button onClick={() => navigate("/favorite")}>My Movies</Button>
+                <Button onClick={handleLogout}>Log out</Button>
               </ButtonGroup>
             </Popover>
           </Box>
