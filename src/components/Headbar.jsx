@@ -13,7 +13,7 @@ import {
   ButtonGroup,
 } from "@mui/material";
 import Searchbar from "./Searchbar";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useUserStore from "../store/storeUsers";
 
 export default function Headbar({ themeSwitch, logo }) {
@@ -21,6 +21,7 @@ export default function Headbar({ themeSwitch, logo }) {
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
   const logoutUser = useUserStore((state) => state.logoutUser);
   const [anchorEl, setAnchorEl] = useState(null);
+  let location = useLocation();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -28,6 +29,13 @@ export default function Headbar({ themeSwitch, logo }) {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    logoutUser();
+    if (location.pathname.includes("user")) {
+      navigate("/login");
+    }
   };
 
   const open = Boolean(anchorEl);
@@ -38,13 +46,11 @@ export default function Headbar({ themeSwitch, logo }) {
     <AppBar>
       <Toolbar>
         <Link to="/movies">{logo}</Link>
-
-        <Searchbar place="header" />
-
+        <Box sx={{ marginLeft: "24px", display: { xs: "none", md: "block" } }}>
+          <Searchbar place="header" />
+        </Box>
         <Box sx={{ flexGrow: 1 }} />
-
         {themeSwitch}
-
         {!isLoggedIn ? (
           <ButtonGroup sx={{ display: { xs: "none", md: "block" } }}>
             <Button onClick={() => navigate("/login")} color="secondary">
@@ -98,7 +104,8 @@ export default function Headbar({ themeSwitch, logo }) {
                 variant="text"
               >
                 <Button onClick={() => navigate("/user")}>Profile</Button>
-                <Button onClick={logoutUser}>Log out</Button>
+                <Button onClick={() => navigate("/favorite")}>My Movies</Button>
+                <Button onClick={handleLogout}>Log out</Button>
               </ButtonGroup>
             </Popover>
           </Box>

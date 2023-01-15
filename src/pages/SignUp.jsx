@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Container,
-  FormControl,
   TextField,
   Button,
   FormLabel,
@@ -71,9 +70,11 @@ const SignUp = () => {
         alignItems: "center",
       }}
     >
-      <FormControl
+      <form
+        onSubmit={handleUserSignUp}
         style={{
           display: "flex",
+          flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
           gap: "0.8rem",
@@ -161,7 +162,7 @@ const SignUp = () => {
           disabled={Boolean(error)}
           variant="contained"
           style={{ marginTop: "1.5rem", width: "80%" }}
-          onClick={handleUserSignUp}
+          type="submit"
         >
           Sign Up
         </Button>
@@ -172,7 +173,7 @@ const SignUp = () => {
             Login
           </Link>
         </Typography>
-      </FormControl>
+      </form>
     </Container>
   );
 };

@@ -10,9 +10,9 @@ import UserEdit from "./pages/UserEdit";
 import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import FavoritsPage from "./pages/FavoritsPage";
 import UserProfile from "./pages/UserProfile";
 import { createTheme, ThemeProvider } from "@mui/material";
+import Favorite from "./pages/Favorite";
 
 const router = createBrowserRouter([
   {
@@ -40,8 +40,8 @@ const router = createBrowserRouter([
         element: <UserEdit />,
       },
       {
-        path: "favorits",
-        element: <FavoritsPage />,
+        path: "favorite",
+        element: <Favorite />,
       },
     ],
   },
