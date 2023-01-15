@@ -53,7 +53,9 @@ export default function Headbar({ themeSwitch, logo }) {
         {themeSwitch}
         {!isLoggedIn ? (
           <ButtonGroup sx={{ display: { xs: "none", md: "block" } }}>
-            <Button onClick={() => navigate("/login")}>Login</Button>
+            <Button onClick={() => navigate("/login")} color="secondary">
+              Login
+            </Button>
             <Button variant="contained" onClick={() => navigate("/signup")}>
               Sign up
             </Button>

@@ -84,14 +84,7 @@ const SignUp = () => {
           height: "31rem",
         }}
       >
-        <FormLabel
-          sx={{
-            color: "#1976d2",
-            fontSize: "2rem",
-          }}
-        >
-          Sign Up
-        </FormLabel>
+        <FormLabel sx={{ fontSize: "2rem" }}>Sign Up</FormLabel>
 
         {
           <Alert
