@@ -15,6 +15,10 @@
   -webkit-text-size-adjust: 100%;
 } */
 
+d{
+  display: flex;
+  justify-content: space-around;
+}
 * {
   margin: 0;
   padding: 0;
