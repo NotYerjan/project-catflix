@@ -25,6 +25,14 @@ export const INIT_REVIEWS = [
       '"The one of the main things that I did like about this film is that some of the questions and the issues people had with the previous iterations were address and/or fixed in this film." - Naturally Na',
   },
   {
+    id: "aegikldffnvela",
+    userId: "te45heyurobin",
+    createdAt: "Jun 15, 2022",
+    rating: 3,
+    content:
+      "This is a really long review to test how the page would look if a long review was added, also to test adding the '...' at the end when a review is eally long so it won't take the whole page. This is a really long review to test how the page would look if a long review was added, also to test adding the '...' at the end when a review is eally long so it won't take the whole page",
+  },
+  {
     id: "iuvbaewkuva",
     userId: "akey45fbty52robin",
     createdAt: "Jan 15, 2022",

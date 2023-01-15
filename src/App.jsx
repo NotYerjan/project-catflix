@@ -18,6 +18,9 @@ function App() {
     palette: {
       mode: currentTheme,
       primary: { main: "rgb(227, 171, 87)" },
+      secondary: {
+        main: currentTheme === "light" ? "#44321e" : "rgb(227, 171, 87)",
+      },
     },
   });
 

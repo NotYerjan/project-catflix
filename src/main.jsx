@@ -11,6 +11,8 @@ import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import FavoritsPage from "./pages/FavoritsPage";
+import UserProfile from "./pages/UserProfile";
+import { createTheme, ThemeProvider } from "@mui/material";
 
 const router = createBrowserRouter([
   {
@@ -30,13 +32,17 @@ const router = createBrowserRouter([
         element: <User />,
       },
       {
+        path: "profile/:id",
+        element: <UserProfile />,
+      },
+      {
         path: "user/edit",
         element: <UserEdit />,
       },
       {
         path: "favorits",
-        element: <FavoritsPage />
-      }
+        element: <FavoritsPage />,
+      },
     ],
   },
   {
@@ -49,8 +55,16 @@ const router = createBrowserRouter([
   },
 ]);
 
+const theme = createTheme({
+  palette: {
+    primary: { main: "rgb(227, 171, 87)" },
+  },
+});
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </React.StrictMode>
 );

@@ -5,7 +5,7 @@ export const INIT_MOVIES = [
     title: "Thor: Love and Thunder",
     description:
       "Thor enlists the help of Valkyrie, Korg and ex-girlfriend Jane Foster to fight Gorr the God Butcher, who intends to make the gods extinct.",
-    reviewIds: ["ionvrkjna", "inilsnvkjnr"],
+    reviewIds: ["ionvrkjna", "inilsnvkjnr", "aegikldffnvela"],
     imgSrc:
       "https://m.media-amazon.com/images/M/MV5BYmMxZWRiMTgtZjM0Ny00NDQxLWIxYWQtZDdlNDNkOTEzYTdlXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg",
     tags: ["action", "adventure", "fantasy", "comedy", "movie"],

@@ -8,6 +8,7 @@ export const INIT_USERS = [
     lastName: "Turarov",
     imgSrc: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
     birthday: new Date("Feb 24 1998"),
+    createdAt: "Dec 2, 2020",
     movies: [
       { id: "jasdhkhadjsj", status: "finished", isFavorite: true },
       { id: "arehsfdbesr", status: "finished", isFavorite: false },
@@ -23,6 +24,7 @@ export const INIT_USERS = [
     lastName: "Bejan",
     imgSrc: "",
     birthday: new Date("Feb 24 1998"),
+    createdAt: "Dec 2, 2010",
     movies: [
       { id: "jasdhkhadjsj", status: "finished", isFavorite: true },
       { id: "arehsfdbesr", status: "finished", isFavorite: false },
@@ -35,6 +37,7 @@ export const INIT_USERS = [
     password: "marriska",
     firstName: "Marriska",
     lastName: "Fernandes",
+    createdAt: "Dec 2, 2018",
   },
   {
     id: "aktsgfbnyt54",
@@ -42,6 +45,7 @@ export const INIT_USERS = [
     password: "eric",
     firstName: "Eric",
     lastName: "Marchen",
+    createdAt: "Dec 2, 2015",
   },
   {
     id: "te45heyurobin",
@@ -49,6 +53,7 @@ export const INIT_USERS = [
     password: "nicki",
     firstName: "Nicki",
     lastName: "Dusse",
+    createdAt: "Dec 2, 2005",
   },
   {
     id: "akey45fbty52robin",
@@ -56,6 +61,7 @@ export const INIT_USERS = [
     password: "keith",
     firstName: "Keith",
     lastName: "Garlington",
+    createdAt: "Dec 2, 2008",
   },
   {
     id: "aoinarobe21obin",
@@ -63,6 +69,7 @@ export const INIT_USERS = [
     password: "liz",
     firstName: "Liz",
     lastName: "Miller",
+    createdAt: "Dec 2, 2017",
   },
   {
     id: "aouhiubv502in",
@@ -70,6 +77,7 @@ export const INIT_USERS = [
     password: "jonathan",
     firstName: "Jonathan",
     lastName: "Sim",
+    createdAt: "Dec 2, 2015",
   },
   {
     id: "a235dfvw1",
@@ -77,6 +85,7 @@ export const INIT_USERS = [
     password: "cory",
     firstName: "Cory",
     lastName: "Woodroof",
+    createdAt: "Dec 2, 2009",
   },
   {
     id: "fgbghe641drf",
@@ -84,5 +93,6 @@ export const INIT_USERS = [
     password: "robert",
     firstName: "Robert",
     lastName: "Roten",
+    createdAt: "Dec 2, 2019",
   },
 ];

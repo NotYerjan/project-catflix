@@ -16,6 +16,7 @@ import {
   ButtonGroup,
 } from "@mui/material";
 import useUserStore from "../../store/storeUsers.js";
+import { Link } from "react-router-dom";
 
 export default function Review(props) {
   const updateReview = useReviewStore((state) => state.updateReview);
@@ -38,6 +39,7 @@ export default function Review(props) {
 
   return (
     <Card elevation={6}>
+      {" "}
       <CardHeader
         avatar={<Avatar />}
         action={
@@ -53,10 +55,16 @@ export default function Review(props) {
             </Box>
           )
         }
-        title={users.find((user) => user.id === userId).username}
+        title={
+          <Link
+            to={`/profile/${users.find((user) => user.id === userId).id}`}
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            {users.find((user) => user.id === userId).username}
+          </Link>
+        }
         subheader={createdAt.toLocaleString("en-CA", { dateStyle: "medium" })}
       />
-
       {isEdited ? (
         <>
           <CardContent>
