@@ -28,18 +28,8 @@ function App() {
   });
 
   useEffect(() => {
-    console.log(pathname);
     if (pathname == "/") {
       navigate("/movies");
-    }
-    if (
-      isLoggedIn &&
-      (pathname.includes("/login") || pathname.includes("/signup"))
-    ) {
-      navigate("/user");
-    }
-    if (!isLoggedIn && pathname.includes("user")) {
-      navigate("/login");
     }
     setCurrentTheme((theme) => (checked ? "light" : "dark"));
   }, [pathname, checked, isLoggedIn]);

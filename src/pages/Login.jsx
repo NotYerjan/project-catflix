@@ -38,15 +38,15 @@ const Login = () => {
     (user) => user.username === username && user.password === password
   );
 
-  const handleUserLogin = () => {
+  const handleUserLogin = (e) => {
+    e.preventDefault();
     if (doesUserExist()) {
       if (userData) {
         setAuth(true);
         setErrorMessage("");
 
         loginUser(userData.id);
-
-        navigate("/");
+        navigate(-1) || navigate("/");
       } else {
         setErrorMessage("Username or password incorrect");
       }
@@ -65,7 +65,7 @@ const Login = () => {
       }}
     >
       <form
-        onSubmit={handleUserLogin}
+        onSubmit={(e) => handleUserLogin(e)}
         style={{
           display: "flex",
           flexDirection: "column",

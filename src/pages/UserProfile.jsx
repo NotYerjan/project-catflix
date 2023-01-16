@@ -3,6 +3,7 @@ import {
   Avatar,
   Card,
   CardMedia,
+  Button,
   Container,
   Grid,
   Paper,
@@ -15,18 +16,8 @@ import { Link, useParams } from "react-router-dom";
 import useUserStore from "../store/storeUsers";
 
 function UserProfile() {
-  /*  const user = {
-    id: "te45heyurobin",
-    username: "Admin",
-    createdAt: "Dec 12, 2005",
-    movies: [
-      { id: "jasdhkhadjsj", status: "finished", isFavorite: true },
-      { id: "arehsfdbesr", status: "finished", isFavorite: false },
-      { id: "xklnjkna", status: "wantToWatch", isFavorite: false },
-      { id: "qwqweiqwpo", status: "watching", isFavorite: false },
-    ],
-  }; */
-
+  const currentUser = useUserStore((state) => state.currentUser);
+  const makeUserSuper = useUserStore((state) => state.makeUserSuper);
   const { id } = useParams();
 
   const reviews = useReviewStore((state) => state.reviews);
@@ -82,7 +73,7 @@ function UserProfile() {
       ) {
         const movieInfo = movies.findIndex((m) => m.id === movie.id);
 
-        console.log(movies[movieInfo]);
+        //console.log(movies[movieInfo]);
 
         const { id, status, isFavorite } = movie;
         const { title, imgSrc, releaseDate } = movies[movieInfo];
@@ -129,7 +120,14 @@ function UserProfile() {
               marginLeft: "2rem",
             }}
           >
-            <Typography variant="h4">{user.username}</Typography>
+            <Typography variant="h4">
+              {user.username} {user.isSuperUser && <span>(moderator)</span>}
+            </Typography>
+            {currentUser?.isSuperUser && !user.isSuperUser && (
+              <Button onClick={() => makeUserSuper(user.id)}>
+                Make Moderator
+              </Button>
+            )}
             <Typography sx={{ fontSize: "1rem" }} color="text.secondary">
               Member in Catlfix since {user.createdAt.split(", ")[1]}
             </Typography>

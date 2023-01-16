@@ -20,9 +20,10 @@ import { useState } from "react";
 export default function MovieInfo({ movie, movieReviews }) {
   const reviews = useReviewStore((state) => state.reviews);
   const user = useUserStore((state) => state.currentUser);
+  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
   const newMovieStatus = useUserStore((state) => state.changeMovieStatusOfUser);
   const toggleFavorite = useUserStore((state) => state.toggleFavoriteMovie);
-  const userMovieState = user.movies?.find(({ id }) => id == movie.id);
+  const userMovieState = user?.movies?.find(({ id }) => id == movie.id);
 
   const [statusMovie, setStatusMovie] = useState(
     userMovieState?.status || "none"
@@ -46,31 +47,33 @@ export default function MovieInfo({ movie, movieReviews }) {
         />
         <CardHeader
           action={
-            <>
-              <IconButton onClick={() => toggleFavorite(movie.id)}>
-                {userMovieState?.isFavorite ? (
-                  <FaHeart color="red" />
-                ) : (
-                  <FaRegHeart />
-                )}
-              </IconButton>
+            isLoggedIn && (
+              <>
+                <IconButton onClick={() => toggleFavorite(movie.id)}>
+                  {userMovieState?.isFavorite ? (
+                    <FaHeart color="red" />
+                  ) : (
+                    <FaRegHeart />
+                  )}
+                </IconButton>
 
-              <FormControl size="small">
-                <InputLabel id="demo-simple-select-label">Status</InputLabel>
-                <Select
-                  label="Status"
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  onChange={handleChange}
-                  value={statusMovie}
-                >
-                  <MenuItem value="none">Select</MenuItem>
-                  <MenuItem value="watching">Watching</MenuItem>
-                  <MenuItem value="finished">Finished</MenuItem>
-                  <MenuItem value="willWatch">Will Watch</MenuItem>
-                </Select>
-              </FormControl>
-            </>
+                <FormControl size="small">
+                  <InputLabel id="demo-simple-select-label">Status</InputLabel>
+                  <Select
+                    label="Status"
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    onChange={handleChange}
+                    value={statusMovie}
+                  >
+                    <MenuItem value="none">Select</MenuItem>
+                    <MenuItem value="watching">Watching</MenuItem>
+                    <MenuItem value="finished">Finished</MenuItem>
+                    <MenuItem value="willWatch">Will Watch</MenuItem>
+                  </Select>
+                </FormControl>
+              </>
+            )
           }
           title={movie.title}
           subheader={

@@ -35,7 +35,8 @@ const SignUp = () => {
     user.username === username ? true : false
   );
 
-  const handleUserSignUp = () => {
+  const handleUserSignUp = (e) => {
+    e.preventDefault();
     const newUser = {
       id: nanoid(),
       username: username,
@@ -43,8 +44,7 @@ const SignUp = () => {
     };
 
     signUpUser(newUser);
-    navigate("/");
-    console.log(users);
+    navigate(-1) || navigate("/");
   };
 
   useEffect(() => {
@@ -71,7 +71,7 @@ const SignUp = () => {
       }}
     >
       <form
-        onSubmit={handleUserSignUp}
+        onSubmit={(e) => handleUserSignUp(e)}
         style={{
           display: "flex",
           flexDirection: "column",

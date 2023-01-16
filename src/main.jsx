@@ -13,11 +13,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import UserProfile from "./pages/UserProfile";
 import { createTheme, ThemeProvider } from "@mui/material";
 import Favorite from "./pages/Favorite";
+import Error from "./Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <Error />,
     children: [
       {
         path: "movies",
