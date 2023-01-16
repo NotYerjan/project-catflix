@@ -15,6 +15,47 @@ export const INIT_USERS = [
       { id: "arehsfdbesr", status: "finished", isFavorite: false },
       { id: "xklnjkna", status: "willWatch", isFavorite: false },
     ],
+    // friends statuses => friend, requested
+    friends: [
+      {
+        id: "akujsdrobin",
+        status: "friend",
+        createdAt: new Date("Mar 12, 2021"),
+        updatedAt: new Date("Mar 15, 2021"),
+      },
+      {
+        id: "aktheyurobin",
+        status: "friend",
+        createdAt: new Date("Jun 5, 2021"),
+        updatedAt: new Date("Jun 6, 2021"),
+      },
+      {
+        id: "te45heyurobin",
+        status: "requested",
+        createdAt: new Date("Sep 21, 2022"),
+        updatedAt: new Date("Sep 21, 2022"),
+      },
+    ],
+    notifications: [
+      {
+        type: "friend_request",
+        createdBy: "akey45fbty52robin",
+        createdAt: new Date("Dec 27, 2022"),
+        isRead: false,
+      },
+      {
+        type: "friend_acceptence",
+        createdBy: "aktheyurobin",
+        createdAt: new Date("Jun 6, 2021"),
+        isRead: true,
+      },
+      {
+        type: "moderator_privilage",
+        createdBy: "akujsdrobin",
+        createdAt: new Date("Dec 2, 2020"),
+        isRead: true,
+      },
+    ],
   },
   {
     id: "akujsdrobin",
@@ -32,6 +73,14 @@ export const INIT_USERS = [
       { id: "arehsfdbesr", status: "finished", isFavorite: false },
       { id: "xklnjkna", status: "willWatch", isFavorite: false },
     ],
+    friends: [
+      {
+        id: "akujbenvr",
+        status: "friend",
+        createdAt: new Date("Mar 12, 2021"),
+        updatedAt: new Date("Mar 15, 2021"),
+      },
+    ],
   },
   {
     id: "aktheyurobin",
@@ -40,6 +89,14 @@ export const INIT_USERS = [
     firstName: "Marriska",
     lastName: "Fernandes",
     createdAt: "Dec 2, 2018",
+    friends: [
+      {
+        id: "akujbenvr",
+        status: "friend",
+        createdAt: new Date("Jun 5, 2021"),
+        updatedAt: new Date("Jun 6, 2021"),
+      },
+    ],
   },
   {
     id: "aktsgfbnyt54",
@@ -56,6 +113,14 @@ export const INIT_USERS = [
     firstName: "Nicki",
     lastName: "Dusse",
     createdAt: "Dec 2, 2005",
+    notifications: [
+      {
+        type: "friend_request",
+        createdBy: "akujbenvr",
+        createdAt: new Date("Dec 27, 2022"),
+        isRead: false,
+      },
+    ],
   },
   {
     id: "akey45fbty52robin",
@@ -64,6 +129,14 @@ export const INIT_USERS = [
     firstName: "Keith",
     lastName: "Garlington",
     createdAt: "Dec 2, 2008",
+    friends: [
+      {
+        id: "akujbenvr",
+        status: "requested",
+        createdAt: new Date("Dec 27, 2022"),
+        updatedAt: new Date("Dec 27, 2022"),
+      },
+    ],
   },
   {
     id: "aoinarobe21obin",

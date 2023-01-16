@@ -76,11 +76,111 @@ const useUserStore = create(
       },
 
       makeUserSuper: (userId) => {
-        set((state) => ({
-          users: state.users.map((user) =>
-            userId === user.id ? { ...user, isSuperUser: true } : user
-          ),
-        }));
+        set((state) => {
+          const createdAt = new Date();
+          const notification = {
+            type: "moderator_privilage",
+            createdBy: state.currentUser.id,
+            createdAt,
+            isRead: false,
+          };
+          return {
+            users: state.users.map((user) =>
+              userId === user.id
+                ? {
+                    ...user,
+                    isSuperUser: true,
+                    notifications: user.notifications
+                      ? [...user.notifications, notification]
+                      : [notification],
+                  }
+                : user
+            ),
+          };
+        });
+      },
+
+      createFriendRequest: (userId) => {
+        set((state) => {
+          const newDate = new Date();
+          const notification = {
+            type: "friend_request",
+            createdBy: state.currentUser.id,
+            createdAt: newDate,
+            isRead: false,
+          };
+
+          const newFriend = {
+            id: userId,
+            status: "requested",
+            createdAt: newDate,
+            updatedAt: newDate,
+          };
+
+          return {
+            users: state.users.map((user) =>
+              userId === user.id
+                ? {
+                    ...user,
+                    notifications: user.notifications
+                      ? [...user.notifications, notification]
+                      : [notification],
+                  }
+                : user
+            ),
+            currentUser: {
+              ...state.currentUser,
+              friends: state.currentUser.friends
+                ? [...state.currentUser.friends, newFriend]
+                : [newFriend],
+            },
+          };
+        });
+        updateGlobalUser(set);
+      },
+
+      acceptFriendRequest: (userId) => {
+        set((state) => {
+          const newDate = new Date();
+          const user = state.users.find({ id: userId });
+          const request = user.friends.find({ id: state.currentUser.id });
+          const newNotification = {
+            type: "friend_acceptence",
+            createdBy: state.currentUser.id,
+            createdAt: newDate,
+            isRead: false,
+          };
+          const updatedUser = {
+            ...user,
+            friends: user.friends.map((friend) =>
+              friend.id === state.currentUser.id
+                ? { ...friend, status: "friend", updatedAt: newDate }
+                : friend
+            ),
+            notifications: user.notifications
+              ? [...user.notifications, newNotification]
+              : [newNotification],
+          };
+          const newFriend = {
+            id: userId,
+            status: "friend",
+            createdAt: request.createdAt,
+            updatedAt: newDate,
+          };
+
+          return {
+            users: state.users.map((user) =>
+              userId === user.id ? updatedUser : user
+            ),
+            currentUser: {
+              ...state.currentUser,
+              friends: state.currentUser.friends
+                ? [...state.currentUser.friends, newFriend]
+                : [newFriend],
+            },
+          };
+        });
+        updateGlobalUser(set);
       },
     }),
     { name: "user-storage" }
