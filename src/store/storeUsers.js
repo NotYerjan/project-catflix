@@ -177,9 +177,19 @@ const useUserStore = create(
               friends: state.currentUser.friends
                 ? [...state.currentUser.friends, newFriend]
                 : [newFriend],
+              notifications: state.currentUser.notifications.filter(
+                ({ id, type }) => !(id === userId && type === "friend_request")
+              ),
             },
           };
         });
+        updateGlobalUser(set);
+      },
+
+      deleteAllNotifications: () => {
+        set((state) => ({
+          currentUser: { ...state.currentUser, notifications: [] },
+        }));
         updateGlobalUser(set);
       },
     }),
