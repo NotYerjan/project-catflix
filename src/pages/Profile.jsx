@@ -11,7 +11,7 @@ import {
 import useUserStore from "../store/storeUsers";
 import { Link } from "react-router-dom";
 
-function User() {
+function Profile() {
   const user = useUserStore((state) => state.currentUser);
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
   const birthday = isLoggedIn ? new Date(user.birthday) : "";
@@ -111,7 +111,7 @@ function User() {
               </Card>
             </ListItem>
           </List>
-          <Link to="/user/edit">
+          <Link to="/profile/edit">
             <Button variant="outlined">Edit Info</Button>
           </Link>
         </>
@@ -120,4 +120,4 @@ function User() {
   );
 }
 
-export default User;
+export default Profile;

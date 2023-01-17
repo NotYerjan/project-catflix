@@ -1,5 +1,5 @@
-import { Switch } from "@mui/material";
-import { createTheme, styled } from "@mui/material/styles";
+import { Switch, InputBase } from "@mui/material";
+import { createTheme, styled, alpha } from "@mui/material/styles";
 
 function useMuiTheme(currentTheme) {
   const theme = createTheme({
@@ -60,6 +60,43 @@ function useMuiTheme(currentTheme) {
     },
   }));
 
-  return { theme, MaterialUISwitch };
+  const SearchIconWrapper = styled("div")(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  }));
+
+  const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    color: "inherit",
+    width: "100%",
+    "& .MuiInputBase-input": {
+      padding: theme.spacing(1, 1, 1, 0),
+      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+      transition: theme.transitions.create("width"),
+      width: "100%",
+    },
+  }));
+
+  const Search = styled("div")(({ theme }) => ({
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    width: "100%",
+  }));
+
+  return {
+    theme,
+    MaterialUISwitch,
+    Search,
+    SearchIconWrapper,
+    StyledInputBase,
+  };
 }
 export default useMuiTheme;

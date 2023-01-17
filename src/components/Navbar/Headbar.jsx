@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Logo from "./Logo";
+import Logo from "../Logo";
 import { FiBell } from "react-icons/fi";
 import {
   Toolbar,
@@ -14,9 +14,13 @@ import {
 } from "@mui/material";
 import Searchbar from "./Searchbar";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import useUserStore from "../store/storeUsers";
+import useUserStore from "../../store/storeUsers";
+import useMuiTheme from "../../hooks/useMuiTheme";
 
-export default function Headbar({ themeSwitch, logo }) {
+export default function Headbar() {
+  const { MaterialUISwitch } = useMuiTheme();
+  const isDarkMode = useUserStore((state) => state.isDarkMode);
+  const switchMode = useUserStore((state) => state.switchMode);
   const navigate = useNavigate();
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
   const logoutUser = useUserStore((state) => state.logoutUser);
@@ -45,12 +49,14 @@ export default function Headbar({ themeSwitch, logo }) {
   return (
     <AppBar>
       <Toolbar>
-        <Link to="/movies">{logo}</Link>
+        <Link to="/">
+          <Logo />
+        </Link>
         <Box sx={{ marginLeft: "24px", display: { xs: "none", md: "block" } }}>
           <Searchbar place="header" />
         </Box>
         <Box sx={{ flexGrow: 1 }} />
-        {themeSwitch}
+        <MaterialUISwitch checked={isDarkMode} onChange={switchMode} />
         {!isLoggedIn ? (
           <ButtonGroup sx={{ display: { xs: "none", md: "block" } }}>
             <Button onClick={() => navigate("/login")} color="secondary">
@@ -103,8 +109,10 @@ export default function Headbar({ themeSwitch, logo }) {
                 sx={{ width: 150 }}
                 variant="text"
               >
-                <Button onClick={() => navigate("/user")}>Profile</Button>
-                <Button onClick={() => navigate("/favorite")}>My Movies</Button>
+                <Button onClick={() => navigate("/profile")}>Profile</Button>
+                <Button onClick={() => navigate("/profile/favorites")}>
+                  My Movies
+                </Button>
                 <Button onClick={handleLogout}>Log out</Button>
               </ButtonGroup>
             </Popover>

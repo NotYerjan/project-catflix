@@ -5,7 +5,7 @@ import { Grid, Card, CardMedia } from "@mui/material";
 export default function MovieList({ movies }) {
   return (
     <Grid container spacing={2}>
-      {movies.map((movie, index) => {
+      {movies.map((movie) => {
         return (
           <Grid item key={movie.id} xs={6} sm={4} md={3}>
             <Card>

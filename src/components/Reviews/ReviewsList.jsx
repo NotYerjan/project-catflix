@@ -1,8 +1,8 @@
 import React from "react";
-import Review from "./Reviews/Review";
-import CreateReview from "./Reviews/CreateReview.jsx";
+import Review from "./Review";
+import CreateReview from "./CreateReview.jsx";
 import { Paper, Typography } from "@mui/material";
-import useUserStore from "../store/storeUsers.js";
+import useUserStore from "../../store/storeUsers.js";
 
 export default function ReviewsList({ movie, movieReviews }) {
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);

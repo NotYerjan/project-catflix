@@ -7,9 +7,10 @@ import {
   TextField,
   CardActions,
 } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-export default function UserEdit() {
+
+export default function ProfileEdit() {
   const [userInfo, setUserInfo] = useState({});
   const [password, setPassword] = useState("");
   const [birthday, setBirthday] = useState("");
@@ -32,7 +33,7 @@ export default function UserEdit() {
       const newBirthday = new Date(birthday);
       updateCurrentUserInfo({ birthday: newBirthday });
     }
-    navigate("/user");
+    navigate("/profile");
   };
   return (
     <Card sx={{ maxWidth: 400, margin: "auto" }}>
@@ -109,9 +110,9 @@ export default function UserEdit() {
         <input type="image" alt="avatar" id="imgSrc" />
       </CardContent>
       <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Link to="/user">
-          <Button variant="outlined">Cancel</Button>
-        </Link>
+        <Button variant="outlined" onClick={() => navigate("/profile")}>
+          Cancel
+        </Button>
         <Button variant="contained" onClick={handleSave}>
           Save
         </Button>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Avatar,
   Card,
@@ -15,7 +15,7 @@ import useReviewStore from "../store/storeReview.js";
 import { Link, useParams } from "react-router-dom";
 import useUserStore from "../store/storeUsers";
 
-function UserProfile() {
+function UsersProfile() {
   const currentUser = useUserStore((state) => state.currentUser);
   const makeUserSuper = useUserStore((state) => state.makeUserSuper);
   const { id } = useParams();
@@ -344,4 +344,4 @@ function UserProfile() {
   );
 }
 
-export default UserProfile;
+export default UsersProfile;
