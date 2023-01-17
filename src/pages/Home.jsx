@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from "react";
 import useMovieStore from "../store/storeMovies";
-import MovieList from "../components/MovieList";
-import Logo from "../components/Logo";
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@mui/material";
+import MovieList from "../components/Movie/MovieList";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 export default function Home() {
   const movies = useMovieStore((state) => state.movies);

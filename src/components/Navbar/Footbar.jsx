@@ -11,9 +11,9 @@ import {
   ButtonGroup,
 } from "@mui/material";
 import Searchbar from "./Searchbar";
-import useUserStore from "../store/storeUsers";
+import useUserStore from "../../store/storeUsers";
 
-export default function Navbar() {
+export default function Footbar() {
   const [displaySearch, setDisplaySearch] = useState(false);
   const logoutUser = useUserStore((state) => state.logoutUser);
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
@@ -49,15 +49,12 @@ export default function Navbar() {
             display: { xs: "flex", md: "none" },
           }}
         >
-          <IconButton
-            onClick={() => navigate("/movies")}
-            sx={{ color: "white" }}
-          >
+          <IconButton onClick={() => navigate("/")} sx={{ color: "white" }}>
             <FiHome className="navBarIcon" />
           </IconButton>
 
           <IconButton
-            onClick={() => navigate("/favorite")}
+            onClick={() => navigate("/profile/favorites")}
             sx={{ color: "white" }}
           >
             <FiHeart className="navBarIcon" />
@@ -92,7 +89,7 @@ export default function Navbar() {
               {" "}
               {isLoggedIn ? (
                 <>
-                  <Button onClick={() => navigate("/user")}>Profile</Button>
+                  <Button onClick={() => navigate("/profile")}>Profile</Button>
                   <Button onClick={logoutUser}>Log out</Button>
                 </>
               ) : (

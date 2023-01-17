@@ -1,8 +1,8 @@
 import { Box, Card, Paper, styled } from "@mui/material";
 import React from "react";
 import { useParams } from "react-router-dom";
-import MovieInfo from "../components/MovieInfo";
-import ReviewsList from "../components/ReviewsList";
+import MovieInfo from "../components/Movie/MovieInfo";
+import ReviewsList from "../components/Reviews/ReviewsList";
 import useMovieStore from "../store/storeMovies";
 import useReviewStore from "../store/storeReview.js";
 

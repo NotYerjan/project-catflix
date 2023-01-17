@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Error() {
+export default function ErrorLayout() {
   const navigate = useNavigate();
   return (
     <h1>

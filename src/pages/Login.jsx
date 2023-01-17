@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import {
   Container,
   TextField,
@@ -27,6 +27,7 @@ const Login = () => {
   // Functions from store
   const users = useUserStore((state) => state.users);
   const loginUser = useUserStore((state) => state.loginUser);
+  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
 
   const doesUserExist = () => {
     const filteredUsers = users.filter((user) => user.username === username);
@@ -55,93 +56,83 @@ const Login = () => {
     }
   };
 
+  if (isLoggedIn) {
+    return <Navigate to="/profile" replace={true} />;
+  }
+
   return (
-    <Container
+    <form
+      onSubmit={(e) => handleUserLogin(e)}
       style={{
-        height: "100vh",
         display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        flexDirection: "column",
+        textAlign: "center",
+        gap: 8,
+        width: "100%",
       }}
     >
-      <form
-        onSubmit={(e) => handleUserLogin(e)}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "0.8rem",
-          boxShadow: "1px 1px 10px -2px #0d345a",
-          borderRadius: "0.2rem",
-          width: "20rem",
-          height: "26rem",
-        }}
-      >
-        <FormLabel sx={{ fontSize: "2rem" }}>Log In</FormLabel>
+      <FormLabel sx={{ fontSize: "2rem" }}>Log In</FormLabel>
 
-        {
-          <Alert
-            sx={{
-              marginBottom: "0.5rem",
-              visibility: errorMessage ? "visible" : "hidden",
-            }}
-            severity="error"
-          >
-            {errorMessage}
-          </Alert>
-        }
-
-        <TextField
-          id="username"
-          label="Username"
-          variant="outlined"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-          style={{ width: "80.5%" }}
-        />
-
-        <TextField
-          id="password"
-          label="Password"
-          variant="outlined"
-          value={password}
-          type={showPassword ? "text" : "password"}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  edge="end"
-                  onClick={() => setShowPassword((show) => !show)}
-                >
-                  {showPassword ? <FiEyeOff /> : <FiEye />}
-                </IconButton>
-              </InputAdornment>
-            ),
+      {
+        <Alert
+          sx={{
+            marginBottom: "0.5rem",
+            visibility: errorMessage ? "visible" : "hidden",
           }}
-        />
-
-        <Button
-          type="submit"
-          disabled={!(username && password)}
-          variant="contained"
-          style={{ marginTop: "2rem", width: "80%" }}
+          severity="error"
         >
-          Log In
-        </Button>
+          {errorMessage}
+        </Alert>
+      }
 
-        <Typography variant="body2" color="text.secondary">
-          Don't have an account?{" "}
-          <Link to="/signup" style={{ textDecoration: "none" }}>
-            Sign up
-          </Link>
-        </Typography>
-      </form>
-    </Container>
+      <TextField
+        id="username"
+        label="Username"
+        variant="outlined"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        required
+      />
+
+      <TextField
+        id="password"
+        label="Password"
+        variant="outlined"
+        value={password}
+        type={showPassword ? "text" : "password"}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                edge="end"
+                onClick={() => setShowPassword((show) => !show)}
+              >
+                {showPassword ? <FiEyeOff /> : <FiEye />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+      />
+
+      <Button
+        type="submit"
+        disabled={!(username && password)}
+        variant="contained"
+        sx={{ marginY: 2 }}
+      >
+        Log In
+      </Button>
+
+      <Typography variant="body2" color="text.secondary">
+        Don't have an account?{" "}
+        <Link to="/signup" style={{ textDecoration: "none" }}>
+          Sign up
+        </Link>
+      </Typography>
+    </form>
   );
 };
 

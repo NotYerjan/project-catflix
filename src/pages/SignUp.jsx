@@ -10,7 +10,7 @@ import {
   Alert,
 } from "@mui/material";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import useUserStore from "../store/storeUsers";
 import { nanoid } from "nanoid";
 import { useEffect } from "react";
@@ -30,6 +30,7 @@ const SignUp = () => {
   // Functions from store
   const users = useUserStore((state) => state.users);
   const signUpUser = useUserStore((state) => state.createAndLoginUser);
+  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
 
   const doesUserNameExist = users.find((user) =>
     user.username === username ? true : false
@@ -61,120 +62,109 @@ const SignUp = () => {
     }
   }, [username, password, confirmPassword, doesUserNameExist]);
 
+  if (isLoggedIn) {
+    return <Navigate to="/profile" replace={true} />;
+  }
+
   return (
-    <Container
+    <form
+      onSubmit={(e) => handleUserSignUp(e)}
       style={{
-        height: "100vh",
         display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        flexDirection: "column",
+        textAlign: "center",
+        gap: 8,
+        width: "100%",
       }}
     >
-      <form
-        onSubmit={(e) => handleUserSignUp(e)}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "0.8rem",
-          boxShadow: "1px 1px 10px -2px #0d345a",
-          borderRadius: "0.2rem",
-          width: "21rem",
-          height: "31rem",
-        }}
-      >
-        <FormLabel sx={{ fontSize: "2rem" }}>Sign Up</FormLabel>
+      <FormLabel sx={{ fontSize: "2rem" }}>Sign Up</FormLabel>
 
-        {
-          <Alert
-            sx={{
-              marginBottom: "0.5rem",
-              visibility:
-                error && error !== "empty field" ? "visible" : "hidden",
-            }}
-            severity="error"
-          >
-            {error}
-          </Alert>
-        }
-
-        <TextField
-          color={doesUserNameExist ? "error" : "primary"}
-          id="username"
-          label="Username"
-          variant="outlined"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-          style={{ width: "77%" }}
-        />
-
-        <TextField
-          id="password"
-          label="Password"
-          variant="outlined"
-          color={password === confirmPassword ? "primary" : "error"}
-          value={password}
-          type={showPassword ? "text" : "password"}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  edge="end"
-                  onClick={() => setShowPassword((show) => !show)}
-                >
-                  {showPassword ? <FiEyeOff /> : <FiEye />}
-                </IconButton>
-              </InputAdornment>
-            ),
+      {
+        <Alert
+          sx={{
+            marginBottom: "0.5rem",
+            visibility: error && error !== "empty field" ? "visible" : "hidden",
           }}
-        />
-
-        <TextField
-          id="confirm-password"
-          label="Confirm Password"
-          variant="outlined"
-          color={password === confirmPassword ? "primary" : "error"}
-          value={confirmPassword}
-          type={showConfirmPassword ? "text" : "password"}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  edge="end"
-                  onClick={() => setShowConfirmPassword((show) => !show)}
-                >
-                  {showConfirmPassword ? <FiEyeOff /> : <FiEye />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-
-        <Button
-          disabled={Boolean(error)}
-          variant="contained"
-          style={{ marginTop: "1.5rem", width: "80%" }}
-          type="submit"
+          severity="error"
         >
-          Sign Up
-        </Button>
+          {error}
+        </Alert>
+      }
 
-        <Typography variant="body2" color="text.secondary">
-          Already have an account?{" "}
-          <Link to="/login" style={{ textDecoration: "none" }}>
-            Login
-          </Link>
-        </Typography>
-      </form>
-    </Container>
+      <TextField
+        color={doesUserNameExist ? "error" : "primary"}
+        id="username"
+        label="Username"
+        variant="outlined"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        required
+      />
+
+      <TextField
+        id="password"
+        label="Password"
+        variant="outlined"
+        color={password === confirmPassword ? "primary" : "error"}
+        value={password}
+        type={showPassword ? "text" : "password"}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                edge="end"
+                onClick={() => setShowPassword((show) => !show)}
+              >
+                {showPassword ? <FiEyeOff /> : <FiEye />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+      />
+
+      <TextField
+        id="confirm-password"
+        label="Confirm Password"
+        variant="outlined"
+        color={password === confirmPassword ? "primary" : "error"}
+        value={confirmPassword}
+        type={showConfirmPassword ? "text" : "password"}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+        required
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                edge="end"
+                onClick={() => setShowConfirmPassword((show) => !show)}
+              >
+                {showConfirmPassword ? <FiEyeOff /> : <FiEye />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+      />
+
+      <Button
+        disabled={Boolean(error)}
+        variant="contained"
+        type="submit"
+        sx={{ marginY: 2 }}
+      >
+        Sign Up
+      </Button>
+
+      <Typography variant="body2" color="text.secondary">
+        Already have an account?{" "}
+        <Link to="/login" style={{ textDecoration: "none" }}>
+          Login
+        </Link>
+      </Typography>
+    </form>
   );
 };
 

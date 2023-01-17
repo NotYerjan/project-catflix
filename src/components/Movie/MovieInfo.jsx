@@ -13,12 +13,10 @@ import {
   IconButton,
 } from "@mui/material";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import useReviewStore from "../store/storeReview";
-import useUserStore from "../store/storeUsers";
+import useUserStore from "../../store/storeUsers";
 import { useState } from "react";
 
 export default function MovieInfo({ movie, movieReviews }) {
-  const reviews = useReviewStore((state) => state.reviews);
   const user = useUserStore((state) => state.currentUser);
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
   const newMovieStatus = useUserStore((state) => state.changeMovieStatusOfUser);

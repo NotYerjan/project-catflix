@@ -8,6 +8,9 @@ const useUserStore = create(
       users: INIT_USERS,
       currentUser: INIT_USERS[0],
       isLoggedIn: true,
+      isDarkMode: true,
+
+      switchMode: () => set((state) => ({ isDarkMode: !state.isDarkMode })),
 
       createAndLoginUser: (newUser) =>
         set((state) => ({
@@ -46,7 +49,7 @@ const useUserStore = create(
 
       changeMovieStatusOfUser: (movieId, newStatus) => {
         set((state) => {
-          const userMovie = state.currentUser.movies.find(
+          const userMovie = state.currentUser.movies?.find(
             ({ id }) => id === movieId
           );
 
@@ -62,7 +65,7 @@ const useUserStore = create(
 
       toggleFavoriteMovie: (movieId) => {
         set((state) => {
-          const userMovie = state.currentUser.movies.find(
+          const userMovie = state.currentUser.movies?.find(
             ({ id }) => id === movieId
           );
 
@@ -200,7 +203,9 @@ const useUserStore = create(
 const addNewMovieToUserMovies = (state, newMovie) => ({
   currentUser: {
     ...state.currentUser,
-    movies: [...state.currentUser.movies, newMovie],
+    movies: state.currentUser.movies
+      ? [...state.currentUser.movies, newMovie]
+      : [newMovie],
   },
 });
 

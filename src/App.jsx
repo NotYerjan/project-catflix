@@ -1,55 +1,77 @@
-import { useEffect, useState } from "react";
-import Navbar from "./components/Navbar";
-import Headbar from "./components/Headbar";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { Container, Paper } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
-import Logo from "./components/Logo";
-import LogoLight from "./components/LogoLight";
 import useUserStore from "./store/storeUsers";
 import useMuiTheme from "./hooks/useMuiTheme";
 
+import RootLayout from "./layouts/RootLayout";
+import ErrorLayout from "./layouts/ErrorLayout";
+import ProfileLayout from "./layouts/ProfileLayout";
+
+import Home from "./pages/Home";
+import Movie from "./pages/Movie";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
+import Profile from "./pages/Profile";
+import ProfileEdit from "./pages/ProfileEdit";
+import Favorites from "./pages/Favorites";
+import UsersProfile from "./pages/UsersProfile";
+
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 function App() {
-  const [currentTheme, setCurrentTheme] = useState("dark");
-  const [checked, setChecked] = useState(false);
-  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
-  const { theme, MaterialUISwitch } = useMuiTheme(currentTheme);
+  const isDarkMode = useUserStore((state) => state.isDarkMode);
+  const { theme } = useMuiTheme(isDarkMode ? "dark" : "light");
 
-  const navigate = useNavigate();
-  const location = useLocation();
-  let pathname = location.pathname;
-
-  useEffect(() => {
-    if (pathname == "/") {
-      navigate("/movies");
-    }
-    setCurrentTheme((theme) => (checked ? "light" : "dark"));
-  }, [pathname, checked, isLoggedIn]);
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <RootLayout />,
+      errorElement: <ErrorLayout />,
+      children: [
+        {
+          index: true,
+          element: <Home />,
+        },
+        {
+          path: "movies/:id",
+          element: <Movie />,
+        },
+        {
+          path: "profile",
+          element: <ProfileLayout />,
+          children: [
+            {
+              index: true,
+              element: <Profile />,
+            },
+            {
+              path: "edit",
+              element: <ProfileEdit />,
+            },
+            {
+              path: "favorites",
+              element: <Favorites />,
+            },
+          ],
+        },
+        {
+          path: "users/:id",
+          element: <UsersProfile />,
+        },
+        {
+          path: "login",
+          element: <Login />,
+        },
+        {
+          path: "signup",
+          element: <SignUp />,
+        },
+      ],
+    },
+  ]);
 
   return (
     <ThemeProvider theme={theme}>
-      <Paper
-        elevation={12}
-        sx={{
-          minHeight: "100vh",
-          pb: "80px",
-          borderRadius: 0,
-        }}
-      >
-        <Headbar
-          themeSwitch={
-            <MaterialUISwitch
-              checked={checked}
-              onChange={() => setChecked(!checked)}
-            />
-          }
-          logo={currentTheme === "light" ? <LogoLight /> : <Logo />}
-        />
-        <Navbar />
-        <Container sx={{ paddingTop: 10 }}>
-          <Outlet />
-        </Container>
-      </Paper>
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
 }
