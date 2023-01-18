@@ -9,13 +9,16 @@ import {
   Button,
 } from "@mui/material";
 import useUserStore from "../store/storeUsers";
+
 import { Link } from "react-router-dom";
 
 function Profile() {
   const user = useUserStore((state) => state.currentUser);
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
   const birthday = isLoggedIn ? new Date(user.birthday) : "";
-
+  const deleteAndLogoutUser = useUserStore(
+    (state) => state.deleteAndLogoutUser
+  );
   return (
     <>
       {isLoggedIn && (
@@ -114,6 +117,9 @@ function Profile() {
           <Link to="/profile/edit">
             <Button variant="outlined">Edit Info</Button>
           </Link>
+          <Button variant="outlined" onClick={deleteAndLogoutUser}>
+            Delete Account
+          </Button>
         </>
       )}
     </>

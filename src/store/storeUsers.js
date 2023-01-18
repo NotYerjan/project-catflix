@@ -21,9 +21,9 @@ const useUserStore = create(
 
       updateUserInGlobalStore: () => updateGlobalUser(set),
 
-      deleteAndLogoutUser: (userId) =>
+      deleteAndLogoutUser: () =>
         set((state) => ({
-          users: state.users.filter((user) => user.id !== userId),
+          users: state.users.filter((user) => user.id !== state.currentUser.id),
           currentUser: null,
           isLoggedIn: false,
         })),
