@@ -1,578 +1,134 @@
 import React, { useState, useEffect } from "react";
 import useMovieStore from "../store/storeMovies";
 import MovieList from "../components/MovieList";
-import Logo from "../components/Logo";
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@mui/material";
+import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 
 export default function Home() {
   const movies = useMovieStore((state) => state.movies);
   const [tags, setTags] = useState("all");
-  const [durations, setDuration] = useState(0);
+  const [durations, setDuration] = useState("all");
   const [movielist, setMovielist] = useState([]);
   const [contrylist, setContrylist] = useState("all");
   const [releaseDates, setReleaseDate] = useState("all");
   const [controluseEffect, setControlEffect] = useState(false);
 
-  //---------------------- to take the reting for the movies ---------------------------
-  // releaseDate
   useEffect(() => {
-    if (
-      tags === "all" &&
-      durations === 0 &&
-      releaseDates === "all" &&
-      contrylist === "all"
-    ) {
+    if ((tags === "all") && (durations === "all") && (releaseDates === "all") && (contrylist === "all")) {
+      //0-0-0-0
       setMovielist(movies);
-    } else if (
-      tags === "all" &&
-      durations === 0 &&
-      releaseDates === "all" &&
-      contrylist !== "all"
-    ) {
+    } else if ((tags === "all") && (durations === "all") && (releaseDates === "all") && (contrylist !== "all")) { 
+      //0-0-0-1
+       setMovielist(
+         movies.filter((movie) => movie.country.includes(contrylist))
+       );
+    } else if ((tags === "all") && (durations === "all") && (releaseDates !== "all") && (contrylist === "all")) { 
+      //0-0-1-0
+       setMovielist(
+         movies.filter((movie) => movie.releaseDate.includes(releaseDates))
+       );
+    } else if ((tags === "all") && (durations === "all") && (releaseDates !== "all") && (contrylist !== "all")) { 
+      //0-0-1-1
+       setMovielist(
+         movies
+           .filter((movie) => movie.releaseDate.includes(releaseDates))
+           .filter((movie) => movie.country.includes(contrylist))
+       );
+    } else if ((tags === "all") && (durations !== "all") && (releaseDates === "all") && (contrylist === "all")) { 
+      //0-1-0-0
       setMovielist(
-        movies.filter((movie) => movie.country.includes(contrylist))
+        movies.filter((movie) => movie.duration >= Number(durations)*30-30 && movie.duration <= Number(durations)*30)
       );
-    } else if (
-      tags === "all" &&
-      durations === 0 &&
-      releaseDates !== "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies.filter((movie) => movie.releaseDate.includes(releaseDates))
-      );
-    } else if (
-      tags === "all" &&
-      durations === 1 &&
-      releaseDates === "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies.filter((movie) => movie.duration > 0 && movie.duration < 31)
-      );
-    } else if (
-      tags === "all" &&
-      durations === 2 &&
-      releaseDates === "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies.filter((movie) => movie.duration > 30 && movie.duration < 61)
-      );
-    } else if (
-      tags === "all" &&
-      durations === 3 &&
-      releaseDates === "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies.filter((movie) => movie.duration > 60 && movie.duration < 91)
-      );
-    } else if (
-      tags === "all" &&
-      durations === 4 &&
-      releaseDates === "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies.filter((movie) => movie.duration > 90 && movie.duration < 121)
-      );
-    } else if (
-      tags === "all" &&
-      durations === 5 &&
-      releaseDates === "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies.filter((movie) => movie.duration > 120 && movie.duration < 151)
-      );
-    } else if (
-      tags === "all" &&
-      durations === 6 &&
-      releaseDates === "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies.filter((movie) => movie.duration > 150 && movie.duration < 181)
-      );
-    } else if (
-      tags === "all" &&
-      durations === 7 &&
-      releaseDates === "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies.filter((movie) => movie.duration > 180 && movie.duration < 211)
-      );
-    } else if (
-      tags === "all" &&
-      durations === 8 &&
-      releaseDates === "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies.filter((movie) => movie.duration > 210 && movie.duration < 241)
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 0 &&
-      releaseDates === "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(movies.filter((movie) => movie.tags.includes(tags)));
-    } else if (
-      tags === "all" &&
-      durations === 0 &&
-      releaseDates !== "all" &&
-      contrylist !== "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.country.includes(contrylist))
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-      );
-    } else if (
-      tags === "all" &&
-      durations === 1 &&
-      releaseDates !== "all" &&
-      contrylist !== "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.country.includes(contrylist))
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 0 && movie.duration < 31)
-      );
-    } else if (
-      tags === "all" &&
-      durations === 1 &&
-      releaseDates !== "all" &&
-      contrylist !== "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.country.includes(contrylist))
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 0 && movie.duration < 31)
-      );
-    } else if (
-      tags === "all" &&
-      durations === 2 &&
-      releaseDates !== "all" &&
-      contrylist !== "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.country.includes(contrylist))
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 30 && movie.duration < 61)
-      );
-    } else if (
-      tags === "all" &&
-      durations === 3 &&
-      releaseDates !== "all" &&
-      contrylist !== "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.country.includes(contrylist))
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 60 && movie.duration < 91)
-      );
-    } else if (
-      tags === "all" &&
-      durations === 4 &&
-      releaseDates !== "all" &&
-      contrylist !== "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.country.includes(contrylist))
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 90 && movie.duration < 110)
-      );
-    } else if (
-      tags === "all" &&
-      durations === 5 &&
-      releaseDates !== "all" &&
-      contrylist !== "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.country.includes(contrylist))
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 110 && movie.duration < 141)
-      );
-    } else if (
-      tags === "all" &&
-      durations === 6 &&
-      releaseDates !== "all" &&
-      contrylist !== "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.country.includes(contrylist))
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 140 && movie.duration < 170)
-      );
-    } else if (
-      tags === "all" &&
-      durations === 7 &&
-      releaseDates !== "all" &&
-      contrylist !== "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.country.includes(contrylist))
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 170 && movie.duration < 201)
-      );
-    } else if (
-      tags === "all" &&
-      durations === 8 &&
-      releaseDates !== "all" &&
-      contrylist !== "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.country.includes(contrylist))
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 200 && movie.duration < 251)
-      ); //=======================================================================
-    } else if (
-      tags !== "all" &&
-      durations === 1 &&
-      releaseDates !== "all" &&
-      contrylist !== "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.country.includes(contrylist))
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 0 && movie.duration < 31)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 1 &&
-      releaseDates !== "all" &&
-      contrylist !== "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.country.includes(contrylist))
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 0 && movie.duration < 31)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 2 &&
-      releaseDates !== "all" &&
-      contrylist !== "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.country.includes(contrylist))
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 30 && movie.duration < 61)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 3 &&
-      releaseDates !== "all" &&
-      contrylist !== "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.country.includes(contrylist))
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 60 && movie.duration < 91)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 4 &&
-      releaseDates !== "all" &&
-      contrylist !== "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.country.includes(contrylist))
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 90 && movie.duration < 110)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 5 &&
-      releaseDates !== "all" &&
-      contrylist !== "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.country.includes(contrylist))
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 110 && movie.duration < 141)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 6 &&
-      releaseDates !== "all" &&
-      contrylist !== "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.country.includes(contrylist))
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 140 && movie.duration < 170)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 7 &&
-      releaseDates !== "all" &&
-      contrylist !== "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.country.includes(contrylist))
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 170 && movie.duration < 201)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 8 &&
-      releaseDates !== "all" &&
-      contrylist !== "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.country.includes(contrylist))
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 200 && movie.duration < 251)
-          .filter((movie) => movie.tags.includes(tags))
-      ); //****************************************************************************************** */
-    } else if (
-      tags !== "all" &&
-      durations === 1 &&
-      releaseDates !== "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 0 && movie.duration < 31)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 1 &&
-      releaseDates !== "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 0 && movie.duration < 31)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 2 &&
-      releaseDates !== "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 30 && movie.duration < 61)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 3 &&
-      releaseDates !== "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 60 && movie.duration < 91)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 4 &&
-      releaseDates !== "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 90 && movie.duration < 110)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 5 &&
-      releaseDates !== "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 110 && movie.duration < 141)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 6 &&
-      releaseDates !== "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 140 && movie.duration < 170)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 7 &&
-      releaseDates !== "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 170 && movie.duration < 201)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 8 &&
-      releaseDates !== "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.releaseDate.includes(releaseDates))
-          .filter((movie) => movie.duration > 200 && movie.duration < 251)
-          .filter((movie) => movie.tags.includes(tags))
-      ); //****************************************************************************************** */
-    } else if (
-      tags !== "all" &&
-      durations === 1 &&
-      releaseDates === "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.duration > 0 && movie.duration < 31)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 2 &&
-      releaseDates === "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.duration > 30 && movie.duration < 61)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 3 &&
-      releaseDates === "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.duration > 60 && movie.duration < 91)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 4 &&
-      releaseDates === "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.duration > 90 && movie.duration < 110)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 5 &&
-      releaseDates === "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.duration > 110 && movie.duration < 141)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 6 &&
-      releaseDates === "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.duration > 140 && movie.duration < 170)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 7 &&
-      releaseDates === "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.duration > 170 && movie.duration < 201)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else if (
-      tags !== "all" &&
-      durations === 8 &&
-      releaseDates === "all" &&
-      contrylist === "all"
-    ) {
-      setMovielist(
-        movies
-          .filter((movie) => movie.duration > 200 && movie.duration < 251)
-          .filter((movie) => movie.tags.includes(tags))
-      );
-    } else {
-      setMovielist([]);
+    } else if ((tags === "all") && (durations !== "all") && (releaseDates === "all") && (contrylist !== "all")) { 
+      //0-1-0-1
+       setMovielist(
+         movies
+            .filter((movie) => movie.duration >= Number(durations) * 30 - 30 && movie.duration <= Number(durations) * 30)
+            .filter((movie) => movie.country.includes(contrylist))
+       );
+    } else if ((tags === "all") && (durations !== "all") && (releaseDates !== "all") && (contrylist === "all")) { 
+      //0-1-1-0
+       setMovielist(
+         movies
+            .filter((movie) => movie.duration >= Number(durations) * 30 - 30 && movie.duration <= Number(durations) * 30)
+            .filter((movie) => movie.releaseDate.includes(releaseDates))
+           );
+          } else if ((tags === "all") && (durations !== "all") && (releaseDates !== "all") && (contrylist !== "all")) { 
+            //0-1-1-1
+            setMovielist(
+              movies
+                .filter((movie) => movie.duration >= Number(durations) * 30 - 30 && movie.duration <= Number(durations) * 30)
+                .filter((movie) => movie.releaseDate.includes(releaseDates))
+                .filter((movie) => movie.country.includes(contrylist))
+       );
+    } else if ((tags !== "all") && (durations === "all") && (releaseDates === "all") && (contrylist === "all")) { 
+      //1-0-0-0
+       setMovielist(movies.filter((movie) => movie.tags.includes(tags)))
+    } else if ((tags !== "all") && (durations === "all") && (releaseDates === "all") && (contrylist !== "all")) { 
+      //1-0-0-1
+      setMovielist(movies.filter((movie) => movie.tags.includes(tags))
+        .filter((movie) => movie.country.includes(contrylist))
+      )
+    } else if ((tags !== "all") && (durations === "all") && (releaseDates !== "all") && (contrylist === "all")) { 
+      //1-0-1-0
+       setMovielist(
+         movies
+           .filter((movie) => movie.tags.includes(tags))
+           .filter((movie) => movie.releaseDate.includes(releaseDates))
+       );
+    } else if ((tags !== "all") && (durations === "all") && (releaseDates !== "all") && (contrylist !== "all")) { 
+      //1-0-1-1
+       setMovielist(
+         movies
+           .filter((movie) => movie.tags.includes(tags))
+           .filter((movie) => movie.releaseDate.includes(releaseDates))
+           .filter((movie) => movie.country.includes(contrylist))
+       );
+    } else if ((tags !== "all") && (durations !== "all") && (releaseDates === "all") && (contrylist === "all")) { 
+      //1-1-0-0
+       setMovielist(
+         movies
+           .filter((movie) => movie.tags.includes(tags))
+           .filter((movie) => movie.duration >= Number(durations) * 30 - 30 && movie.duration <= Number(durations) * 30)
+       );
+    } else if ((tags !== "all") && (durations !== "all") && (releaseDates === "all") && (contrylist !== "all")) { 
+      //1-1-0-1
+       setMovielist(
+         movies
+           .filter((movie) => movie.tags.includes(tags))
+           .filter((movie) => movie.duration >= Number(durations) * 30 - 30 && movie.duration <= Number(durations) * 30)
+           .filter((movie) => movie.country.includes(contrylist))
+       );
+    } else if ((tags !== "all") && (durations !== "all") && (releaseDates !== "all") && (contrylist === "all")) { 
+      //1-1-1-0
+       setMovielist(
+         movies
+           .filter((movie) => movie.tags.includes(tags))
+           .filter((movie) => movie.duration >= Number(durations) * 30 - 30 && movie.duration <= Number(durations) * 30)
+           .filter((movie) => movie.releaseDate.includes(releaseDates))
+       );
+    } else if ((tags !== "all") && (durations !== "all") && (releaseDates !== "all") && (contrylist !== "all")) { 
+      //1-1-1-1
+       setMovielist(
+         movies
+           .filter((movie) => movie.tags.includes(tags))
+           .filter((movie) => movie.duration >= Number(durations) * 30 - 30 && movie.duration <= Number(durations) * 30)
+           .filter((movie) => movie.releaseDate.includes(releaseDates))
+           .filter((movie) => movie.country.includes(contrylist))
+       );
     }
   }, [controluseEffect]);
-
   const handleChange = (e) => {
     setControlEffect(!controluseEffect);
     if (e.target.name === "tags") setTags(e.target.value);
-    if (e.target.name === "duration") setDuration(Number(e.target.value));
+    if (e.target.name === "duration") setDuration(e.target.value);
     if (e.target.name === "contry") setContrylist(e.target.value);
     if (e.target.name === "relasi") setReleaseDate(e.target.value);
   };
   const styles = {
     display: "flex",
-    justifyContent: "space-around",
+    justifyContent: "center",
+    gap: "30px",
+    marginBottom:"20px"
   };
   return (
     <div>
@@ -608,7 +164,7 @@ export default function Home() {
             value={durations}
             name="duration"
           >
-            <MenuItem value={0}>ALL</MenuItem>
+            <MenuItem value='all'>ALL</MenuItem>
             <MenuItem value={1}>0 - 30.min</MenuItem>
             <MenuItem value={2}>30.min - 1.h</MenuItem>
             <MenuItem value={3}>1.h - 1,3.h</MenuItem>
