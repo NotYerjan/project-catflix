@@ -6,8 +6,8 @@ const useUserStore = create(
   persist(
     (set, get) => ({
       users: INIT_USERS,
-      currentUser: INIT_USERS[0],
-      isLoggedIn: true,
+      currentUser: null,
+      isLoggedIn: false,
       isDarkMode: true,
 
       switchMode: () => set((state) => ({ isDarkMode: !state.isDarkMode })),
