@@ -1,95 +1,46 @@
 import { FiSearch } from "react-icons/fi";
-import {
-  InputAdornment,
-  ListItemButton,
-  ListItemText,
-  TextField,
-} from "@mui/material";
+import { Autocomplete, Box, InputAdornment, TextField } from "@mui/material";
 import useMovieStore from "../../store/storeMovies";
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import useMuiTheme from "../../hooks/useMuiTheme";
 
 export default function Searchbar() {
-  const _close = useRef(null);
-  const windowSize = useRef([window.innerWidth]);
   const navigate = useNavigate();
   const movies = useMovieStore((state) => state.movies);
-  const [searchMovies, setSearchMovies] = useState("");
-  const [putSearchs, setPutSearchs] = useState([]);
-  const { Search, SearchIconWrapper, StyledInputBase } = useMuiTheme();
 
-  useEffect(() => {
-    document.addEventListener("click", closeSearch, true);
-  }, []);
-
-  useEffect(() => {
-    let searchedMovies;
-
-    if (String(searchMovies).trim() !== "") {
-      searchedMovies = movies.filter((movie) => {
-        return movie.title
-          .toLowerCase()
-          .includes(searchMovies.toLowerCase().trim());
-      });
-      setPutSearchs(
-        searchedMovies.map((movie) => (
-          <ListItemButton
-            component="a"
-            key={movie.title}
-            onClick={() => navigate(`/movies/${movie.id}`)}
-          >
-            <ListItemText primary={movie.title} />
-          </ListItemButton>
-        ))
-      );
-    } else {
-      setPutSearchs([]);
-    }
-  }, [searchMovies]);
-
-  const closeSearch = (e) => {
-    if (!_close.current.contains(e.target)) {
-      setPutSearchs([]);
-    }
-  };
-
-  const showSeachStyle = {
-    position: "absolute",
-    backgroundColor: "#2e2a2d",
-    bottom: windowSize.current[0] < 900 ? "120px" : "",
-  };
+  const moviesList = movies.map((movie) => ({
+    label: movie.title,
+    id: movie.id,
+  }));
 
   return (
     <>
-      <TextField
-        placeholder="Search…"
-        onChange={(e) => setSearchMovies(e.target.value)}
-        value={searchMovies}
+      <Autocomplete
+        disablePortal
+        id="combo-box-demo"
+        options={moviesList}
+        sx={{ width: "100%", minWidth: 250 }}
         size="small"
-        sx={{ width: "100%" }}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <FiSearch />
-            </InputAdornment>
-          ),
-        }}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            placeholder="Search"
+            InputProps={{
+              ...params.InputProps,
+              startAdornment: (
+                <InputAdornment position="start" sx={{ pl: 1 }}>
+                  <FiSearch />
+                </InputAdornment>
+              ),
+            }}
+          />
+        )}
+        renderOption={(props, option) => (
+          <Box {...props} onClick={() => navigate(`/movies/${option.id}`)}>
+            {option.label}
+          </Box>
+        )}
       />
-      {/* <Search>
-        <SearchIconWrapper>
-          <FiSearch />
-        </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Search…"
-          inputProps={{ "aria-label": "search" }}
-          onChange={(e) => setSearchMovies(e.target.value)}
-          value={searchMovies}
-        />
-      </Search> */}
-      <div ref={_close} style={showSeachStyle}>
-        {putSearchs}
-      </div>
     </>
   );
 }

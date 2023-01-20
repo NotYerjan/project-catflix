@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FiHeart, FiHome, FiSearch, FiUser } from "react-icons/fi";
 import {
   AppBar,
@@ -19,6 +19,8 @@ export default function Footbar() {
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
+  const location = useLocation();
+  const pathname = location.pathname;
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -54,6 +56,13 @@ export default function Footbar() {
           </IconButton>
 
           <IconButton
+            onClick={() => setDisplaySearch(!displaySearch)}
+            sx={{ color: "white" }}
+          >
+            <FiSearch className="navBarIcon" />
+          </IconButton>
+
+          <IconButton
             onClick={() => navigate("/profile/favorites")}
             sx={{ color: "white" }}
           >
@@ -86,7 +95,6 @@ export default function Footbar() {
               sx={{ width: "90vw" }}
               variant="text"
             >
-              {" "}
               {isLoggedIn ? (
                 <>
                   <Button onClick={() => navigate("/profile")}>Profile</Button>
@@ -100,13 +108,6 @@ export default function Footbar() {
               )}
             </ButtonGroup>
           </Popover>
-
-          <IconButton
-            onClick={() => setDisplaySearch(!displaySearch)}
-            sx={{ color: "white" }}
-          >
-            <FiSearch className="navBarIcon" />
-          </IconButton>
         </Toolbar>
       </AppBar>
     </>
