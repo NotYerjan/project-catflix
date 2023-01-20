@@ -1,5 +1,10 @@
 import { FiSearch } from "react-icons/fi";
-import { ListItemButton, ListItemText } from "@mui/material";
+import {
+  InputAdornment,
+  ListItemButton,
+  ListItemText,
+  TextField,
+} from "@mui/material";
 import useMovieStore from "../../store/storeMovies";
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
@@ -57,7 +62,21 @@ export default function Searchbar() {
 
   return (
     <>
-      <Search>
+      <TextField
+        placeholder="Search…"
+        onChange={(e) => setSearchMovies(e.target.value)}
+        value={searchMovies}
+        size="small"
+        sx={{ width: "100%" }}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <FiSearch />
+            </InputAdornment>
+          ),
+        }}
+      />
+      {/* <Search>
         <SearchIconWrapper>
           <FiSearch />
         </SearchIconWrapper>
@@ -67,7 +86,7 @@ export default function Searchbar() {
           onChange={(e) => setSearchMovies(e.target.value)}
           value={searchMovies}
         />
-      </Search>
+      </Search> */}
       <div ref={_close} style={showSeachStyle}>
         {putSearchs}
       </div>

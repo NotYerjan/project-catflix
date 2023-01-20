@@ -41,12 +41,12 @@ function UsersProfile() {
         review.userId === user.id &&
         !userReviews.find((user) => review.userId === user.userId)
       ) {
-        const movieInfo = movies.filter((movie) =>
-          movie.reviewIds.find((id) => id === review.id)
+        const movieInfo = movies.find(({ reviewIds }) =>
+          reviewIds.includes(review.id)
         );
 
         const { id, userId, content, createdAt, rating } = review;
-        const { id: movieId, imgSrc, title, releaseDate } = movieInfo[0];
+        const { id: movieId, imgSrc, title, releaseDate } = movieInfo;
 
         setUserReviews((r) => [
           ...r,

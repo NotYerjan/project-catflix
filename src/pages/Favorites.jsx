@@ -34,19 +34,33 @@ export default function Favorites() {
   }, [type]);
 
   return (
-    <div>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <Button variant="text" onClick={() => setType("favorite")}>
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <div style={{ display: "flex", gap: 20, marginBottom: 10 }}>
+        <Button
+          onClick={() => setType("favorite")}
+          variant={type === "favorite" ? "contained" : "text"}
+        >
           Favorites
         </Button>
-        <Button variant="text" onClick={() => setType("watching")}>
+        <Button
+          onClick={() => setType("watching")}
+          variant={type === "watching" ? "contained" : "text"}
+        >
           Watching
         </Button>
-        <Button variant="text" onClick={() => setType("finished")}>
+        <Button
+          onClick={() => setType("finished")}
+          variant={type === "finished" ? "contained" : "text"}
+        >
           Watched
         </Button>
-        <Button variant="text" onClick={() => setType("willWatch")}>
-          Going to watch
+        <Button
+          onClick={() => setType("willWatch")}
+          variant={type === "willWatch" ? "contained" : "text"}
+        >
+          Will watch
         </Button>
       </div>
       {filteredMovies && <MovieList movies={filteredMovies} />}

@@ -7,15 +7,17 @@ import {
   CardContent,
   Typography,
   Button,
+  Box,
 } from "@mui/material";
 import useUserStore from "../store/storeUsers";
 
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const user = useUserStore((state) => state.currentUser);
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
   const birthday = isLoggedIn ? new Date(user.birthday) : "";
+  const navigate = useNavigate();
   const deleteAndLogoutUser = useUserStore(
     (state) => state.deleteAndLogoutUser
   );
@@ -114,12 +116,18 @@ function Profile() {
               </Card>
             </ListItem>
           </List>
-          <Link to="/profile/edit">
-            <Button variant="outlined">Edit Info</Button>
-          </Link>
-          <Button variant="outlined" onClick={deleteAndLogoutUser}>
-            Delete Account
-          </Button>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Button
+              variant="outlined"
+              onClick={() => navigate("/profile/edit")}
+            >
+              Edit Info
+            </Button>
+
+            <Button variant="outlined" onClick={deleteAndLogoutUser}>
+              Delete Account
+            </Button>
+          </Box>
         </>
       )}
     </>

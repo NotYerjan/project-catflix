@@ -8,14 +8,6 @@ export default function RootLayout() {
   const isAuthPage =
     location.pathname === "/login" || location.pathname === "/signup";
 
-  // if (!isNavBar) {
-  //   return (
-  //     <Paper>
-  //       <Outlet />
-  //     </Paper>
-  //   );
-  // }
-
   return (
     <Paper
       elevation={12}

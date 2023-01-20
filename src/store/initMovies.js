@@ -25,7 +25,7 @@ export const INIT_MOVIES = [
     title: "Spider-Man: No Way Home",
     description:
       "With Spider-Man's identity now revealed, Peter asks Doctor Strange for help. When a spell goes wrong, dangerous foes from other worlds start to appear, forcing Peter to discover what it truly means to be Spider-Man.",
-    reviewIds: [],
+    reviewIds: ["aegiklnvela", "iuvbaewkuva", "oiuhebgvea"],
     imgSrc:
       "https://m.media-amazon.com/images/M/MV5BZWMyYzFjYTYtNTRjYi00OGExLWE2YzgtOGRmYjAxZTU3NzBiXkEyXkFqcGdeQXVyMzQ0MzA0NTM@._V1_FMjpg_UX1000_.jpg",
     tags: ["action", "adventure", "fantasy", "comedy", "movie"],
@@ -38,7 +38,7 @@ export const INIT_MOVIES = [
       "J.K. Simmons",
       "Harry Holland",
     ],
-    country: "united kingdom",
+    country: "uk",
   },
   {
     id: "xklnjkna",
@@ -58,7 +58,7 @@ export const INIT_MOVIES = [
       "J.K. Simmons",
       "Harry Holland",
     ],
-    country: "United States of America",
+    country: "usa",
   },
   {
     id: "qwqweiqwpo",
@@ -78,7 +78,7 @@ export const INIT_MOVIES = [
       "J.K. Simmons",
       "Harry Holland",
     ],
-    country: "United States of America",
+    country: "usa",
   },
   //from flavius
   {
@@ -98,7 +98,7 @@ export const INIT_MOVIES = [
       "Salma Hayek",
       "Wagner Moura",
     ],
-    country: "United States of America",
+    country: "usa",
   },
   {
     id: "avatarjkhjkdas",
@@ -117,7 +117,7 @@ export const INIT_MOVIES = [
       "Joel David Moore",
       "Jemaine Clement",
     ],
-    country: "United States of America",
+    country: "usa",
   },
   {
     id: "violentjkhjkdas",
@@ -136,7 +136,7 @@ export const INIT_MOVIES = [
       "Cam Gigandet",
       "André Eriksen",
     ],
-    country: "United States of America",
+    country: "usa",
   },
   {
     id: "M3GANjkhjkdas",
@@ -155,7 +155,7 @@ export const INIT_MOVIES = [
       "Jen Van Epps",
       "Millen Baird",
     ],
-    country: "United States of America",
+    country: "usa",
   },
   {
     id: "BlackAdamjkhjkdas",
@@ -174,7 +174,7 @@ export const INIT_MOVIES = [
       "Marwan Kenzari",
       "Jalon Christian",
     ],
-    country: "United States of America",
+    country: "usa",
   },
   {
     id: "Lionjkhjkdas",
@@ -193,7 +193,7 @@ export const INIT_MOVIES = [
       "James Cosmo",
       "Patrick Kake",
     ],
-    country: "United States of America",
+    country: "usa",
   },
   {
     id: "encantojkhjkdas",
@@ -212,7 +212,7 @@ export const INIT_MOVIES = [
       "Adassa",
       "Mauro Castillo",
     ],
-    country: "United States of America",
+    country: "usa",
   },
   {
     id: "knivesjkhjkdas",
@@ -231,7 +231,7 @@ export const INIT_MOVIES = [
       "Jessica Henwick",
       "Madelyn Cline",
     ],
-    country: "United States of America",
+    country: "usa",
   },
   {
     id: "firstavatarjkhjkdas",
@@ -250,7 +250,7 @@ export const INIT_MOVIES = [
       "Joel David Moore",
       "Wes Studi",
     ],
-    country: "United States of America",
+    country: "usa",
   },
   {
     id: "womankingjkhjkdas",
@@ -269,7 +269,7 @@ export const INIT_MOVIES = [
       "Hero Fiennes Tiffin",
       "Masali Baduza",
     ],
-    country: "United States of America",
+    country: "usa",
   },
   {
     id: "lastclinetjkhjkdas",
@@ -288,7 +288,7 @@ export const INIT_MOVIES = [
       "Thalita Beltrão Sørensen",
       "Torben Svendsen",
     ],
-    country: "United States of America",
+    country: "usa",
   },
   {
     id: "savagejkhjkdas",
@@ -307,6 +307,6 @@ export const INIT_MOVIES = [
       "Meadow Williams",
       "John Malkovich",
     ],
-    country: "United States of America",
+    country: "usa",
   },
 ];
