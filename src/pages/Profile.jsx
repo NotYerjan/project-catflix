@@ -12,15 +12,43 @@ import {
 import useUserStore from "../store/storeUsers";
 
 import { useNavigate } from "react-router-dom";
+import useReviewStore from "../store/storeReview";
+import useMovieStore from "../store/storeMovies";
 
 function Profile() {
   const user = useUserStore((state) => state.currentUser);
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
   const birthday = isLoggedIn ? new Date(user.birthday) : "";
+  const reviews = useReviewStore((state) => state.reviews);
+  const movies = useMovieStore((state) => state.movies);
+  const removeReviewFromMovie = useMovieStore(
+    (state) => state.removeReviewFromMovie
+  );
+  const deleteAllReviewsOfUser = useReviewStore(
+    (state) => state.deleteAllReviewsOfUser
+  );
   const navigate = useNavigate();
   const deleteAndLogoutUser = useUserStore(
     (state) => state.deleteAndLogoutUser
   );
+
+  const handelDeleteUser = async () => {
+    try {
+      await reviews
+        .filter((review) => review.userId === user.id)
+        .map((review) => {
+          const movie = movies.find((movie) =>
+            movie.reviewIds.includes(review.id)
+          );
+          removeReviewFromMovie(movie.id, review.id);
+        });
+      await deleteAllReviewsOfUser(user.id);
+      deleteAndLogoutUser();
+    } catch {
+      console.log("something went wrong");
+    }
+  };
+
   return (
     <>
       {isLoggedIn && (
@@ -124,7 +152,7 @@ function Profile() {
               Edit Info
             </Button>
 
-            <Button variant="outlined" onClick={deleteAndLogoutUser}>
+            <Button variant="outlined" onClick={handelDeleteUser}>
               Delete Account
             </Button>
           </Box>

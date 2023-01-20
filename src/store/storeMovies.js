@@ -18,11 +18,11 @@ const useMovieStore = create((set) => ({
       movies: state.movies.map((movie) =>
         movie.id === movieId
           ? {
-            ...movie,
-            reviewIds: movie.reviewIds.filter(
-              (review) => review !== reviewId
-            ),
-          }
+              ...movie,
+              reviewIds: movie.reviewIds.filter(
+                (review) => review !== reviewId
+              ),
+            }
           : movie
       ),
     })),

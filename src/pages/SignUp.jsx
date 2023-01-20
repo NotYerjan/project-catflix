@@ -38,10 +38,14 @@ const SignUp = () => {
 
   const handleUserSignUp = (e) => {
     e.preventDefault();
+    const date = new Date();
     const newUser = {
       id: nanoid(),
       username: username,
       password: password,
+      createdAt: date.toLocaleString("en-CA", {
+        dateStyle: "medium",
+      }),
     };
 
     signUpUser(newUser);
