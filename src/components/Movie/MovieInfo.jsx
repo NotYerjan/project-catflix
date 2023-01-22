@@ -87,7 +87,7 @@ export default function MovieInfo({ movie, movieReviews }) {
                   (total, review) => total + review.rating,
                   0
                 ) / movieReviews.length
-              ).toFixed(1)}
+              ).toFixed(1) || "There is no review yet"}
             </Typography>
           }
         />

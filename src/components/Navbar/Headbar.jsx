@@ -11,6 +11,7 @@ import {
   Popover,
   Button,
   ButtonGroup,
+  Typography,
 } from "@mui/material";
 import Searchbar from "./Searchbar";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -23,6 +24,7 @@ export default function Headbar() {
   const switchMode = useUserStore((state) => state.switchMode);
   const navigate = useNavigate();
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
+  const user = useUserStore((state) => state.currentUser);
   const logoutUser = useUserStore((state) => state.logoutUser);
   const [anchorEl, setAnchorEl] = useState(null);
   let location = useLocation();
@@ -67,7 +69,7 @@ export default function Headbar() {
             </Button>
           </ButtonGroup>
         ) : (
-          <Box sx={{ display: "flex" }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
@@ -77,6 +79,7 @@ export default function Headbar() {
                 <FiBell />
               </Badge>
             </IconButton>
+            <Typography>Hello, {user.username}</Typography>
             <IconButton
               size="large"
               edge="end"
@@ -109,7 +112,9 @@ export default function Headbar() {
                 sx={{ width: 150 }}
                 variant="text"
               >
-                <Button onClick={() => navigate("/profile")}>Profile</Button>
+                <Button onClick={() => navigate(`/profile/${user.id}`)}>
+                  Profile
+                </Button>
                 <Button onClick={() => navigate("/profile/favorites")}>
                   My Movies
                 </Button>

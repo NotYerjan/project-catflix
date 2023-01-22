@@ -145,8 +145,10 @@ const useUserStore = create(
       acceptFriendRequest: (userId) => {
         set((state) => {
           const newDate = new Date();
-          const user = state.users.find({ id: userId });
-          const request = user.friends.find({ id: state.currentUser.id });
+          const user = state.users.find(({ id }) => userId === id);
+          const request = user.friends.find(
+            ({ id }) => id === state.currentUser.id
+          );
           const newNotification = {
             type: "friend_acceptence",
             createdBy: state.currentUser.id,
@@ -180,8 +182,61 @@ const useUserStore = create(
               friends: state.currentUser.friends
                 ? [...state.currentUser.friends, newFriend]
                 : [newFriend],
-              notifications: state.currentUser.notifications.filter(
-                ({ id, type }) => !(id === userId && type === "friend_request")
+            },
+          };
+        });
+        updateGlobalUser(set);
+      },
+
+      declineFriendRequest: (userId) => {
+        set((state) => {
+          const newDate = new Date();
+          const user = state.users.find(({ id }) => userId === id);
+
+          const newNotification = {
+            type: "friend_declined",
+            createdBy: state.currentUser.id,
+            createdAt: newDate,
+            isRead: false,
+          };
+
+          const updatedUser = {
+            ...user,
+            friends: user.friends.filter(
+              (friend) => friend.id !== state.currentUser.id
+            ),
+            notifications: user.notifications
+              ? [...user.notifications, newNotification]
+              : [newNotification],
+          };
+
+          return {
+            users: state.users.map((user) =>
+              userId === user.id ? updatedUser : user
+            ),
+          };
+        });
+      },
+
+      unfriend: (userId) => {
+        set((state) => {
+          const user = state.users.find(({ id }) => userId === id);
+
+          const updatedUser = {
+            ...user,
+            friends: user.friends.filter(
+              (friend) => friend.id !== state.currentUser.id
+            ),
+          };
+
+          return {
+            users: state.users.map((user) =>
+              userId === user.id ? updatedUser : user
+            ),
+            currentUser: {
+              ...state.currentUser,
+              friends: state.currentUser.friends.filter(
+                (friend) => friend.id !== state.currentUser.id
               ),
             },
           };

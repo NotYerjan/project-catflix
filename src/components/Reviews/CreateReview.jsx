@@ -27,7 +27,9 @@ export default function CreateReview({ movieId, movie }) {
     const newReview = {
       id: reviewId,
       userId: user.id,
-      createdAt: date,
+      createdAt: date.toLocaleString("en-CA", {
+        dateStyle: "medium",
+      }),
       rating: rating,
       content: reviewContent,
     };

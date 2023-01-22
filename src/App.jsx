@@ -10,12 +10,11 @@ import Home from "./pages/Home";
 import Movie from "./pages/Movie";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-import Profile from "./pages/Profile";
 import ProfileEdit from "./pages/ProfileEdit";
 import Favorites from "./pages/Favorites";
-import UsersProfile from "./pages/UsersProfile";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Profile from "./pages/Profile";
 
 function App() {
   const isDarkMode = useUserStore((state) => state.isDarkMode);
@@ -40,7 +39,7 @@ function App() {
           element: <ProfileLayout />,
           children: [
             {
-              index: true,
+              path: ":id",
               element: <Profile />,
             },
             {
@@ -52,10 +51,6 @@ function App() {
               element: <Favorites />,
             },
           ],
-        },
-        {
-          path: "users/:id",
-          element: <UsersProfile />,
         },
         {
           path: "login",

@@ -57,7 +57,7 @@ export default function Review(props) {
         }
         title={
           <Link
-            to={`/users/${users.find((user) => user.id === userId).id}`}
+            to={`/profile/${users.find((user) => user.id === userId).id}`}
             style={{ textDecoration: "none", color: "white" }}
           >
             {users.find((user) => user.id === userId).username}
