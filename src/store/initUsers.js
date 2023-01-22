@@ -6,7 +6,8 @@ export const INIT_USERS = [
     email: "admin1@example.com",
     firstName: "Yerjan",
     lastName: "Turarov",
-    imgSrc: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+    imgSrc:
+      "https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png",
     birthday: new Date("Feb 24 1998"),
     createdAt: "Dec 2, 2020",
     isSuperUser: true,

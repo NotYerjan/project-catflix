@@ -1,4 +1,4 @@
-import { Switch } from "@mui/material";
+import { Switch, Box } from "@mui/material";
 import { createTheme, styled } from "@mui/material/styles";
 
 function useMuiTheme(currentTheme) {
@@ -60,9 +60,18 @@ function useMuiTheme(currentTheme) {
     },
   }));
 
+  const StyledBox = styled(Box)({
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    gap: 20,
+    paddingTop: 20,
+  });
+
   return {
     theme,
     MaterialUISwitch,
+    StyledBox,
   };
 }
 export default useMuiTheme;
