@@ -8,7 +8,7 @@ export const INIT_USERS = [
     lastName: "Turarov",
     imgSrc:
       "https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png",
-    birthday: new Date("Feb 24 1998"),
+    birthday: "Feb 24 1998",
     createdAt: "Dec 2, 2020",
     isSuperUser: true,
     movies: [
@@ -21,39 +21,39 @@ export const INIT_USERS = [
       {
         id: "akujsdrobin",
         status: "friend",
-        createdAt: new Date("Mar 12, 2021"),
-        updatedAt: new Date("Mar 15, 2021"),
+        createdAt: "Mar 12, 2021",
+        updatedAt: "Mar 15, 2021",
       },
       {
         id: "aktheyurobin",
         status: "friend",
-        createdAt: new Date("Jun 5, 2021"),
-        updatedAt: new Date("Jun 6, 2021"),
+        createdAt: "Jun 5, 2021",
+        updatedAt: "Jun 6, 2021",
       },
       {
         id: "te45heyurobin",
         status: "requested",
-        createdAt: new Date("Sep 21, 2022"),
-        updatedAt: new Date("Sep 21, 2022"),
+        createdAt: "Sep 21, 2022",
+        updatedAt: "Sep 21, 2022",
       },
     ],
     notifications: [
       {
         type: "friend_request",
         createdBy: "akey45fbty52robin",
-        createdAt: new Date("Dec 27, 2022"),
+        createdAt: "Dec 27, 2022",
         isRead: false,
       },
       {
         type: "friend_acceptence",
         createdBy: "aktheyurobin",
-        createdAt: new Date("Jun 6, 2021"),
+        createdAt: "Jun 6, 2021",
         isRead: true,
       },
       {
         type: "moderator_privilage",
         createdBy: "akujsdrobin",
-        createdAt: new Date("Dec 2, 2020"),
+        createdAt: "Dec 2, 2020",
         isRead: true,
       },
     ],
@@ -66,7 +66,7 @@ export const INIT_USERS = [
     firstName: "Flavius",
     lastName: "Bejan",
     imgSrc: "",
-    birthday: new Date("Feb 24 1998"),
+    birthday: "Feb 24 1998",
     createdAt: "Dec 2, 2010",
     isSuperUser: true,
     movies: [
@@ -78,8 +78,8 @@ export const INIT_USERS = [
       {
         id: "akujbenvr",
         status: "friend",
-        createdAt: new Date("Mar 12, 2021"),
-        updatedAt: new Date("Mar 15, 2021"),
+        createdAt: "Mar 12, 2021",
+        updatedAt: "Mar 15, 2021",
       },
     ],
   },
@@ -94,8 +94,8 @@ export const INIT_USERS = [
       {
         id: "akujbenvr",
         status: "friend",
-        createdAt: new Date("Jun 5, 2021"),
-        updatedAt: new Date("Jun 6, 2021"),
+        createdAt: "Jun 5, 2021",
+        updatedAt: "Jun 6, 2021",
       },
     ],
   },
@@ -118,7 +118,7 @@ export const INIT_USERS = [
       {
         type: "friend_request",
         createdBy: "akujbenvr",
-        createdAt: new Date("Dec 27, 2022"),
+        createdAt: "Dec 27, 2022",
         isRead: false,
       },
     ],
@@ -134,8 +134,8 @@ export const INIT_USERS = [
       {
         id: "akujbenvr",
         status: "requested",
-        createdAt: new Date("Dec 27, 2022"),
-        updatedAt: new Date("Dec 27, 2022"),
+        createdAt: "Dec 27, 2022",
+        updatedAt: "Dec 27, 2022",
       },
     ],
   },

@@ -16,7 +16,7 @@ import {
   ButtonGroup,
 } from "@mui/material";
 import useUserStore from "../../store/storeUsers.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Review(props) {
   const updateReview = useReviewStore((state) => state.updateReview);
@@ -25,6 +25,7 @@ export default function Review(props) {
   const user = useUserStore((state) => state.currentUser);
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
   const { id, userId, createdAt, content, rating } = props.content;
+  const navigate = useNavigate();
 
   const [isEdited, setIsEdited] = useState(false);
   const [newContent, setNewContent] = useState(content);
@@ -56,12 +57,16 @@ export default function Review(props) {
           )
         }
         title={
-          <Link
-            to={`/profile/${users.find((user) => user.id === userId).id}`}
-            style={{ textDecoration: "none", color: "white" }}
+          <Typography
+            onClick={() =>
+              navigate(
+                `/profile/${users.find((user) => user.id === userId).id}`
+              )
+            }
+            sx={{ cursor: "pointer" }}
           >
             {users.find((user) => user.id === userId).username}
-          </Link>
+          </Typography>
         }
         subheader={createdAt.toLocaleString("en-CA", { dateStyle: "medium" })}
       />
