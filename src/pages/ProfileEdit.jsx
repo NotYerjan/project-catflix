@@ -6,19 +6,29 @@ import {
   CardContent,
   TextField,
   CardActions,
+  Avatar,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+
+import Axios from "axios";
 
 export default function ProfileEdit() {
   const [userInfo, setUserInfo] = useState({});
   const [password, setPassword] = useState("");
   const [birthday, setBirthday] = useState("");
   const [repeatPassword, setRepeatePassowrd] = useState("");
+
   const user = useUserStore((state) => state.currentUser);
   const updateCurrentUserInfo = useUserStore(
     (state) => state.updateCurrentUserInfo
   );
+
+  const [userAvatar, setUserAvatar] = useState({
+    avatar: null,
+    avatarPreview: user.imgSrc,
+  });
+
   const navigate = useNavigate();
 
   //handle save function
@@ -35,8 +45,76 @@ export default function ProfileEdit() {
     }
     navigate("/profile");
   };
+
+  const handleUserAvatarUpload = () => {
+    const data = new FormData();
+
+    data.append("file", userAvatar.avatar);
+    data.append("upload_preset", "xts9tly0");
+    data.append("cloud_name", "df9xmfkp1");
+
+    fetch("https://api.cloudinary.com/v1_1/df9xmfkp1/image/upload", {
+      method: "POST",
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        updateCurrentUserInfo({
+          imgSrc: data.secure_url,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <Card sx={{ maxWidth: 400, margin: "auto" }}>
+      <div
+        style={{
+          marginTop: "1rem",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "1rem",
+        }}
+      >
+        <Avatar
+          alt="Remy Sharp"
+          src={userAvatar.avatarPreview}
+          sx={{ width: 100, height: 100 }}
+        />
+        <div
+          style={{
+            display: "flex",
+            gap: "1rem",
+          }}
+        >
+          <Button variant="contained" component="label">
+            Upload
+            <input
+              hidden
+              accept="image/*"
+              multiple
+              type="file"
+              name="user_avatar"
+              onChange={(e) =>
+                setUserAvatar({
+                  ...userAvatar,
+                  avatar: e.target.files[0],
+                  avatarPreview: URL.createObjectURL(e.target.files[0]),
+                })
+              }
+            />
+          </Button>
+          <Button
+            variant="contained"
+            component="label"
+            onClick={handleUserAvatarUpload}
+          >
+            Save
+          </Button>
+        </div>
+      </div>
       <CardContent sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
         <TextField
           sx={{ width: "100%" }}
@@ -106,8 +184,6 @@ export default function ProfileEdit() {
           }
           value={userInfo.email ? userInfo.email : user.email}
         />
-        <label htmlFor="imgSrc"> Avatar</label>
-        <input type="image" alt="avatar" id="imgSrc" />
       </CardContent>
       <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
         <Button variant="outlined" onClick={() => navigate("/profile")}>
