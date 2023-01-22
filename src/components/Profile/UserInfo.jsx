@@ -22,7 +22,7 @@ export default function UserInfo({ user, userReviewsLength }) {
   const navigate = useNavigate();
 
   return (
-    <Card sx={{ maxWidth: { xs: "100%", sm: 300 } }}>
+    <Card sx={{ maxWidth: { xs: "100%", sm: 300 }, width: "100%" }}>
       <div style={{ display: "flex", justifyContent: "center", padding: 20 }}>
         <Avatar
           alt="avatar"

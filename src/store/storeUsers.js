@@ -236,7 +236,7 @@ const useUserStore = create(
             currentUser: {
               ...state.currentUser,
               friends: state.currentUser.friends.filter(
-                (friend) => friend.id !== state.currentUser.id
+                (friend) => friend.id !== userId
               ),
             },
           };

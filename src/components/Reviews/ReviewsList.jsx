@@ -1,5 +1,5 @@
 import React from "react";
-import Review from "./Review";
+import Review from "../List/Review";
 import CreateReview from "./CreateReview.jsx";
 import { Paper, Typography } from "@mui/material";
 import useUserStore from "../../store/storeUsers.js";

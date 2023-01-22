@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FiHeart, FiHome, FiSearch, FiUser } from "react-icons/fi";
 import {
   AppBar,
@@ -19,8 +19,8 @@ export default function Footbar() {
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
-  const location = useLocation();
-  const pathname = location.pathname;
+  const user = useUserStore((state) => state.currentUser);
+  let location = useLocation();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -28,6 +28,19 @@ export default function Footbar() {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleNavigate = (path) => {
+    handleClose();
+    navigate(path);
+  };
+
+  const handleLogout = () => {
+    handleClose();
+    logoutUser();
+    if (location.pathname.includes("user")) {
+      navigate("/login");
+    }
   };
 
   const open = Boolean(anchorEl);
@@ -97,13 +110,19 @@ export default function Footbar() {
             >
               {isLoggedIn ? (
                 <>
-                  <Button onClick={() => navigate("/profile")}>Profile</Button>
-                  <Button onClick={logoutUser}>Log out</Button>
+                  <Button onClick={() => handleNavigate(`/profile/${user.id}`)}>
+                    Profile
+                  </Button>
+                  <Button onClick={() => handleLogout()}>Log out</Button>
                 </>
               ) : (
                 <>
-                  <Button onClick={() => navigate("/login")}>Login</Button>
-                  <Button onClick={() => navigate("/signup")}>Sign up</Button>
+                  <Button onClick={() => handleNavigate("/login")}>
+                    Login
+                  </Button>
+                  <Button onClick={() => handleNavigate("/signup")}>
+                    Sign up
+                  </Button>
                 </>
               )}
             </ButtonGroup>

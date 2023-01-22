@@ -38,10 +38,16 @@ export default function Headbar() {
   };
 
   const handleLogout = () => {
+    handleClose();
     logoutUser();
     if (location.pathname.includes("user")) {
       navigate("/login");
     }
+  };
+
+  const handleNavigate = (path) => {
+    handleClose();
+    navigate(path);
   };
 
   const open = Boolean(anchorEl);
@@ -112,10 +118,10 @@ export default function Headbar() {
                 sx={{ width: 150 }}
                 variant="text"
               >
-                <Button onClick={() => navigate(`/profile/${user.id}`)}>
+                <Button onClick={() => handleNavigate(`/profile/${user.id}`)}>
                   Profile
                 </Button>
-                <Button onClick={() => navigate("/profile/favorites")}>
+                <Button onClick={() => handleNavigate("/profile/favorites")}>
                   My Movies
                 </Button>
                 <Button onClick={handleLogout}>Log out</Button>

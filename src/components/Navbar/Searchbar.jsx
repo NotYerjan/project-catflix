@@ -37,7 +37,9 @@ export default function Searchbar() {
         )}
         renderOption={(props, option) => (
           <Box {...props} onClick={() => navigate(`/movies/${option.id}`)}>
-            {option.label}
+            <Box width="100%" onClick={props.onClick}>
+              {option.label}
+            </Box>
           </Box>
         )}
       />
