@@ -7,7 +7,6 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "watch": "nodemon server/",
     "lint": "npx rome check ."
   },
   "dependencies": {
@@ -16,11 +15,6 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/material": "^5.10.17",
-    "axios": "^1.2.3",
-    "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "mime": "^3.0.0",
-    "multer": "^1.4.5-lts.1",
     "nanoid": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -32,7 +26,6 @@
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
     "@vitejs/plugin-react": "^2.2.0",
-    "nodemon": "^2.0.20",
     "rome": "^10.0.1",
     "vite": "^3.2.3"
   }

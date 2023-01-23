@@ -11,8 +11,6 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-import Axios from "axios";
-
 export default function ProfileEdit() {
   const [userInfo, setUserInfo] = useState({});
   const [password, setPassword] = useState("");
