@@ -27,17 +27,17 @@ export default function ProfileInfoList({ user, userReviewsLength }) {
     <List>
       {user.email && <ProfileInfo Icon={FiMail} text={user.email} />}
       {birthday && <ProfileInfo Icon={FiCalendar} text={birthday} />}
-      <ProfileInfo Icon={FiUsers} text={`${friendsNo} friends`} />
+      <ProfileInfo Icon={FiUsers} text={`${friendsNo} Friends`} />
       <ProfileInfo
         Icon={FiClock}
-        text={`member since ${membership.getFullYear()}`}
+        text={`Member since ${membership.getFullYear()}`}
       />
       <ProfileInfo
         Icon={FiEdit3}
-        text={`${userReviewsLength} reviews written`}
+        text={`${userReviewsLength} Reviews written`}
       />
-      {user.isSuperUser && <ProfileInfo Icon={FiShield} text="moderator" />}
-      {isFriend && <ProfileInfo Icon={FiUserCheck} text="you are friends" />}
+      {user.isSuperUser && <ProfileInfo Icon={FiShield} text="Moderator" />}
+      {isFriend && <ProfileInfo Icon={FiUserCheck} text="You are friends" />}
     </List>
   );
 }

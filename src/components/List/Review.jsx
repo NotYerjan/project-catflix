@@ -21,9 +21,12 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Review(props) {
   const updateReview = useReviewStore((state) => state.updateReview);
   const deleteReview = useReviewStore((state) => state.deleteReview);
+
   const users = useUserStore((state) => state.users);
   const user = useUserStore((state) => state.currentUser);
+
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
+
   const { id, userId, createdAt, content, rating } = props.content;
   const navigate = useNavigate();
 
@@ -42,7 +45,9 @@ export default function Review(props) {
     <Card elevation={6}>
       {" "}
       <CardHeader
-        avatar={<Avatar />}
+        avatar={
+          <Avatar src={users.filter((user) => user.id === userId)[0].imgSrc} />
+        }
         action={
           isLoggedIn &&
           (userId == user.id || user.isSuperUser) && (

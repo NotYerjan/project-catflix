@@ -97,7 +97,7 @@ export default function Headbar() {
               onClick={handleClick}
               aria-describedby={id}
             >
-              <Avatar />
+              <Avatar src={user.imgSrc} />
             </IconButton>
             <Popover
               id={id}

@@ -81,7 +81,7 @@ export default function MovieInfo({ movie, movieReviews }) {
               component="div"
               sx={{ color: "rgb(227, 171, 87);" }}
             >
-              IMDB:
+              Rating:{" "}
               {(
                 movieReviews.reduce(
                   (total, review) => total + review.rating,
