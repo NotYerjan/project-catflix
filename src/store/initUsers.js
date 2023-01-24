@@ -41,18 +41,21 @@ export const INIT_USERS = [
       {
         type: "friend_request",
         createdBy: "akey45fbty52robin",
+        username: "keith",
         createdAt: "Dec 27, 2022",
         isRead: false,
       },
       {
-        type: "friend_acceptence",
+        type: "friend_accept",
         createdBy: "aktheyurobin",
+        username: "marriska",
         createdAt: "Jun 6, 2021",
         isRead: true,
       },
       {
-        type: "moderator_privilage",
+        type: "moderator_access",
         createdBy: "akujsdrobin",
+        username: "moderator",
         createdAt: "Dec 2, 2020",
         isRead: true,
       },

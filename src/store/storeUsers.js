@@ -82,7 +82,7 @@ const useUserStore = create(
         set((state) => {
           const createdAt = new Date();
           const notification = {
-            type: "moderator_privilage",
+            type: "moderator_access",
             createdBy: state.currentUser.id,
             createdAt,
             isRead: false,
@@ -150,7 +150,7 @@ const useUserStore = create(
             ({ id }) => id === state.currentUser.id
           );
           const newNotification = {
-            type: "friend_acceptence",
+            type: "friend_accept",
             createdBy: state.currentUser.id,
             createdAt: newDate,
             isRead: false,
@@ -194,7 +194,7 @@ const useUserStore = create(
           const user = state.users.find(({ id }) => userId === id);
 
           const newNotification = {
-            type: "friend_declined",
+            type: "friend_decline",
             createdBy: state.currentUser.id,
             createdAt: newDate,
             isRead: false,
@@ -247,6 +247,20 @@ const useUserStore = create(
       deleteAllNotifications: () => {
         set((state) => ({
           currentUser: { ...state.currentUser, notifications: [] },
+        }));
+        updateGlobalUser(set);
+      },
+      makeAllNotificationsRead: () => {
+        set((state) => ({
+          currentUser: {
+            ...state.currentUser,
+            notifications: state.currentUser.notifications?.map(
+              (notification) => ({
+                ...notification,
+                isRead: true,
+              })
+            ),
+          },
         }));
         updateGlobalUser(set);
       },
