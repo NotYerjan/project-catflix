@@ -80,10 +80,14 @@ const useUserStore = create(
 
       makeUserSuper: (userId) => {
         set((state) => {
-          const createdAt = new Date();
+          const date = new Date();
+          const createdAt = date.toLocaleString("en-CA", {
+            dateStyle: "medium",
+          });
           const notification = {
             type: "moderator_access",
             createdBy: state.currentUser.id,
+            username: state.currentUser.username,
             createdAt,
             isRead: false,
           };
@@ -105,10 +109,14 @@ const useUserStore = create(
 
       createFriendRequest: (userId) => {
         set((state) => {
-          const newDate = new Date();
+          const date = new Date();
+          const newDate = date.toLocaleString("en-CA", {
+            dateStyle: "medium",
+          });
           const notification = {
             type: "friend_request",
             createdBy: state.currentUser.id,
+            username: state.currentUser.username,
             createdAt: newDate,
             isRead: false,
           };
@@ -144,7 +152,10 @@ const useUserStore = create(
 
       acceptFriendRequest: (userId) => {
         set((state) => {
-          const newDate = new Date();
+          const date = new Date();
+          const newDate = date.toLocaleString("en-CA", {
+            dateStyle: "medium",
+          });
           const user = state.users.find(({ id }) => userId === id);
           const request = user.friends.find(
             ({ id }) => id === state.currentUser.id
@@ -152,6 +163,7 @@ const useUserStore = create(
           const newNotification = {
             type: "friend_accept",
             createdBy: state.currentUser.id,
+            username: state.currentUser.username,
             createdAt: newDate,
             isRead: false,
           };
@@ -190,12 +202,16 @@ const useUserStore = create(
 
       declineFriendRequest: (userId) => {
         set((state) => {
-          const newDate = new Date();
+          const date = new Date();
+          const newDate = date.toLocaleString("en-CA", {
+            dateStyle: "medium",
+          });
           const user = state.users.find(({ id }) => userId === id);
 
           const newNotification = {
             type: "friend_decline",
             createdBy: state.currentUser.id,
+            username: state.currentUser.username,
             createdAt: newDate,
             isRead: false,
           };

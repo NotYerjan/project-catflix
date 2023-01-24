@@ -14,7 +14,7 @@ export default function UserReviewCard({ movie }) {
   const navigate = useNavigate();
   return (
     <Paper elevation={3} sx={{ display: { xs: "block", md: "flex" }, gap: 1 }}>
-      <Box sx={{ flex: 1 }}>
+      <Box sx={{ flex: 1, display: { xs: "none", md: "block" } }}>
         <img
           src={movie.imgSrc}
           alt={movie.title}

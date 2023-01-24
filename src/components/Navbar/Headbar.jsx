@@ -78,9 +78,15 @@ export default function Headbar() {
             </Button>
           </ButtonGroup>
         ) : (
-          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
             <NotificationBar />
-            <Typography>Hello, {user.username}</Typography>
+            <Typography
+              variant="subtitle1"
+              fontWeight={700}
+              sx={{ display: { xs: "none", md: "block" }, ml: 2 }}
+            >
+              {user.username}
+            </Typography>
             <IconButton
               size="large"
               edge="end"

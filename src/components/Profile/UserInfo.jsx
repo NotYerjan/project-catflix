@@ -42,7 +42,11 @@ export default function UserInfo({ user, userReviewsLength }) {
             </IconButton>
           )
         }
-        title={`${user.firstName} ${user.lastName}`}
+        title={
+          user.firstName || user.lastName
+            ? `${user.firstName || ""} ${user.lastName || ""}`
+            : "NoName"
+        }
         subheader={user.username}
       />
       <CardContent>
