@@ -1,4 +1,4 @@
-import { Badge, CardHeader, Icon, Typography } from "@mui/material";
+import { CardHeader, Icon } from "@mui/material";
 import { FiAlertCircle } from "react-icons/fi";
 
 export default function FriendRequest({ notification }) {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useMovieStore from "../store/storeMovies";
 import MovieList from "../components/Movie/MovieList";
-import { Button } from "@mui/material";
+import { Box, Button, IconButton } from "@mui/material";
 import useUserStore from "../store/storeUsers";
 import { Navigate } from "react-router-dom";
 
@@ -43,31 +43,43 @@ export default function Favorites() {
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <div style={{ display: "flex", gap: 20, marginBottom: 10 }}>
-        <Button
-          onClick={() => setType("favorite")}
-          variant={type === "favorite" ? "contained" : "text"}
-        >
-          Favorites
-        </Button>
-        <Button
-          onClick={() => setType("watching")}
-          variant={type === "watching" ? "contained" : "text"}
-        >
-          Watching
-        </Button>
-        <Button
-          onClick={() => setType("finished")}
-          variant={type === "finished" ? "contained" : "text"}
-        >
-          Watched
-        </Button>
-        <Button
-          onClick={() => setType("willWatch")}
-          variant={type === "willWatch" ? "contained" : "text"}
-        >
-          Will watch
-        </Button>
+      <div
+        style={{
+          marginBottom: 2,
+          maxWidth: "100%",
+          overflow: "scroll",
+        }}
+      >
+        <Box sx={{ minWidth: 475 }}>
+          <Button
+            onClick={() => setType("favorite")}
+            variant={type === "favorite" ? "contained" : "text"}
+            sx={{ mx: 1 }}
+          >
+            Favorites
+          </Button>
+          <Button
+            onClick={() => setType("watching")}
+            variant={type === "watching" ? "contained" : "text"}
+            sx={{ mx: 1 }}
+          >
+            Watching
+          </Button>
+          <Button
+            onClick={() => setType("finished")}
+            variant={type === "finished" ? "contained" : "text"}
+            sx={{ mx: 1 }}
+          >
+            Watched
+          </Button>
+          <Button
+            onClick={() => setType("willWatch")}
+            variant={type === "willWatch" ? "contained" : "text"}
+            sx={{ mx: 1 }}
+          >
+            Will watch
+          </Button>
+        </Box>
       </div>
       {filteredMovies && <MovieList movies={filteredMovies} />}
     </div>

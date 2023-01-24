@@ -19,9 +19,8 @@ export default function ProfileInfoList({ user, userReviewsLength }) {
   const isFriend = !!user.friends?.find(
     ({ id, status }) => status === "friend" && id === currentUser?.id
   );
-  const friendsNo = user.friends?.filter(
-    ({ status }) => status === "friend"
-  ).length;
+  const friendsNo =
+    user.friends?.filter(({ status }) => status === "friend").length || 0;
 
   return (
     <List>

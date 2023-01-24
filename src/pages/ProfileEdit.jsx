@@ -12,6 +12,12 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export default function ProfileEdit() {
+  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
+  const user = useUserStore((state) => state.currentUser);
+  const updateCurrentUserInfo = useUserStore(
+    (state) => state.updateCurrentUserInfo
+  );
+
   const [userInfo, setUserInfo] = useState({});
   const [password, setPassword] = useState("");
   const [birthday, setBirthday] = useState("");
@@ -22,12 +28,6 @@ export default function ProfileEdit() {
   });
 
   const navigate = useNavigate();
-
-  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
-  const user = useUserStore((state) => state.currentUser);
-  const updateCurrentUserInfo = useUserStore(
-    (state) => state.updateCurrentUserInfo
-  );
 
   if (!isLoggedIn) {
     return <Navigate to="/login" replace={true} />;
@@ -42,7 +42,10 @@ export default function ProfileEdit() {
     }
     updateCurrentUserInfo(userInfo);
     if (birthday) {
-      const newBirthday = new Date(birthday);
+      const date = new Date(birthday);
+      const newBirthday = date.toLocaleString("en-CA", {
+        dateStyle: "medium",
+      });
       updateCurrentUserInfo({ birthday: newBirthday });
     }
     navigate("/profile");
