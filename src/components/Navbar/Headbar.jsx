@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Logo from "../Logo";
-import { FiBell } from "react-icons/fi";
+
 import {
   Toolbar,
   Box,
@@ -17,6 +17,7 @@ import Searchbar from "./Searchbar";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useUserStore from "../../store/storeUsers";
 import useMuiTheme from "../../hooks/useMuiTheme";
+import NotificationBar from "./NotificationBar";
 
 export default function Headbar() {
   const { MaterialUISwitch } = useMuiTheme();
@@ -27,6 +28,7 @@ export default function Headbar() {
   const user = useUserStore((state) => state.currentUser);
   const logoutUser = useUserStore((state) => state.logoutUser);
   const [anchorEl, setAnchorEl] = useState(null);
+
   let location = useLocation();
 
   const handleClick = (event) => {
@@ -51,6 +53,7 @@ export default function Headbar() {
   };
 
   const open = Boolean(anchorEl);
+
   const id = open ? "simple-popover-headbar" : undefined;
 
   const menuId = "primary-search-account-menu";
@@ -76,15 +79,7 @@ export default function Headbar() {
           </ButtonGroup>
         ) : (
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <FiBell />
-              </Badge>
-            </IconButton>
+            <NotificationBar />
             <Typography>Hello, {user.username}</Typography>
             <IconButton
               size="large"

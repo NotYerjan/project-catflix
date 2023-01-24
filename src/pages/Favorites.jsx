@@ -3,14 +3,16 @@ import useMovieStore from "../store/storeMovies";
 import MovieList from "../components/Movie/MovieList";
 import { Button } from "@mui/material";
 import useUserStore from "../store/storeUsers";
+import { Navigate } from "react-router-dom";
 
 export default function Favorites() {
+  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
   const user = useUserStore((state) => state.currentUser);
   const movies = useMovieStore((state) => state.movies);
   const [filteredMovies, setFilteredMovies] = useState(null);
   const [type, setType] = useState("favorite");
 
-  const userMovies = user.movies
+  const userMovies = user?.movies
     ? {
         favorite: user.movies
           .filter((movie) => movie.isFavorite)
@@ -26,6 +28,10 @@ export default function Favorites() {
           .map(({ id }) => id),
       }
     : {};
+
+  if (!isLoggedIn) {
+    return <Navigate to="/login" replace={true} />;
+  }
 
   useEffect(() => {
     setFilteredMovies(

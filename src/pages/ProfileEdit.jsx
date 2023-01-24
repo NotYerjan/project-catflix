@@ -8,7 +8,7 @@ import {
   CardActions,
   Avatar,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export default function ProfileEdit() {
@@ -16,18 +16,22 @@ export default function ProfileEdit() {
   const [password, setPassword] = useState("");
   const [birthday, setBirthday] = useState("");
   const [repeatPassword, setRepeatePassowrd] = useState("");
-
-  const user = useUserStore((state) => state.currentUser);
-  const updateCurrentUserInfo = useUserStore(
-    (state) => state.updateCurrentUserInfo
-  );
-
   const [userAvatar, setUserAvatar] = useState({
     avatar: null,
     avatarPreview: user.imgSrc,
   });
 
   const navigate = useNavigate();
+
+  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
+  const user = useUserStore((state) => state.currentUser);
+  const updateCurrentUserInfo = useUserStore(
+    (state) => state.updateCurrentUserInfo
+  );
+
+  if (!isLoggedIn) {
+    return <Navigate to="/login" replace={true} />;
+  }
 
   //handle save function
   const handleSave = () => {
