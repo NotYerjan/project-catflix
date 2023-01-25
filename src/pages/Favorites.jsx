@@ -47,7 +47,7 @@ export default function Favorites() {
         style={{
           marginBottom: 2,
           maxWidth: "100%",
-          overflow: "scroll",
+          overflow: "auto",
         }}
       >
         <Box sx={{ minWidth: 475 }}>
