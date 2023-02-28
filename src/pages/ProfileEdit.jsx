@@ -13,6 +13,11 @@ import { useState } from "react";
 
 export default function ProfileEdit() {
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
+
+  if (!isLoggedIn) {
+    return <Navigate to="/login" replace={true} />;
+  }
+
   const user = useUserStore((state) => state.currentUser);
   const updateCurrentUserInfo = useUserStore(
     (state) => state.updateCurrentUserInfo
@@ -28,10 +33,6 @@ export default function ProfileEdit() {
   });
 
   const navigate = useNavigate();
-
-  if (!isLoggedIn) {
-    return <Navigate to="/login" replace={true} />;
-  }
 
   //handle save function
   const handleSave = () => {

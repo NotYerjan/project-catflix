@@ -15,9 +15,14 @@
   -webkit-text-size-adjust: 100%;
 } */
 
+:root {
+  --primary-color: #c48d39;
+  --primary-color-transparent: #a6772c30;
+  --text-color: #fff;
+  --text-color-contrary: #000;
+}
+
 * {
-
-
   margin: 0;
   padding: 0;
   box-sizing: border-box;

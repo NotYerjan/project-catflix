@@ -68,6 +68,7 @@ export default function Headbar() {
         </Box>
         <Box sx={{ flexGrow: 1 }} />
         <MaterialUISwitch checked={isDarkMode} onChange={switchMode} />
+        <Button onClick={() => navigate("/documatation")}>Docs</Button>
         {!isLoggedIn ? (
           <ButtonGroup sx={{ display: { xs: "none", md: "block" } }}>
             <Button onClick={() => navigate("/login")} color="secondary">

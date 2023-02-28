@@ -12,6 +12,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import ProfileEdit from "./pages/ProfileEdit";
 import Favorites from "./pages/Favorites";
+import Docs from "./pages/Docs";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Profile from "./pages/Profile";
@@ -59,6 +60,10 @@ function App() {
         {
           path: "signup",
           element: <SignUp />,
+        },
+        {
+          path: "documatation",
+          element: <Docs />,
         },
       ],
     },
