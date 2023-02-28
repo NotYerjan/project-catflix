@@ -6,7 +6,7 @@ export default function ButtonGuide() {
     <div>
       <h1>Buttons</h1>
       <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "200px 1fr" }}>
           <div>
             <Button alt="Primary button" />
           </div>
@@ -15,7 +15,7 @@ export default function ButtonGuide() {
           >{`<Button alt="Primary button" />`}</div>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "200px 1fr" }}>
           <div>
             <Button alt="Outlined button" variant="outlined" />
           </div>
@@ -24,7 +24,7 @@ export default function ButtonGuide() {
           >{`<Button alt="Outlined button" variant="outlined" />`}</div>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "200px 1fr" }}>
           <div>
             <Button alt="Contained button" variant="contained" />
           </div>
@@ -33,7 +33,7 @@ export default function ButtonGuide() {
           >{`<Button alt="Contained button" variant="contained" />`}</div>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "200px 1fr" }}>
           <div>
             <Button alt="Primary small" small />
           </div>
@@ -42,7 +42,7 @@ export default function ButtonGuide() {
           >{`<Button alt="Primary small" small/>`}</div>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "200px 1fr" }}>
           <div>
             <Button alt="Outlined small" variant="outlined" small />
           </div>
@@ -51,7 +51,7 @@ export default function ButtonGuide() {
           >{`<Button alt="Outlined small" variant="outlined" small/>`}</div>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "200px 1fr" }}>
           <div>
             <Button alt="Contained small" variant="contained" small />
           </div>
@@ -60,7 +60,7 @@ export default function ButtonGuide() {
           >{`<Button alt="Contained small" variant="contained" small/>`}</div>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "200px 1fr" }}>
           <div>
             <Button alt="Disabled button" disabled />
           </div>
@@ -69,7 +69,7 @@ export default function ButtonGuide() {
           >{`<Button alt="Disabled button" disabled/>`}</div>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "200px 1fr" }}>
           <div>
             <Button icon={FiHome} variant="icon" />
           </div>
@@ -78,7 +78,16 @@ export default function ButtonGuide() {
           >{`<Button icon={FiHome} variant="icon" />`}</div>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "200px 1fr" }}>
+          <div>
+            <Button icon={FiHome} variant="icon" small />
+          </div>
+          <div
+            style={{ display: "flex", alignItems: "center" }}
+          >{`<Button icon={FiHome} variant="icon" small/>`}</div>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "200px 1fr" }}>
           <div>
             <Button alt="Primary button" icon={FiHome} />
           </div>
@@ -87,7 +96,7 @@ export default function ButtonGuide() {
           >{`<Button alt="Primary button" icon={FiHome}/>`}</div>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "200px 1fr" }}>
           <div>
             <Button alt="Outlined button" variant="outlined" icon={FiHome} />
           </div>
@@ -96,13 +105,40 @@ export default function ButtonGuide() {
           >{`<Button alt="Outlined button" variant="outlined" icon={FiHome}/>`}</div>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "200px 1fr" }}>
           <div>
             <Button alt="Contained button" variant="contained" icon={FiHome} />
           </div>
           <div
             style={{ display: "flex", alignItems: "center" }}
           >{`<Button alt="Contained button" variant="contained" icon={FiHome}/>`}</div>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "200px 1fr" }}>
+          <div>
+            <Button alt="Success button" color="success" />
+          </div>
+          <div
+            style={{ display: "flex", alignItems: "center" }}
+          >{`<Button alt="Success button" color="success"/>`}</div>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "200px 1fr" }}>
+          <div>
+            <Button alt="Error button" color="error" variant="outlined" />
+          </div>
+          <div
+            style={{ display: "flex", alignItems: "center" }}
+          >{`<Button alt="Error button" color="error" variant="outlined"/>`}</div>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "200px 1fr" }}>
+          <div>
+            <Button alt="Info button" color="info" variant="contained" />
+          </div>
+          <div
+            style={{ display: "flex", alignItems: "center" }}
+          >{`<Button alt="Info button" color="info" variant="contained"/>`}</div>
         </div>
       </div>
     </div>
