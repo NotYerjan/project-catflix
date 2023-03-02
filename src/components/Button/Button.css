@@ -14,60 +14,65 @@
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   border-radius: 0.5em;
+  white-space: nowrap;
 }
-.btn-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-}
-.btn.contained {
-  background-color: var(--primary-color);
-  color: var(--text-color-contrary);
-}
-.btn.outlined {
-  box-sizing: border-box;
-  border: 2px solid var(--primary-color);
-}
-.btn.small {
+
+/* Small button */
+.btn--small {
   text-align: center;
   height: 2em;
   padding: 0 0.5em;
   gap: 0.25em;
 }
-.btn.icon {
+
+/* Button colors */
+.btn--col-success {
+  --primary-color: #66bb6a;
+}
+.btn--col-error {
+  --primary-color: #f44336;
+}
+.btn--col-info {
+  --primary-color: #29b6f6;
+}
+
+/* Button variants */
+.btn--var-contained {
+  background-color: var(--primary-color);
+  color: var(--text-color-contrary);
+}
+.btn--var-outlined {
+  box-sizing: border-box;
+  border: 2px solid var(--primary-color);
+}
+.btn--var-icon {
   padding: 0;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
 }
-.btn.small .btn-icon {
-  size: 1em;
+
+/* Button icon */
+.btn__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
 }
 
-.btn:hover,
+/* Button interactions */
 .btn:focus {
-  color: var(--primary-color);
-  background-color: var(--primary-color-transparent);
-  box-shadow: 0 0.5em 0.5em -0.4em var(--text-color-contrary);
-  transform: translateY(-0.25em);
+  backdrop-filter: sepia(0.5);
+}
+.btn:hover {
+  filter: sepia(0.2);
+  transform: scale(1.05);
+  backdrop-filter: sepia(0.5);
 }
 .btn:disabled {
+  backdrop-filter: sepia(0.2);
+  filter: sepia(0.5) blur(0.8px);
   cursor: unset;
-  color: var(--text-color-contrary);
   border: none;
-  background-color: var(--primary-color-transparent);
   transform: none;
   box-shadow: none;
-}
-.btn.success {
-  --primary-color: #66bb6a;
-  --primary-color-transparent: #66bb6a30;
-}
-.btn.error {
-  --primary-color: #f44336;
-  --primary-color-transparent: #f4433630;
-}
-.btn.info {
-  --primary-color: #29b6f6;
-  --primary-color-transparent: #29b6f630;
 }

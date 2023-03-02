@@ -1,3 +1,3 @@
-export default function CardMain() {
+export default function CardBody() {
   return <div className="card-main"></div>;
 }

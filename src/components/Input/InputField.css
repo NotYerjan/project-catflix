@@ -1,0 +1,67 @@
+.input {
+  min-height: 2.5em;
+  font-size: 1rem;
+  display: flex;
+  border: 1px solid var(--primary-color);
+  border-radius: 0.5em;
+  margin-top: 0.5em;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0 0.5em;
+}
+.input--col-success {
+  --primary-color: #66bb6a;
+}
+.input--col-error {
+  --primary-color: #f44336;
+}
+.input--col-info {
+  --primary-color: #29b6f6;
+}
+
+.input__body {
+  flex: 1;
+  position: relative;
+  display: flex;
+  max-width: 100%;
+}
+.input__body__input-field {
+  font-size: inherit;
+  border: none;
+  border-radius: 8px;
+  background-color: unset;
+  color: var(--text-color);
+  outline: 0;
+  padding: 0.5em 0;
+  flex: 1;
+  width: 100%;
+}
+
+.input__body__label {
+  width: fit-content;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: text;
+  transform: scale(1) translate(0, 0.5em);
+  transform-origin: left;
+  transition: all 0.2s ease-in-out;
+  background: unset;
+  padding: 0;
+  white-space: nowrap;
+}
+
+.input__action {
+  position: relative;
+  right: 3px;
+}
+
+.input:focus-within {
+  box-shadow: 0 0 0.2em var(--primary-color);
+}
+.input__body__input-field:not(:placeholder-shown) ~ .input__body__label,
+.input__body__input-field:focus ~ .input__body__label {
+  transform: scale(0.8) translate(0, -0.8em);
+  padding: 0 0.5em;
+  background-color: var(--bg-color);
+}

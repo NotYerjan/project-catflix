@@ -18,6 +18,7 @@
 :root {
   --primary-color: #c48d39;
   --primary-color-transparent: #a6772c30;
+  --bg-color: #333333;
   --text-color: #fff;
   --text-color-contrary: #000;
 }

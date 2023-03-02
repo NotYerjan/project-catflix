@@ -2,14 +2,14 @@ import "./Card.css";
 import CardFooter from "./CardFooter";
 import CardHeader from "./CardHeader";
 import CardImage from "./CardImage";
-import CardMain from "./CardMain";
+import CardBody from "./CardBody";
 
 export default function Card(props) {
   return (
     <article className="card">
-      <CardImage image={props.image} />
+      <CardImage image={props.imageSrc} alt={props.imageAlt} />
       <CardHeader />
-      <CardMain />
+      <CardBody />
       <CardFooter />
     </article>
   );
