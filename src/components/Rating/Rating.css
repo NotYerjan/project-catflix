@@ -1,0 +1,15 @@
+.rating .btn:focus {
+    backdrop-filter: none;
+}
+
+.rating .btn:hover {
+    filter: none;
+    transform: none;
+    backdrop-filter: none;
+    cursor: default;
+}
+
+.rating__edit .btn:hover .btn__icon {
+    fill: white;
+    color: white;
+}
