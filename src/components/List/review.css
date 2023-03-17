@@ -9,7 +9,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .review-card__header {
@@ -21,25 +21,14 @@
     width: 100%;
 }
 
-.review-card__header img {
-    width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 3rem;
-}
-
-.review-card__header .avatar button {
-    background-color: rgb(117, 117, 117);
-    width: 3.5rem;
-    height: 3.5rem;
-    font-size: 2.5rem;
-    color: black;
-    border-radius: 3rem;
-}
-
 .review-card__info {
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
+}
+
+.review-card__info-name:hover {
+    cursor: pointer;
 }
 
 .review-card__info-date {

@@ -21,6 +21,7 @@
   --bg-color: #333333;
   --text-color: #fff;
   --text-color-contrary: #000;
+  --light-black: rgb(18, 18, 18);
   --sub-text: rgba(255, 255, 255, 0.7);
   --font-roboto: Roboto, Helvetica, Arial, sans-serif;
 }

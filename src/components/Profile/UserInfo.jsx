@@ -1,16 +1,11 @@
-import {
-  Avatar,
-  Card,
-  CardContent,
-  CardHeader,
-  IconButton,
-} from "@mui/material";
+import { Card, CardContent, CardHeader, IconButton } from "@mui/material";
 import React from "react";
 import { FiEdit } from "react-icons/fi";
 import { useNavigate, useParams } from "react-router-dom";
 import useUserStore from "../../store/storeUsers";
 import ProfileActions from "./ProfileActions";
 import ProfileInfoList from "./ProfileInfoList";
+import Avatar from "../Avatar/Avatar";
 
 export default function UserInfo({ user, userReviewsLength }) {
   // const { id } = useParams();
@@ -23,8 +18,19 @@ export default function UserInfo({ user, userReviewsLength }) {
 
   return (
     <Card sx={{ maxWidth: { xs: "100%", sm: 300 }, width: "100%" }}>
-      <div style={{ display: "flex", justifyContent: "center", padding: 20 }}>
+      <div
+        style={{
+          padding: 20,
+        }}
+        className="avatar-container"
+      >
         <Avatar
+          height={"21rem"}
+          width={"21rem"}
+          src={user.imgSrc}
+          alt="avatar"
+        />
+        {/*  <Avatar
           alt="avatar"
           src={
             user.imgSrc
@@ -32,7 +38,7 @@ export default function UserInfo({ user, userReviewsLength }) {
               : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
           }
           sx={{ maxWidth: 250, width: "100%", height: 250 }}
-        />
+        /> */}
       </div>
       <CardHeader
         action={

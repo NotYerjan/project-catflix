@@ -6,7 +6,7 @@ import { FiEdit, FiTrash } from "react-icons/fi";
 import useReviewStore from "../../store/storeReview.js";
 import useUserStore from "../../store/storeUsers.js";
 
-import Avatar from "../Avatar";
+import Avatar from "../Avatar/Avatar";
 import Rating from "../Rating/Rating";
 
 import Button from "../Button/Button";
@@ -30,7 +30,12 @@ export default function Review(props) {
   const [newContent, setNewContent] = useState(content);
   const [newRating, setNewRating] = useState(rating);
 
-  const toggleEditReview = (e) => setIsEdited(!isEdited);
+  const toggleEditReview = () => setIsEdited(!isEdited);
+
+  const cancelEditing = () => {
+    setNewRating(rating);
+    toggleEditReview();
+  };
 
   const handleUpdateReview = () => {
     updateReview(id, newContent, newRating);
@@ -40,9 +45,16 @@ export default function Review(props) {
   return (
     <div className="review-card">
       <div className="review-card__header">
-        <Avatar src={users.filter((user) => user.id === userId)[0].imgSrc} />
+        <div className="review-card__avatar-container">
+          <Avatar
+            height={"3.5rem"}
+            width={"3.5rem"}
+            src={users.filter((user) => user.id === userId)[0].imgSrc}
+          />
+        </div>
         <div className="review-card__info">
           <p
+            className="review-card__info-name"
             onClick={() =>
               navigate(
                 `/profile/${users.find((user) => user.id === userId).id}`
@@ -69,11 +81,6 @@ export default function Review(props) {
               onClick={() => deleteReview(id)}
               small
             />
-            {/*    <FiEdit />
-            </IconButton>
-            <IconButton onClick={() => deleteReview(id)}>
-              <FiTrash />
-            </IconButton> */}
           </div>
         )}
       </div>
@@ -89,14 +96,15 @@ export default function Review(props) {
             <div className="review-card__edit">
               <Rating
                 name="simple-controlled"
-                value={newRating}
+                rating={newRating}
+                setNewRating={setNewRating}
                 onChange={(e, newValue) => setNewRating(newValue)}
               />
               <div>
                 <Button
                   alt="Cancel"
                   variant="outlined"
-                  onClick={toggleEditReview}
+                  onClick={cancelEditing}
                   small
                 />
 
@@ -112,105 +120,10 @@ export default function Review(props) {
         ) : (
           <>
             <p>{content}</p>
-            <Rating name="read-only" value={rating} readOnly />
+            <Rating name="read-only" rating={newRating} readOnly />
           </>
         )}
       </div>
     </div>
-    /*  <Card elevation={6}>
-      {" "}
-      <CardHeader
-        avatar={
-          <Avatar src={users.filter((user) => user.id === userId)[0].imgSrc} />
-        }
-        action={
-          isLoggedIn &&
-          (userId == user.id || user.isSuperUser) && (
-            <Box>
-              <IconButton onClick={toggleEditReview}>
-                <FiEdit />
-              </IconButton>
-              <IconButton onClick={() => deleteReview(id)}>
-                <FiTrash />
-              </IconButton>
-            </Box>
-          )
-        }
-        title={
-          <Typography
-            onClick={() =>
-              navigate(
-                `/profile/${users.find((user) => user.id === userId).id}`
-              )
-            }
-            sx={{ cursor: "pointer" }}
-          >
-            {users.find((user) => user.id === userId).username}
-          </Typography>
-        }
-        subheader={createdAt.toLocaleString("en-CA", { dateStyle: "medium" })}
-      />
-      {isEdited ? (
-        <>
-          <CardContent>
-            <TextField
-              multiline
-              defaultValue={content}
-              onChange={(e) => setNewContent(e.target.value)}
-              sx={{
-                width: "100%",
-                height: "auto",
-              }}
-              InputProps={{
-                sx: {
-                  display: "flex",
-                  flexDirection: { xs: "column", md: "row" },
-                },
-              }}
-            />
-          </CardContent>{" "}
-          <CardActions
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              padding: 2,
-              pt: 0,
-            }}
-          >
-            <Rating
-              name="simple-controlled"
-              value={newRating}
-              onChange={(e, newValue) => setNewRating(newValue)}
-            />
-            <ButtonGroup>
-              <Button variant="outlined" onClick={toggleEditReview}>
-                Cancel
-              </Button>
-              <Button variant="contained" onClick={handleUpdateReview}>
-                Save
-              </Button>
-            </ButtonGroup>
-          </CardActions>{" "}
-        </>
-      ) : (
-        <>
-          <CardContent>
-            <Typography variant="body2" color="text.secondary">
-              {content}
-            </Typography>
-          </CardContent>{" "}
-          <CardActions
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              padding: 2,
-              pt: 0,
-            }}
-          >
-            <Rating name="read-only" value={rating} readOnly />
-          </CardActions>
-        </>
-      )}
-    </Card> */
   );
 }

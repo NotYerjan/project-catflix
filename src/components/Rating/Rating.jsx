@@ -5,45 +5,33 @@ import { BsStarFill } from "react-icons/bs";
 import Button from "../Button/Button";
 import "./Rating.css";
 
-const Rating = ({ readOnly, value }) => {
-  const filledStars = Array(value);
-  const nonFilledStars = Array(5 - value);
-
-  const [isFilled, setIsFilled] = useState(() =>
-    Array(5).fill(true, 0, value - 1)
+const Rating = ({ readOnly, rating, setNewRating = () => {} }) => {
+  // An array to show how many filled and non-filled stars there are
+  // Rating = 3 --> isStarFilled = [true, true, true, false, false]
+  const [isStarFilled, setIsStarFilled] = useState(
+    [...Array(5)].map((_, i) => (i < rating ? true : false))
   );
 
-  const onHover = (e) => {
-    console.log(e.target.class);
-  };
+  // Check if the Rating is readonly we shouldn't change anything
+  const handleRatingChange = (index) =>
+    !readOnly &&
+    setIsStarFilled(() =>
+      isStarFilled.map((_, i) => (i <= index ? true : false))
+    );
 
-  // useEffect(() => setIsFilled(isFilled.fill(true, 0, value - 1)), []);
-  console.log(isFilled);
+  // Update the new value of rating
+  useEffect(() => setNewRating(isStarFilled.filter((star) => star).length));
 
   return (
     <div className={`${readOnly ? "rating" : "rating__edit"}`}>
-      {isFilled.map((filled) => (
-        <Button icon={filled ? BsStarFill : FiStar} variant="icon" small />
+      {isStarFilled.map((star, i) => (
+        <Button
+          icon={star ? BsStarFill : FiStar}
+          variant="icon"
+          small
+          onClick={() => handleRatingChange(i)}
+        />
       ))}
-      {/*  {nonFilledStars.map((f) => (
-        <Button icon={FiStar} variant="icon" small />
-      ))} */}
-      {/* {readOnly ? (
-        <>
-          {Array(filledStars).fill(
-            <Button icon={BsStarFill} variant="icon" small />
-          )}
-          {Array(nonFilledStars).fill(
-            <Button icon={FiStar} variant="icon" small />
-          )}
-        </>
-      ) : (
-        <>
-          {Array(nonFilledStars).fill(
-            <Button icon={FiStar} variant="icon" onMouseEnter={onHover} small />
-          )}
-        </>
-      )} */}
     </div>
   );
 };
