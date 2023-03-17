@@ -1,22 +1,18 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { FiEdit, FiTrash } from "react-icons/fi";
+
 import useReviewStore from "../../store/storeReview.js";
-import { FiTrash, FiEdit, FiUser } from "react-icons/fi";
-import {
-  Card,
-  CardHeader,
-  Avatar,
-  Box,
-  IconButton,
-  CardContent,
-  Typography,
-  Button,
-  TextField,
-  Rating,
-  CardActions,
-  ButtonGroup,
-} from "@mui/material";
 import useUserStore from "../../store/storeUsers.js";
-import { Link, useNavigate } from "react-router-dom";
+
+import Avatar from "../Avatar/Avatar";
+import Rating from "../Rating/Rating";
+
+import Button from "../Button/Button";
+import InputField from "../Input/InputField";
+
+import "./review.css";
 
 export default function Review(props) {
   const updateReview = useReviewStore((state) => state.updateReview);
@@ -36,106 +32,98 @@ export default function Review(props) {
 
   const toggleEditReview = () => setIsEdited(!isEdited);
 
+  const cancelEditing = () => {
+    setNewRating(rating);
+    toggleEditReview();
+  };
+
   const handleUpdateReview = () => {
     updateReview(id, newContent, newRating);
     toggleEditReview();
   };
 
   return (
-    <Card elevation={6}>
-      {" "}
-      <CardHeader
-        avatar={
-          <Avatar src={users.filter((user) => user.id === userId)[0].imgSrc} />
-        }
-        action={
-          isLoggedIn &&
-          (userId == user.id || user.isSuperUser) && (
-            <Box>
-              <IconButton onClick={toggleEditReview}>
-                <FiEdit />
-              </IconButton>
-              <IconButton onClick={() => deleteReview(id)}>
-                <FiTrash />
-              </IconButton>
-            </Box>
-          )
-        }
-        title={
-          <Typography
+    <div className="review-card">
+      <div className="review-card__header">
+        <div className="review-card__avatar-container">
+          <Avatar
+            height={"3.5rem"}
+            width={"3.5rem"}
+            src={users.filter((user) => user.id === userId)[0].imgSrc}
+          />
+        </div>
+        <div className="review-card__info">
+          <p
+            className="review-card__info-name"
             onClick={() =>
               navigate(
                 `/profile/${users.find((user) => user.id === userId).id}`
               )
             }
-            sx={{ cursor: "pointer" }}
           >
             {users.find((user) => user.id === userId).username}
-          </Typography>
-        }
-        subheader={createdAt.toLocaleString("en-CA", { dateStyle: "medium" })}
-      />
-      {isEdited ? (
-        <>
-          <CardContent>
-            <TextField
-              multiline
+          </p>
+          <p className="review-card__info-date">
+            {createdAt.toLocaleString("en-CA", { dateStyle: "medium" })}
+          </p>
+        </div>
+        {isLoggedIn && (userId == user.id || user.isSuperUser) && (
+          <div className="review-card__options">
+            <Button
+              icon={FiEdit}
+              variant="icon"
+              onClick={toggleEditReview}
+              small
+            />
+            <Button
+              icon={FiTrash}
+              variant="icon"
+              onClick={() => deleteReview(id)}
+              small
+            />
+          </div>
+        )}
+      </div>
+      <div className="review-card__content">
+        {isEdited ? (
+          <>
+            <InputField
+              label="TextArea"
               defaultValue={content}
               onChange={(e) => setNewContent(e.target.value)}
-              sx={{
-                width: "100%",
-                height: "auto",
-              }}
-              InputProps={{
-                sx: {
-                  display: "flex",
-                  flexDirection: { xs: "column", md: "row" },
-                },
-              }}
+              multiline
             />
-          </CardContent>{" "}
-          <CardActions
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              padding: 2,
-              pt: 0,
-            }}
-          >
-            <Rating
-              name="simple-controlled"
-              value={newRating}
-              onChange={(e, newValue) => setNewRating(newValue)}
-            />
-            <ButtonGroup>
-              <Button variant="outlined" onClick={toggleEditReview}>
-                Cancel
-              </Button>
-              <Button variant="contained" onClick={handleUpdateReview}>
-                Save
-              </Button>
-            </ButtonGroup>
-          </CardActions>{" "}
-        </>
-      ) : (
-        <>
-          <CardContent>
-            <Typography variant="body2" color="text.secondary">
-              {content}
-            </Typography>
-          </CardContent>{" "}
-          <CardActions
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              padding: 2,
-              pt: 0,
-            }}
-          >
-            <Rating name="read-only" value={rating} readOnly />
-          </CardActions>
-        </>
-      )}
-    </Card>
+            <div className="review-card__edit">
+              <Rating
+                name="simple-controlled"
+                rating={newRating}
+                setNewRating={setNewRating}
+                onChange={(e, newValue) => setNewRating(newValue)}
+              />
+              <div>
+                <Button
+                  alt="Cancel"
+                  variant="outlined"
+                  onClick={cancelEditing}
+                  small
+                />
+
+                <Button
+                  alt="Save"
+                  variant="contained"
+                  onClick={handleUpdateReview}
+                  small
+                />
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <p>{content}</p>
+            <Rating name="read-only" rating={newRating} readOnly />
+          </>
+        )}
+      </div>
+    </div>
   );
 }
